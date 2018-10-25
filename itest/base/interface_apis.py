@@ -20,6 +20,7 @@ from itest.models import Interface, Project, Theme
 from bson import ObjectId
 from itest.utils.utils import init_return, mongo_to_dict, get_value, convert_mongo_to_json
 from itest.utils.decorators import params_required, params_objectid_check, project_check, params_empty_check
+from .common.interface import CInterface
 
 blueprint = Blueprint('interface', __name__)
 
@@ -55,16 +56,19 @@ def all_interfaces():
     return init_return(info)
 
 
-@blueprint.route('/<interface_id>', methods=['GET', 'POST'])
-def get_interface(interface_id):
+@blueprint.route('/get', methods=['GET', 'POST'])
+@params_required(['interface_id'])
+def get_interface():
     """
      2、根据id查看
     :param: environment_id
     :return:
     """
-    interface = Interface.objects(id=ObjectId(interface_id))
+    data = request.get_json()
+    interface_id = data['interface_id']
+    interface = CInterface.get_interface(interface_id)
     if interface.count() == 0:
-        return init_return({}, sucess=False, error="查找的接口不存在", errorCode=1001)
+        return init_return({}, sucess=False, error="查看的接口不存在", errorCode=1001)
     else:
         return init_return(convert_mongo_to_json(interface.first()))
 
@@ -230,7 +234,7 @@ def theme_add_sub():
 
 @blueprint.route('/theme/create/interface', methods=['POST'])
 @project_check
-@params_required(['theme_id', 'name'])
+@params_required(['project_id', 'theme_id', 'name', 'path', 'method'])
 def theme_add_interface():
     """
       6 新增主题对应接口
@@ -238,36 +242,30 @@ def theme_add_interface():
     """
     data = request.get_json()
 
+    project_id = data['project_id']
     theme_id = data['theme_id']
+    path = data['path']
     name = data['name']
+    method = data['method']
     desc = get_value(data, 'desc', '')
     sub_theme_name = get_value(data, 'sub_theme_name', '')
 
-    # 新增接口
-    node = convert_mongo_to_json(Theme.objects(id=ObjectId(theme_id)).first())
-    interface = {
-        'desc': desc,
-        'name': name
-    }
-    int
-    # 主节点
-    if sub_theme_name == '':
-
-        if len(node['list']) != 0 and \
-                len(list(filter(lambda x:  x['name'] == name, node['list']))) != 0:
-            return init_return({}, sucess=False, error="存在相同接口名", errorCode=1001)
-        Theme.objects(id=ObjectId(theme_id)).update_one(push__list=interface)
-
+    cApi = CInterface(name=name, project_id=project_id, path=path, method=method, desc=desc)
+    save_result = cApi.save()
+    if save_result['success']:
+        interface = {
+            'desc': desc,
+            'name': name,
+            'interface_id': save_result['data']['id']
+        }
+        if sub_theme_name == '':
+            # 主节点
+            Theme.objects(id=ObjectId(theme_id)).update_one(push__list=interface)
+        else:
+            theme = Theme.objects(id=ObjectId(theme_id), sub_themes__name=sub_theme_name)
+            theme.update_one(push__sub_themes__S__list=interface)
     else:
-        node = list(filter(lambda x: x['name'] == sub_theme_name, node['sub_themes']))[0]\
-                or {'list': []}
-
-        if len(node['list']) != 0 and \
-                len(list(filter(lambda x: x['name'] == name, node['list']))) != 0:
-            return init_return({}, sucess=False, error="该主题下存在相同接口名", errorCode=1001)
-
-        theme = Theme.objects(id=ObjectId(theme_id), sub_themes__name=sub_theme_name)
-        theme.update_one(push__sub_themes__S__list=interface)
+        return save_result
 
     return init_return({
         'data': '新增成功'

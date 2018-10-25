@@ -109,19 +109,19 @@ class Interface(Document):
     """0 接口集合"""
     meta = {'collection': 'interface'}
 
-    project_id = ReferenceField(Project)       # 所属项目
-    name = StringField()                    # 接口名
-    path = StringField()               # 接口
-    method = StringField()                    # 接口请求类型 post get
-    content_type = StringField()            # 接口数据类型
-    req_body_type = StringField()                                        # 接口请求参数类型：form json file raw
-    req_body_params = ListField(EmbeddedDocumentField(RequestParamPairs))       # 接口请求参数定义
-    res_body_type = StringField()                                        # 返回结果类型 json raw
-    req_example = StringField()                                             # 接口请求示例
-    res_body_params = ListField(EmbeddedDocumentField(ResponseParamPairs))       # 接口返回结果参数定义
-    res_example = StringField()                                                     # 接口返回示例
-    headers = ListField(EmbeddedDocumentField(HeaderParamPairs))                  # 接口头文件
-    desc = DictField()                                          # 接口备注
+    project_id = ReferenceField(Project, required=True)       # 所属项目
+    name = StringField(required=True)                    # 接口名
+    path = StringField(required=True)               # 接口
+    method = StringField(default='GET', required=True)                    # 接口请求类型 post get
+    content_type = StringField(default='')            # 接口数据类型
+    req_body_type = StringField(default='json')                                        # 接口请求参数类型：form json file raw
+    req_body_params = ListField(EmbeddedDocumentField(RequestParamPairs), default=[])       # 接口请求参数定义
+    res_body_type = StringField(default='json')                                        # 返回结果类型 json raw
+    req_example = StringField(default='')                                             # 接口请求示例
+    res_body_params = ListField(EmbeddedDocumentField(ResponseParamPairs), default=[])       # 接口返回结果参数定义
+    res_example = StringField(default='')                                                     # 接口返回示例
+    headers = ListField(EmbeddedDocumentField(HeaderParamPairs), default=[])                  # 接口头文件
+    desc = StringField(default='')                                          # 接口备注
     update_info = EmbeddedDocumentField(OperatorInfo) # 更新记录
     create_info = EmbeddedDocumentField(OperatorInfo) # 创建记录
 
