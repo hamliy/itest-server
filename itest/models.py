@@ -114,7 +114,7 @@ class Interface(Document):
     path = StringField(required=True)               # 接口
     method = StringField(default='GET', required=True)                    # 接口请求类型 post get
     content_type = StringField(default='')            # 接口数据类型
-    req_body_type = StringField(default='json')                                        # 接口请求参数类型：form json file raw
+    req_body_type = StringField(default='json')                                        # 接口请求参数类型：form json params
     req_body_params = ListField(EmbeddedDocumentField(RequestParamPairs), default=[])       # 接口请求参数定义
     res_body_type = StringField(default='json')                                        # 返回结果类型 json raw
     req_example = StringField(default='')                                             # 接口请求示例
