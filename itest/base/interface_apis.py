@@ -20,7 +20,7 @@ from itest.models import Interface, Project, Theme
 from bson import ObjectId
 from itest.utils.utils import init_return, mongo_to_dict, get_value, convert_mongo_to_json
 from itest.utils.decorators import params_required, params_objectid_check, project_check, params_empty_check
-from .common.interface import CInterface
+from .common.interface import CInterface, MInterface
 
 blueprint = Blueprint('interface', __name__)
 
@@ -94,7 +94,9 @@ def add():
 
     content_type = get_value(data, 'content_type')
     params = get_value(data, 'params', [])
-    headers = get_value(data, 'headers', [])
+    headers = get_value(data, 'headers', [{
+        'Content-Type': 'application/json;charset=utf-8'
+    }])
     description = get_value(data, 'description')
 
     existed = Interface.objects(name=name, project=ObjectId(project_id)).first()
@@ -108,54 +110,53 @@ def add():
     })
 
 
-@blueprint.route('/update', methods=['GET', 'POST'])
-@params_empty_check(['name', 'interface', 'type'])
-@params_required(['id'])
-def update():
-    """
-      4 根据接口id更新接口
-    :return:
-    """
-    data = request.get_json()
-    # data = json.loads(request.get_data().decode('utf-8'))
-    id = data['id']
-    name = data['name']
-    interf = data['interface']
-    request_type = data['type']
-
-    interface = Interface.objects(id=ObjectId(id))
-    if interface.count() == 0:
-        return init_return({}, sucess=False, error="更新的接口不存在", errorCode=1001)
-    else:
-        existed = Interface.objects(name=name, project=interface.first().project).first()
-        if existed and str(existed.id) != id:
-            return init_return({}, sucess=False, error="存在相同环境名", errorCode=1001)
-
-        content_type = get_value(data, 'content_type')
-        params = get_value(data, 'params', [])
-        headers = get_value(data, 'headers', [])
-        description = get_value(data, 'description')
-
-        source = mongo_to_dict(interface.first())
-
-        if name != source['name']:
-            interface.update_one(name=name)
-        if interf != source['interface']:
-            interface.update_one(interface=interf)
-        if params != source['params']:
-            interface.update_one(params=params)
-        if content_type != source['content_type']:
-            interface.update_one(content_type=content_type)
-        if request_type != source['request_type']:
-            interface.update_one(request_type=request_type)
-        if headers != source['headers']:
-            interface.update_one(headers=headers)
-        if description != source['remarks']['description']:
-            interface.update_one(remarks__description=description)
-
-        return init_return({
-            'data': '更新成功'
-        })
+# @blueprint.route('/update', methods=['GET', 'POST'])
+# @params_empty_check(['name', 'interface', 'type'])
+# @params_required(['id'])
+# def update():
+#     """
+#       4 根据接口id更新接口
+#     :return:
+#     """
+#     data = request.get_json()
+#     # data = json.loads(request.get_data().decode('utf-8'))
+#     id = data['id']
+#     name = data['name']
+#     request_type = data['type']
+#
+#     interface = Interface.objects(id=ObjectId(id))
+#     if interface.count() == 0:
+#         return init_return({}, sucess=False, error="更新的接口不存在", errorCode=1001)
+#     else:
+#         existed = Interface.objects(name=name, project=interface.first().project).first()
+#         if existed and str(existed.id) != id:
+#             return init_return({}, sucess=False, error="存在相同环境名", errorCode=1001)
+#
+#         content_type = get_value(data, 'content_type')
+#         params = get_value(data, 'params', [])
+#         headers = get_value(data, 'headers', [])
+#         description = get_value(data, 'description')
+#
+#         source = mongo_to_dict(interface.first())
+#
+#         if name != source['name']:
+#             interface.update_one(name=name)
+#         if interf != source['interface']:
+#             interface.update_one(interface=interf)
+#         if params != source['params']:
+#             interface.update_one(params=params)
+#         if content_type != source['content_type']:
+#             interface.update_one(content_type=content_type)
+#         if request_type != source['request_type']:
+#             interface.update_one(request_type=request_type)
+#         if headers != source['headers']:
+#             interface.update_one(headers=headers)
+#         if description != source['remarks']['description']:
+#             interface.update_one(remarks__description=description)
+#
+#         return init_return({
+#             'data': '更新成功'
+#         })
 
 
 @blueprint.route('/delete/<interface_id>', methods=['GET', 'POST'])
@@ -174,6 +175,83 @@ def delete(interface_id):
     else:
         return init_return({'data': '删除成功'})
 
+@blueprint.route('/update/basic', methods=['POST'])
+@project_check
+@params_required(['project_id', 'theme_id', '_id', 'name', 'path', 'method'])
+def update_basic():
+    """
+      更新接口基本信息
+    :return:
+    """
+    data = request.get_json()
+
+    project_id = data['project_id']
+    interface_id = data['_id']
+    theme_id = data['theme_id']
+    path = data['path']
+    name = data['name']
+    method = data['method']
+    desc = get_value(data, 'desc', '')
+
+    sub_theme_name = get_value(data, 'sub_theme_name', '')
+
+    cApi = CInterface(name=name, project_id=project_id, path=path, method=method, desc=desc)
+    save_result = cApi.update_basic(interface_id)
+    if save_result['success']:
+        interface = {
+            'desc': desc,
+            'name': name,
+            'interface_id': ObjectId(interface_id)
+        }
+
+        if sub_theme_name == '':
+            theme = Theme.objects(id=ObjectId(theme_id))
+            theme.update_one(pull__list__interface_id=ObjectId(interface_id))
+            theme.update_one(push__list=interface)
+        else:
+            theme = Theme.objects(id=ObjectId(theme_id), sub_themes__name=sub_theme_name)
+            theme.update_one(pull__sub_themes__S__list__interface_id=ObjectId(interface_id))
+            theme.update_one(push__sub_themes__S__list=interface)
+    else:
+        return save_result
+
+    return init_return({
+        'data': '更新成功'
+    })
+
+
+@blueprint.route('/update/body', methods=['POST'])
+@project_check
+@params_required(['project_id', '_id', 'update_type'])
+def update_body():
+    """
+      更新接口基本信息
+    :return:
+    """
+    data = request.get_json()
+
+    interface_id = data['_id']
+    update_type = data['update_type']
+    if update_type == "request":
+        req_body_type = data['req_body_type']
+        req_body_params = data['req_body_params']
+        req_example = data['req_example']
+        Interface.objects(id=ObjectId(interface_id)).update_one(set__req_body_type=req_body_type,
+                                                                set__req_body_params=req_body_params,
+                                                                set__req_example=req_example)
+    elif update_type == 'headers':
+        headers = data['headers']
+        Interface.objects(id=ObjectId(interface_id)).update_one(set__headers=headers)
+    elif update_type == 'response':
+        res_body_type = data['res_body_type']
+        res_body_params = data['res_body_params']
+        res_example = data['res_example']
+        Interface.objects(id=ObjectId(interface_id)).update_one(set__res_body_type=res_body_type,
+                                                                set__res_body_params=res_body_params,
+                                                                set__res_example=res_example)
+    return init_return({
+        'data': '更新成功'
+    })
 
 @blueprint.route('/theme/create', methods=['POST'])
 @project_check
@@ -251,7 +329,7 @@ def theme_add_interface():
     sub_theme_name = get_value(data, 'sub_theme_name', '')
 
     cApi = CInterface(name=name, project_id=project_id, path=path, method=method, desc=desc)
-    save_result = cApi.save()
+    save_result = cApi.new_add()
     if save_result['success']:
         interface = {
             'desc': desc,
@@ -315,7 +393,7 @@ def theme_remove_sub():
 
 
 @blueprint.route('/theme/remove/interface', methods=['GET', 'POST'])
-@params_required(['theme_id', 'sub_theme_name', 'interface_id'])
+@params_required(['theme_id', 'interface_id'])
 def theme_remove_infterface():
     """
      5 接口删除
@@ -328,6 +406,8 @@ def theme_remove_infterface():
     theme_id = data['theme_id']
     if not ObjectId.is_valid(theme_id):
         return init_return({}, sucess=False, error="theme_id参数错误", errorCode=1001)
+
+    MInterface().remove(interface_id)
 
     # 主节点
     if sub_theme_name == '':

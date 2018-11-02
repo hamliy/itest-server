@@ -83,8 +83,8 @@ class HeaderParamPairs(EmbeddedDocument):
     name = StringField()                     # 参数名
     value = StringField()               # 参数值
     required = BooleanField()               # 是否必需
-    example = StringField()             # 示例
-    desc = StringField()             # 说明
+    example = StringField(default="")             # 示例
+    desc = StringField(default="")             # 说明
 
 
 class RequestParamPairs(EmbeddedDocument):
@@ -166,7 +166,7 @@ class UseCaseRequest(EmbeddedDocument):
 
     headers = ListField(EmbeddedDocumentField(HeaderParamPairs))  # 请求头
     interface_path = StringField()                          # 请求接口路径
-    request_type = StringField()
+    methods = StringField()
     interface = ReferenceField(Interface)                   # 关联接口
 
 
@@ -183,7 +183,7 @@ class UseCase(Document):
     rule = DictField()                                              # 预期结果校验规则
     update_info = EmbeddedDocumentField(OperatorInfo)               # 更新记录
     create_info = EmbeddedDocumentField(OperatorInfo)               # 创建记录
-    remarks = DictField()                                           # 用例备注
+    desc = StringField()                                            # 用例备注
     # 运行用例
     def invoke_use_case(self, task=None, envoriment_url=''):
         use_case = self
@@ -192,10 +192,10 @@ class UseCase(Document):
         source_type = 'task'
         source_data = task
         environment_url = envoriment_url
-        remarks = {'data':'invoke success'}
+        desc = 'invoke success'
         InvokeUsecase(use_case=use_case, response=response,source_type=source_type,
                       environment_url=environment_url,
-                      source_data=source_data, status=status[0], remarks=remarks).save()
+                      source_data=source_data, status=status[0], desc=desc).save()
 
 @init_create_info.apply
 class Environment(Document):

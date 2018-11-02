@@ -5,7 +5,7 @@
 @time  : 8/28/18 9:23 PM
 @dec   : 
 """
-import json
+import json, os
 import datetime
 from bson import ObjectId
 
@@ -55,7 +55,8 @@ def convert_mongo_to_json(o):
         for key, value in dic_data.items():
             if isinstance(value, list):
                 for l in value:
-                    convert(l)
+                    if isinstance(l, dict):
+                        convert(l)
             else:
                 if isinstance(value, ObjectId):
                     dic_data[key] = str(dic_data.pop(key))
@@ -72,4 +73,15 @@ def convert_mongo_to_json(o):
     # ret = json.dumps(ret, cls=DateEncoder)
     # ret = json.loads(ret)
     return ret
+
+# 获取项目路径
+def get_project_path ():
+    utils_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.abspath(os.path.join(utils_dir, ".."))
+
+
+# 获取项目静态图像路径
+def get_images_path ():
+    utils_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.abspath(os.path.join(utils_dir, "../../../static/test_data/images/"))
 

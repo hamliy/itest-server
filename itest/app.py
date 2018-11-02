@@ -8,7 +8,7 @@
 from flask import Flask, jsonify, Response
 from itest.config import DevConfig
 from itest.extensions import cors, init_mongo, jwt
-from itest import environment, invoice, user, base
+from itest import environment, invoice, user, base, test_data
 
 #
 #
@@ -50,6 +50,7 @@ def register_blueprints(app):
     app.register_blueprint(base.task_apis.blueprint, url_prefix='/api/task')
     app.register_blueprint(base.interface_apis.blueprint, url_prefix='/api/interface')
     app.register_blueprint(base.use_case_apis.blueprint, url_prefix='/api/usecase')
+    app.register_blueprint(test_data.test_data_apis.blueprint, url_prefix='/api/data')
     return None
 
 
