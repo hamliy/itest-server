@@ -29,6 +29,7 @@ from mongoengine import signals
     7 更新数据
 """
 
+
 def handler(event):
     """Signal decorator to allow use of callback functions as class decorators."""
 
@@ -260,6 +261,7 @@ class InvokeUsecase(Document):
     source_type = StringField()                     # 执行用例来源类型 task 任务
     source_data = StringField()                     # 来源数据  task对应
     remarks = DictField()                           # 备注信息
+
 
 class TaskEnvironment(EmbeddedDocument):
     """任务对应环境信息"""

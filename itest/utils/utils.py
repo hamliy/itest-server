@@ -8,6 +8,7 @@
 import json, os
 import datetime
 from bson import ObjectId
+import hashlib
 
 from mongoengine.base import BaseDocument
 
@@ -84,4 +85,13 @@ def get_project_path ():
 def get_images_path ():
     utils_dir = os.path.dirname(os.path.abspath(__file__))
     return os.path.abspath(os.path.join(utils_dir, "../../../static/test_data/images/"))
+
+
+# md5 加密
+def md5(str):
+    # 创建md5对象
+    m = hashlib.md5()
+    b = str.encode(encoding='utf-8')
+    m.update(b)
+    return m.hexdigest()
 

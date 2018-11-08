@@ -9,6 +9,7 @@
 from itest.models import Task, UseCase, InvokeUsecase, ApiResponse, ApiRequest, Interface, Environment, Project, OperatorInfo
 from datetime import datetime
 from mongoengine import connect
+from itest.utils.utils import mongo_to_dict
 
 connect('itest', host='mongodb://172.20.166.50:27017/itest2')
 
@@ -70,8 +71,9 @@ def init_interface():
 if __name__ == '__main__':
     # init_db()
     # test()
-    id = "5b91e7b45f627dfd0621e9fa"
-    id = "5b91e7b45f627dfd0621e9fa"
-    use_case = UseCase.objects(id=ObjectId(id))
-    print(use_case)
-    print(use_case.count())
+    env_name = '测试环境1'
+    env_url = 'http://localhost:8082'
+    env_remarks ='测试环境'
+    env = Environment(name=env_name,  value=env_url,description=env_remarks).save()
+
+    print(mongo_to_dict(env))
