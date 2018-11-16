@@ -23,10 +23,11 @@ _HOST = '0.0.0.0'
 # def after_request(response):
 #     response.headers.add('Access-Control-Allow-Origin', '*')
 #     if
+
 @app.before_request
 def before_request():
     if CONFIG.BEFORE_REQUEST:
-        if '/login' not in flask.request.url:
+        if '/api/users/login' not in flask.request.url and '/api/users/refreshToken' not in flask.request.url:
             auth()
 
 
@@ -35,15 +36,15 @@ def auth():
     pass
 
 
-@app.route('/login', methods=['POST'])
-def login():
-    username = request.json.get('username', None)
-    password = request.json.get('password', None)
-    if username != 'admin' or password != 'admin':
-        return jsonify({"msg": "用户名或密码错误"})
-
-    access_token = create_access_token(identity=username)
-    return jsonify(access_token=access_token)
+# @app.route('/login', methods=['POST'])
+# def login():
+#     username = request.json.get('username', None)
+#     password = request.json.get('password', None)
+#     if username != 'admin' or password != 'admin':
+#         return jsonify({"msg": "用户名或密码错误"})
+#
+#     access_token = create_access_token(identity=username)
+#     return jsonify(access_token=access_token)
 
 
 if __name__ == '__main__':

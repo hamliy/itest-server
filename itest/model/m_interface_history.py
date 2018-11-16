@@ -8,7 +8,7 @@
 from datetime import datetime
 from mongoengine import Document, EmbeddedDocument
 from mongoengine.fields import (
-    DateTimeField, EmbeddedDocumentField, FloatField, IntField, DictField,
+    DateTimeField, EmbeddedDocumentField, FloatField, IntField, DictField, SortedListField,
     ListField, ReferenceField, StringField, ObjectIdField, BooleanField
 )
 
@@ -17,9 +17,9 @@ from .m_user import User
 
 
 class History(EmbeddedDocument):
-    createTime = DateTimeField(default=datetime.utcnow())  # 创建时间
+    createTime = DateTimeField(default=datetime.utcnow)  # 创建时间
     data = DictField()
-    operator = ReferenceField(User)
+    operatorId = ReferenceField(User)
     operatorName = StringField()
 
 
@@ -29,9 +29,9 @@ class InterfaceHistory(Document):
        """
     meta = {'collection': 'interface_history'}
 
-    interfaceId = ReferenceField(Interface)   # 关联接口
-    records = ListField(EmbeddedDocumentField(History))
-    createTime = DateTimeField(default=datetime.utcnow())  # 创建时间
-    updateTime = DateTimeField(default=datetime.utcnow())  # 更新时间
+    interfaceId = ReferenceField(Interface, required=True, unique=True)   # 关联接口
+    records = SortedListField(EmbeddedDocumentField(History), default=[], ordering="createTime", reverse=True)
+    createTime = DateTimeField(default=datetime.utcnow)  # 创建时间
+    modifiedTime = DateTimeField(default=datetime.utcnow)  # 更新时间
 
 

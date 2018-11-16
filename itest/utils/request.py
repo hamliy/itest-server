@@ -14,6 +14,8 @@ from urllib.parse import urlparse
 from urllib.parse import urlunparse
 from posixpath import normpath
 
+from flask_jwt_extended import get_jwt_identity, jwt_optional
+
 
 # url+api拼接
 def uri_join(base, url):
@@ -21,4 +23,12 @@ def uri_join(base, url):
     arr = urlparse(url1)
     path = normpath(arr[2])
     return urlunparse((arr.scheme, arr.netloc, path, arr.params, arr.query, arr.fragment))
+
+
+# 获取token的用户id
+@jwt_optional
+def get_user_id():
+    return get_jwt_identity()
+
+
 

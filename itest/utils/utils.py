@@ -59,8 +59,15 @@ def convert_mongo_to_json(o):
                     if isinstance(l, dict):
                         convert(l)
             else:
+                # 转换id
                 if isinstance(value, ObjectId):
-                    dic_data[key] = str(dic_data.pop(key))
+                    # temp = str(dic_data.pop(key))
+                    dic_data[key] = str(value)
+                # 转换日期格式
+                if isinstance(value, datetime.datetime):
+                    dic_data[key] = (value + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S')
+                elif isinstance(value, datetime.date):
+                    dic_data[key] = value.strftime("%Y-%m-%d")
         return dic_data
 
     ret = {}
@@ -70,10 +77,21 @@ def convert_mongo_to_json(o):
         # 转化为字典
         data = data.to_dict()
         ret = convert(data)
-    # 将数据转化为json格式， 因json不能直接处理datetime类型的数据， 故需要区分处理
-    # ret = json.dumps(ret, cls=DateEncoder)
-    # ret = json.loads(ret)
+    # 默认删除isDeleted字段
+    if 'isDeleted' in ret:
+        ret.pop('isDeleted')
+    # _id 转换为 id
+    if '_id' in ret:
+        ret['id'] = ret.pop('_id')
     return ret
+
+
+# mongo 查询结果集转json
+def convert_queryset_to_json(queryset):
+    data = []
+    for item in queryset:
+        data.append(convert_mongo_to_json(item))
+    return data
 
 # 获取项目路径
 def get_project_path ():

@@ -9,9 +9,11 @@ from flask import Flask, jsonify, Response
 from itest.config import DevConfig
 from itest.extensions import cors, init_mongo, jwt
 from itest import environment, invoice, user, base, test_data
+from itest.apis import a_user, a_project, a_image, a_image_group, a_mark_field, a_environment,\
+    a_interface, a_interface_history, a_interface_group
+#
 
-#
-#
+
 class MyResponse(Response):
     """
     自定义响应结果
@@ -36,6 +38,7 @@ def create_app(config_object=DevConfig):
     register_extensions(app)
     # 注册蓝图
     register_blueprints(app)
+    register_api_blueprints(app)
     # 注册api 别名- api接口文档
     # register_api()
     return app
@@ -51,6 +54,19 @@ def register_blueprints(app):
     app.register_blueprint(base.interface_apis.blueprint, url_prefix='/api/interface')
     app.register_blueprint(base.use_case_apis.blueprint, url_prefix='/api/usecase')
     app.register_blueprint(test_data.test_data_apis.blueprint, url_prefix='/api/data')
+    return None
+
+
+def register_api_blueprints(app):
+    app.register_blueprint(a_user.blueprint, url_prefix='/api/users')
+    app.register_blueprint(a_project.blueprint, url_prefix='/api/projects')
+    app.register_blueprint(a_image.blueprint, url_prefix='/api/images')
+    app.register_blueprint(a_image_group.blueprint, url_prefix='/api/images-group')
+    app.register_blueprint(a_mark_field.blueprint, url_prefix='/api/mark-field')
+    app.register_blueprint(a_environment.blueprint, url_prefix='/api/envs')
+    app.register_blueprint(a_interface.blueprint, url_prefix='/api/interfaces')
+    app.register_blueprint(a_interface_group.blueprint, url_prefix='/api/interface-group')
+    app.register_blueprint(a_interface_history.blueprint, url_prefix='/api/interface-history')
     return None
 
 

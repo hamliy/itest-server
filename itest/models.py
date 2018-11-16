@@ -198,6 +198,7 @@ class UseCase(Document):
                       environment_url=environment_url,
                       source_data=source_data, status=status[0], desc=desc).save()
 
+
 @init_create_info.apply
 class Environment(Document):
     """6 环境集合"""

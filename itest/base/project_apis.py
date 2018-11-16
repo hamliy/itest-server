@@ -173,6 +173,6 @@ def delete():
     if result == 0:
         return init_return({}, sucess=False, error="删除的项目不存在", errorCode=1001)
     else:
-        return init_return({'data':'删除成功'})
+        return init_return({'data': '删除成功'})
 
 

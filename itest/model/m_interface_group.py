@@ -1,11 +1,10 @@
 # encoding: utf-8
 """
 @author: han.li
-@file  : m_environment.py
-@time  : 11/5/18 10:57 AM
-@dec   : 环境类
+@file  : m_interface_group.py
+@time  : 11/5/18 2:55 PM
+@dec   : 
 """
-
 from datetime import datetime
 from mongoengine import Document, EmbeddedDocument
 from mongoengine.fields import (
@@ -16,21 +15,18 @@ from .m_user import User
 from .m_project import Project
 
 
-class Environment(Document):
+class InterfaceGroup(Document):
     """
-    环境数据
+    接口分组
     """
-    meta = {'collection': 'environment'}
+    meta = {'collection': 'interface_group'}
 
     projectId = ReferenceField(Project)             # 所属项目id
     creatorId = ReferenceField(User)                  # 创建人id
-    name = StringField(required=True)                   # 环境名
-    protocol = StringField(required=True, default='http')               # 环境协议
-    path = StringField(required=True)               # 环境路径
-    port = IntField(required=True, default=80)               # 环境端口
-    status = IntField(default=0)                             # 环境状态 0 待确认 1 ping通 2 ping不通
-    checkTime = DateTimeField(default=datetime.utcnow)    # 状态检查时间
+    name = StringField(required=True)               # 组名
+    member = ListField(ObjectIdField(), default=[])             # 接口成员
     createTime = DateTimeField(default=datetime.utcnow)                    # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)                  # 更新时间
     isDeleted = BooleanField(default=False)                      # 是否删除
-    desc = StringField(default="")                            # 描述
+    level = IntField(required=True, default=1)      # 分组层级 默认 1级
+    desc = StringField(default="")                            # 分组描述

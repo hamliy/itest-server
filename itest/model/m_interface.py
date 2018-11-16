@@ -13,7 +13,7 @@ from mongoengine.fields import (
 )
 from .m_user import User
 from .m_project import Project
-from .m_group import Group
+from .m_interface_group import InterfaceGroup
 
 
 class BodyParam(EmbeddedDocument):
@@ -59,11 +59,11 @@ class Option(EmbeddedDocument):
     接口参数
     """
 
-    method = StringField()  # 方法
+    method = StringField(default="GET")  # 方法
     headers = EmbeddedDocumentField(HeaderParam)
     params = EmbeddedDocumentField(BodyParam)
-    examples = EmbeddedDocumentField(BodyExample)
-    response = ListField(EmbeddedDocument(ResponseParams))
+    example = EmbeddedDocumentField(BodyExample)
+    response = ListField(EmbeddedDocumentField(ResponseParams))
     responseIndex = IntField(default=0)      # 指定返回结果 或随机
     delay = IntField(default=0)             # 模拟网络延迟
 
@@ -72,18 +72,18 @@ class Interface(Document):
     """
     接口信息
     """
-    meta = {'collection': 'interface'}
+    meta = {'collection': 'interfaces'}
 
     projectId = ReferenceField(Project)  # 所属项目id
-    group = ReferenceField(Group)   # 所属组
-    creator = ReferenceField(User)  # 创建人id
+    groupId = ReferenceField(InterfaceGroup)   # 所属组
+    creatorId = ReferenceField(User)  # 创建人id
     name = StringField(required=True)  # 接口名
     options = EmbeddedDocumentField(Option)
 
-    createTime = DateTimeField(default=datetime.utcnow())  # 创建时间
-    modifiedTime = DateTimeField(default=datetime.utcnow())  # 更新时间
+    createTime = DateTimeField(default=datetime.utcnow)  # 创建时间
+    modifiedTime = DateTimeField(default=datetime.utcnow)  # 更新时间
     isDeleted = BooleanField(default=False)  # 是否删除
-    desc = StringField()  # 分组描述
+    desc = StringField(default="")  # 分组描述
 
 
 

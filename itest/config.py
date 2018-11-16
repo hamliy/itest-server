@@ -6,7 +6,7 @@
 @dec   : app配置信息
 """
 import os
-
+from datetime import timedelta
 
 class Config(object):
     """Base configuration"""
@@ -18,6 +18,7 @@ class Config(object):
     DEBUG_TB_ENABLED = False #  Diable Debug
 
     JWT_SECRET_KEY = 'super-secret'
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=2)
 
     # 请求的json返回字符串显示中文
     JSON_AS_ASCII = False

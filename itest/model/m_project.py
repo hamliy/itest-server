@@ -18,13 +18,13 @@ class Project(Document):
     """
     项目信息
     """
-    meta = {'collection': 'project'}
+    meta = {'collection': 'projects'}
 
     name = StringField(required=True, unique=True)      # 项目名
-    version = StringField()                             # 项目版本号 V1.0 后续创建版本管理
-    type = StringField()                                # 项目类型   Web， app
-    creator = ReferenceField(User)                      # 创建人
-    createTime = DateTimeField(default=datetime.utcnow())                        # 创建时间
-    modifiedTime = DateTimeField(default=datetime.utcnow())                      # 更新时间
-    isDeleted = BooleanField()                          # 是否删除
-    desc = StringField()                                # 描述
+    version = StringField(default="V1.0")                             # 项目版本号 V1.0 后续创建版本管理
+    projectType = StringField(default="web")                                # 项目类型   Web， app
+    creatorId = ReferenceField(User)                      # 创建人
+    createTime = DateTimeField(default=datetime.utcnow)                        # 创建时间
+    modifiedTime = DateTimeField(default=datetime.utcnow)                      # 更新时间
+    isDeleted = BooleanField(default=False)                          # 是否删除
+    desc = StringField(default="")                                # 描述
