@@ -46,7 +46,7 @@ class DevConfig(Config):
     DEBUG_TB_ENABLED = True
     #MONGO_HOST = 'localhost'
     #MONGO_PORT = 27017
-    MONGO_URI = 'mongodb://172.20.166.50:27017/itest2'
+    MONGO_URI = 'mongodb://localhost:27017/itest'
     # MONGO_USERNAME = 'kingdee'
     # MONGO_PASSWORD = 'kingdee'
     # MONGO_DBNAME = 'butterfly'

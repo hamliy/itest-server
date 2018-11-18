@@ -23,7 +23,7 @@ class ProjectService(object):
     def create(project):
         creator_id = get_user_id()
         return convert_mongo_to_json(Project(name=project['name'],
-                                             project_type=project['project_type'],
+                                             projectType=project['projectType'],
                                              creatorId=ObjectId(creator_id),
                                              desc=project['desc']).save())
 

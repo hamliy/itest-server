@@ -26,7 +26,7 @@ class InterfaceService(object):
     def create(interface):
         creator_id = get_user_id()
         return convert_mongo_to_json(Interface(name=interface['name'],
-                                               options=interface['option'],
+                                               option=interface['option'],
                                                creatorId=ObjectId(creator_id),
                                                projectId=ObjectId(interface['projectId']),
                                                groupId=ObjectId(interface['groupId']),
@@ -72,7 +72,7 @@ class InterfaceService(object):
             if not data.first():
                 return None, 'not_find'
             rs = data.modify(name=interface['name'],
-                             options=interface['option'],
+                             option=interface['option'],
                              desc=interface['desc'],
                              modifiedTime=datetime.utcnow,
                              new=True)

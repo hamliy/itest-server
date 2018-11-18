@@ -1,7 +1,7 @@
 # encoding: utf-8
 """
 @author: han.li
-@file  : m_use_case.py
+@file  : m_interface_use_case.py
 @time  : 11/5/18 10:56 AM
 @dec   : 用例类 接口+数据+环境
 """
@@ -16,9 +16,10 @@ from .m_user import User
 from .m_project import Project
 from .m_interface import Interface
 from .m_environment import Environment
+from .m_interface_use_case_group import InterfaceUseCaseGroup
 
 
-class UseCaseOption(EmbeddedDocument):
+class InterfaceUseCaseOption(EmbeddedDocument):
     """
     用例参数
     """
@@ -33,23 +34,25 @@ class UseCaseOption(EmbeddedDocument):
     delay = IntField(default=0)         # 模拟网络延迟
 
 
-class UseCase(Document):
+class InterfaceUseCase(Document):
     """
     用例
     """
-    meta = {'collection': 'use_case'}
+    meta = {'collection': 'interface_use_case'}
 
-    projectId = ReferenceField(Project)             # 所属项目id
+    projectId = ReferenceField(Project, required=True)             # 所属项目id
     creatorId = ReferenceField(User)                  # 创建人id
     interfaceId = ReferenceField(Interface)
     environmentId = ReferenceField(Environment)
-    useCaseNo = StringField()                           # 用例编号
+    groupId = ReferenceField(InterfaceUseCaseGroup)     # 用例分组
+    useCaseNo = StringField(required=True, unique=True)                           # 用例编号
+    level = IntField(required=True, default=0)  # 用例级别 0 未设置  1 2 3 4
     name = StringField(required=True)                   # 用例名
-    detail = StringField()                              # 用例详情
+    detail = StringField(required=True, defalt="")                              # 用例详情
 
-    options = EmbeddedDocumentField(UseCaseOption)      # 用例参数
+    option = EmbeddedDocumentField(InterfaceUseCaseOption)      # 用例参数
 
-    createTime = DateTimeField(default=datetime.utcnow())                    # 创建时间
-    modifiedTime = DateTimeField(default=datetime.utcnow())                  # 更新时间
+    createTime = DateTimeField(default=datetime.utcnow)                    # 创建时间
+    modifiedTime = DateTimeField(default=datetime.utcnow)                  # 更新时间
     isDeleted = BooleanField(default=False)                      # 是否删除
     desc = StringField()                                    # 描述

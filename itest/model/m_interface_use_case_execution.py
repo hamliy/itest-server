@@ -1,7 +1,7 @@
 # encoding: utf-8
 """
 @author: han.li
-@file  : m_use_case_execution.py
+@file  : m_interface_use_case_execution.py
 @time  : 11/5/18 11:02 AM
 @dec   : 用例执行结果
 """
@@ -12,8 +12,8 @@ from mongoengine.fields import (
     DateTimeField, EmbeddedDocumentField, FloatField, IntField, DictField,
     ListField, ReferenceField, StringField, ObjectIdField, BooleanField
 )
-from .m_use_case import UseCase
-from .m_task_execution import TaskExecution
+from .m_interface_use_case import InterfaceUseCase
+from .m_user import User
 
 
 class ResponseData(EmbeddedDocument):
@@ -34,21 +34,23 @@ class CheckResult(EmbeddedDocument):
     errorDetail = DictField()       # 失败详情
 
 
-class UseCaseExecution(Document):
+class InterfaceUseCaseExecution(Document):
     """
     用例执行结果
     """
-    meta = {'collection': 'use_case_execution'}
-
-    useCaseId = ReferenceField(UseCase)  # 用例Id
-    taskExecutionId = ReferenceField(TaskExecution)  # 任务执行结果
-    useCaseNo = StringField()  # 用例编号
+    meta = {'collection': 'interface_use_case_execution'}
+    creatorId = ReferenceField(User)  # 执行人
+    useCaseId = ReferenceField(InterfaceUseCase)  # 用例Id
+    relationId = ObjectIdField(default=None)  # 关联Id  根据执行类型设置 0 无， 1，2 测试计划执行结果 id
+    executeType = IntField(default=0)    # 用例执行类型  0 单用例执行调试 1 按组执行 创建临时执行测试计划 2 按测试计划执行
+    status = IntField(default=0)    # 用例执行状态 0 执行中 1 执行完成
+    useCaseNo = StringField()   # 用例编号
     useCaseName = StringField(required=True)  # 用例名
     useCaseDetail = StringField()   # 用例
 
     response = EmbeddedDocumentField(ResponseData)  # 请求信息
     result = EmbeddedDocumentField(CheckResult)    # 信息结果
 
-    startTime = DateTimeField(default=datetime.utcnow())  # 开始时间
-    endTime = DateTimeField(default=datetime.utcnow())  # 结束时间
+    startTime = DateTimeField(default=None)  # 开始时间
+    endTime = DateTimeField(default=None)  # 结束时间
 

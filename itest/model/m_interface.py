@@ -78,7 +78,7 @@ class Interface(Document):
     groupId = ReferenceField(InterfaceGroup)   # 所属组
     creatorId = ReferenceField(User)  # 创建人id
     name = StringField(required=True)  # 接口名
-    options = EmbeddedDocumentField(Option)
+    option = EmbeddedDocumentField(Option)
 
     createTime = DateTimeField(default=datetime.utcnow)  # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)  # 更新时间
