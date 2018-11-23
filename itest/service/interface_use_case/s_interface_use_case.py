@@ -9,6 +9,9 @@
 
 
 from itest.model.m_interface_use_case import InterfaceUseCase
+from itest.model.m_interface_use_case_execution import InterfaceUseCaseExecution
+from itest.service.image.s_image import ImageService
+from itest.common.use_case_request import UseCaseRequest
 from itest.utils.utils import convert_mongo_to_json, convert_queryset_to_json
 from mongoengine.errors import NotUniqueError
 from bson import ObjectId
@@ -21,24 +24,71 @@ from itest.utils.request import get_user_id
 class InterfaceUseCaseService(object):
     def __init__(self):
         pass
+
     @staticmethod
-    def execute_use_case():
-        return {},{}
+    def execute_use_case(use_case_id):
+        use_case = InterfaceUseCaseService.get_by_id(use_case_id)
+
+        # 上传文件 本地转换
+        if use_case['option']['request_type'] == 2:
+            true_files = {}
+            # 缓存图片id
+            for key, value in use_case['option']['files'].items():
+                image = ImageService.get_by_id(value)
+                if not image:
+                    return {
+                            'status': 5000,
+                            'data': {},
+                            'costTime': 100
+                        }, {
+                            'passed': False,
+                            'error': "获取图片失败异常",
+                            'errorDetail': {}
+                        }
+                else:
+                    true_files[key] = (image['name'], open(image['path'], 'rb'), 'multipart/form-data')
+            use_case['option']['files'] = true_files
+
+        ucr = UseCaseRequest(use_case)
+        ucr.run()
+        print(ucr.get_result())
+        response = {
+            'status': 200,
+            'data': {},
+            'costTime': 100
+        }
+        check_result = {
+            'passed': True,
+            'error': "",
+            'errorDetail': {}
+        }
+        return response, check_result
+
+
+
     @staticmethod
     def create(use_case):
         creator_id = get_user_id()
-        # use_case_no = use_case['useCaseNo'] + "#" +interface_use_case['projectId']
-        return convert_mongo_to_json(InterfaceUseCase(name=use_case['name'],
-                                             interfaceId=ObjectId(use_case['projectId']),
-                                             environmentId=ObjectId(use_case['environmentId']),
-                                             creatorId=ObjectId(creator_id),
-                                             groupId=ObjectId(use_case['groupId']),
-                                             level= use_case['level'],
-                                             useCaseNo=use_case['useCaseNo'],
-                                             detail=use_case['detail'],
-                                             option=use_case['option'],
-                                             projectId=ObjectId(use_case['projectId']),
-                                             desc=use_case['desc']).save())
+        status = 'ok'
+        try:
+            rs = InterfaceUseCase(name=use_case['name'],
+                                  interfaceId=ObjectId(use_case['interfaceId']),
+                                  environmentId=ObjectId(use_case['environmentId']),
+                                  creatorId=ObjectId(creator_id),
+                                  groupId=ObjectId(use_case['groupId']),
+                                  level=use_case['level'],
+                                  useCaseNo=use_case['useCaseNo'],
+                                  detail=use_case['detail'],
+                                  option=use_case['option'],
+                                  projectId=ObjectId(use_case['projectId']),
+                                  desc=use_case['desc']).save()
+        except InvalidId:
+            rs = None
+            status = 'not_object_id'
+        except NotUniqueError:
+            rs = None
+            status = 'not_unique'
+        return convert_mongo_to_json(rs), status
 
     @staticmethod
     def get_by_name(name):
@@ -49,7 +99,11 @@ class InterfaceUseCaseService(object):
         return convert_mongo_to_json(InterfaceUseCase.objects(id=ObjectId(use_case_id), isDeleted=False).first())
 
     @staticmethod
-    def get_UseCases(project_id):
+    def get_by_id_list(id_list):
+        return convert_queryset_to_json(InterfaceUseCase.objects(id__in=id_list, isDeleted=False))
+
+    @staticmethod
+    def get_use_cases(project_id):
         status = 'ok'
         try:
             rs = InterfaceUseCase.objects(projectId=ObjectId(project_id), isDeleted=False).order_by("-createTime")
@@ -77,7 +131,7 @@ class InterfaceUseCaseService(object):
                 return None, 'not_find'
             rs = data.modify(name=use_case['name'],
                              desc=use_case['desc'],
-                             interfaceId=ObjectId(use_case['projectId']),
+                             interfaceId=ObjectId(use_case['interfaceId']),
                              environmentId=ObjectId(use_case['environmentId']),
                              groupId=ObjectId(use_case['groupId']),
                              level=use_case['level'],

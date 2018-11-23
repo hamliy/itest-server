@@ -43,7 +43,7 @@ class EnvironmentService(object):
         # status = EnvironmentService.check_status(env['path'])
         return convert_mongo_to_json(Environment(name=env['name'],
                                                  protocol=env['protocol'],
-                                                 path=env['path'],
+                                                 ip=env['ip'],
                                                  port=env['port'],
                                                  # status=status,
                                                  creatorId=ObjectId(creator_id),
@@ -76,7 +76,7 @@ class EnvironmentService(object):
         :return:
         """
         return convert_queryset_to_json(Environment.objects(
-            (Q(name__icontains=q) | Q(desc__icontains=q) | Q(desc__path=q))
+            (Q(name__icontains=q) | Q(desc__icontains=q) | Q(desc__ip=q))
             & Q(isDeleted=False) & Q(projectId=ObjectId(project_id)))
                                         .order_by("-createTime"))
 
@@ -89,7 +89,7 @@ class EnvironmentService(object):
                 return None, 'not_find'
             rs = data.modify(name=env['name'],
                              protocol=env['protocol'],
-                             path=env['path'],
+                             ip=env['ip'],
                              port=env['port'],
                              desc=env['desc'],
                              modifiedTime=datetime.utcnow,

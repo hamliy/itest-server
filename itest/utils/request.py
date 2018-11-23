@@ -25,6 +25,14 @@ def uri_join(base, url):
     return urlunparse((arr.scheme, arr.netloc, path, arr.params, arr.query, arr.fragment))
 
 
+# http+url+port+api拼接
+def get_use_case_url(http, url, port, api):
+    if port == '80':
+        return http + '://' + uri_join(url, api)
+    else:
+        return http + '://' + uri_join("%s:%s" % (url, port), api)
+
+
 # 获取token的用户id
 @jwt_optional
 def get_user_id():

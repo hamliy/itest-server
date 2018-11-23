@@ -11,7 +11,7 @@ from itest.service.image.s_image_group import ImageGroupService
 from itest.utils.utils import init_return
 from itest.utils.decorators import init_params
 
-blueprint = Blueprint('image-group', __name__)
+blueprint = Blueprint('images-group', __name__)
 
 
 @blueprint.route('/search', methods=['POST'])

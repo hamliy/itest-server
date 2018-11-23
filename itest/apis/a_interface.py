@@ -33,8 +33,8 @@ def get():
 
 
 @blueprint.route('/create', methods=['POST'])
-@init_params(params=['projectId', 'groupId', 'option', 'name', 'desc'],
-             empty_check_params=['projectId', 'groupId', 'name', 'option'])
+@init_params(params=['projectId', 'groupId', 'option', 'method', 'path', 'name', 'desc'],
+             empty_check_params=['projectId', 'groupId', 'method', 'path', 'name', 'option'])
 def create():
     info = request.get_json()
     group, status = InterfaceGroupService.get_by_id(info['groupId'])

@@ -20,7 +20,7 @@ class ResponseData(EmbeddedDocument):
     """
     结果数据
     """
-    status = IntField()         # 状态码
+    status = IntField()         # 状态码 5001符合异常， 正常错误码
     data = DictField()          # 返回数据
     costTime = FloatField()     # 请求耗时
 

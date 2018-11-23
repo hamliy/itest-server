@@ -10,7 +10,8 @@ from itest.config import DevConfig
 from itest.extensions import cors, init_mongo, jwt
 from itest import environment, invoice, user, base, test_data
 from itest.apis import a_user, a_project, a_image, a_image_group, a_mark_field, a_environment,\
-    a_interface, a_interface_history, a_interface_group
+    a_interface, a_interface_history, a_interface_group, a_interface_use_case_group,\
+    a_interface_use_case_history, a_interface_use_case
 #
 
 
@@ -67,6 +68,9 @@ def register_api_blueprints(app):
     app.register_blueprint(a_interface.blueprint, url_prefix='/api/interfaces')
     app.register_blueprint(a_interface_group.blueprint, url_prefix='/api/interface-group')
     app.register_blueprint(a_interface_history.blueprint, url_prefix='/api/interface-history')
+    app.register_blueprint(a_interface_use_case.blueprint, url_prefix='/api/interface-use-case')
+    app.register_blueprint(a_interface_use_case_group.blueprint, url_prefix='/api/interface-use-case-group')
+    app.register_blueprint(a_interface_use_case_history.blueprint, url_prefix='/api/interface-use-case-history')
     return None
 
 

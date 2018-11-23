@@ -27,7 +27,7 @@ class InterfaceUseCaseGroup(Document):
     name = StringField(required=True)               # 组名
     member = ListField(ObjectIdField(), default=[])             # 用例成员
     groupType = IntField(default=0)                 # 分组类型默认  0 ，接口用例组，成员 无关联执行
-                                                                # 1 业务用例组，用例上下文，按顺序执行
+                                                    # 1 业务用例组，用例上下文，按顺序执行
     createTime = DateTimeField(default=datetime.utcnow)                    # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)                  # 更新时间
     isDeleted = BooleanField(default=False)                      # 是否删除

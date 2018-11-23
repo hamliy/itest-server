@@ -21,9 +21,9 @@ class BodyParam(EmbeddedDocument):
     内容参数
     """
 
-    body = ListField()      # 提交 json 或form数据  请求类型为GET 则无该参数
-    path = ListField()      # 提交 restful风格url参数 https://www/:param1/:param2
-    query = ListField()     # url参数 https://www？param1=hi
+    body = ListField()      # 提交 json 或form数据  请求类型为GET 则无该参数 data
+    path = ListField()      # 提交 restful风格url参数 https://www/:param1/:param2 url
+    query = ListField()     # url参数 https://www？param1=hi params
 
 
 class BodyExample(EmbeddedDocument):
@@ -58,8 +58,6 @@ class Option(EmbeddedDocument):
     """
     接口参数
     """
-
-    method = StringField(default="GET")  # 方法
     headers = EmbeddedDocumentField(HeaderParam)
     params = EmbeddedDocumentField(BodyParam)
     example = EmbeddedDocumentField(BodyExample)
@@ -78,6 +76,8 @@ class Interface(Document):
     groupId = ReferenceField(InterfaceGroup)   # 所属组
     creatorId = ReferenceField(User)  # 创建人id
     name = StringField(required=True)  # 接口名
+    method = StringField(required=True, default="GET")  # 方法
+    path = StringField(required=True)   # 接口路径
     option = EmbeddedDocumentField(Option)
 
     createTime = DateTimeField(default=datetime.utcnow)  # 创建时间

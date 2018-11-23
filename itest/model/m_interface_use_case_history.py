@@ -20,7 +20,7 @@ from .m_user import User
 class History(EmbeddedDocument):
     createTime = DateTimeField(default=datetime.utcnow)  # 创建时间
     data = DictField()
-    operator = ReferenceField(User)
+    operatorId = ReferenceField(User)
     operatorName = StringField()
 
 

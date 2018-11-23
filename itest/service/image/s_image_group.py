@@ -30,6 +30,11 @@ class ImageGroupService(object):
                                                 desc=image_group['desc']).save())
 
     @staticmethod
+    def add_member(group_id, interface_id):
+        ImageGroup.objects(id=ObjectId(group_id), isDeleted=False)\
+                .update_one(push__member=ObjectId(interface_id))
+
+    @staticmethod
     def get_by_name(name):
         return convert_mongo_to_json(ImageGroup.objects(name=name).first())
 

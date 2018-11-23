@@ -26,9 +26,9 @@ class InterfaceUseCaseGroupService(object):
     def create(interface_group):
         creator_id = get_user_id()
         return convert_mongo_to_json(InterfaceUseCaseGroup(name=interface_group['name'],
-                                                    creatorId=ObjectId(creator_id),
-                                                    projectId=ObjectId(interface_group['projectId']),
-                                                    desc=interface_group['desc']).save())
+                                                           creatorId=ObjectId(creator_id),
+                                                           projectId=ObjectId(interface_group['projectId']),
+                                                           desc=interface_group['desc']).save())
 
     @staticmethod
     def get_by_name(name):

@@ -23,10 +23,15 @@ class InterfaceUseCaseOption(EmbeddedDocument):
     """
     用例参数
     """
+    url = StringField()                 # 请求url
     path = StringField()                # 接口路径
     method = StringField()              # 方法
-    headers = ListField()               # 请求头
+    headers = DictField()               # 请求头
     params = DictField()                # 请求参数
+    data = DictField(default=None)                  # 请求数据
+    files = DictField(default=None)                 # 请求文件 {name: image_id} 换成图片i
+    request_type = IntField(default=0)  # post请求类型 => 0: params or forms, 1: json , 2: files
+    # file_type = IntField(default=0)     # 文件类型  0: 文件 1： 文件转 Base64 2： 直接Base64
 
     expect = DictField()                # 用例预期结果
     checkRule = DictField()             # 预期结果校验规则

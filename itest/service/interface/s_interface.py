@@ -26,6 +26,8 @@ class InterfaceService(object):
     def create(interface):
         creator_id = get_user_id()
         return convert_mongo_to_json(Interface(name=interface['name'],
+                                               method=interface['method'],
+                                               path=interface['path'],
                                                option=interface['option'],
                                                creatorId=ObjectId(creator_id),
                                                projectId=ObjectId(interface['projectId']),

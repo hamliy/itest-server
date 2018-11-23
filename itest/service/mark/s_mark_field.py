@@ -24,7 +24,7 @@ class MarkFieldService(object):
     @staticmethod
     def create(mark_field):
         return convert_mongo_to_json(MarkField(name=mark_field['name'],
-                                               project_id=ObjectId(mark_field['projectId']),
+                                               projectId=ObjectId(mark_field['projectId']),
                                                fieldType=mark_field['fieldType'],
                                                fieldItems=mark_field['fieldItems'],
                                                desc=mark_field['desc']).save())

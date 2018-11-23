@@ -9,11 +9,9 @@
 
 from itest.model.m_interface_use_case_history import InterfaceUseCaseHistory
 from itest.service.user.s_user import UserService
-from itest.utils.utils import convert_mongo_to_json, convert_queryset_to_json
-from mongoengine.errors import NotUniqueError
+from itest.utils.utils import convert_mongo_to_json
 from bson import ObjectId
 from bson.errors import InvalidId
-from mongoengine.queryset.visitor import Q
 from datetime import datetime
 from itest.utils.request import get_user_id
 
@@ -23,10 +21,10 @@ class InterfaceUseCaseHistoryService(object):
         pass
 
     @staticmethod
-    def get(interface_id):
+    def get(use_case_id):
         status = 'ok'
         try:
-            rs = InterfaceUseCaseHistory.objects(interfaceId=ObjectId(interface_id)).first()
+            rs = InterfaceUseCaseHistory.objects(useCaseId=ObjectId(use_case_id)).first()
         except InvalidId:
             rs = None
             status = 'not_object_id'
@@ -44,10 +42,11 @@ class InterfaceUseCaseHistoryService(object):
                 'operatorId': operator_id,
                 'operatorName': name
             }
+            print(use_case)
             history = InterfaceUseCaseHistory.objects(useCaseId=ObjectId(use_case['id']))
             if not history.first():
                 rs = InterfaceUseCaseHistory(records=[record],
-                                      useCaseId=ObjectId(use_case['id'])).save()
+                                             useCaseId=ObjectId(use_case['id'])).save()
             else:
                 if len(history.first().records) == 5:
                     InterfaceUseCaseHistory.objects(useCaseId=ObjectId(use_case['id'])).modify(

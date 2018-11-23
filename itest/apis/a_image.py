@@ -8,6 +8,7 @@
 
 from flask import Blueprint, request
 from itest.service.image.s_image import ImageService
+from itest.service.image.s_image_group import ImageGroupService
 from itest.utils.utils import init_return
 from itest.utils.decorators import init_params
 
@@ -58,6 +59,7 @@ def create():
         return init_return({}, sucess=False, error="图片类型错误", errorCode=4002)
     info['path'] = image_path
     data = ImageService.create(info)
+    ImageGroupService.add_member(info['groupId'], data['id'])
     return init_return(data)
 
 

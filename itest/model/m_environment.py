@@ -26,7 +26,7 @@ class Environment(Document):
     creatorId = ReferenceField(User)                  # 创建人id
     name = StringField(required=True)                   # 环境名
     protocol = StringField(required=True, default='http')               # 环境协议
-    path = StringField(required=True)               # 环境路径
+    ip = StringField(required=True)               # 环境路径
     port = IntField(required=True, default=80)               # 环境端口
     status = IntField(default=0)                             # 环境状态 0 待确认 1 ping通 2 ping不通
     checkTime = DateTimeField(default=datetime.utcnow)    # 状态检查时间
