@@ -9,9 +9,6 @@ import json, os
 import datetime
 from bson import ObjectId
 import hashlib
-import operator
-from jsondiff import diff
-from jsondiff.symbols import Symbol
 
 from mongoengine.base import BaseDocument
 
@@ -117,29 +114,4 @@ def md5(str):
     return m.hexdigest()
 
 
-# 比较json是否相等
-def get_cmp_json(src_data, dst_data):
-    if diff(src_data, dst_data) == {}:
-        return True
-    else:
-        return False
 
-
-# 比较字典 是否包含 src 包含 dst
-def get_contain_json(src_data, dst_data):
-    return diff_just_delete(diff(src_data, dst_data))
-
-
-# 判断 diff结果是否只是缺少的数据， 来匹配包含
-def diff_just_delete(differ):
-    for key, value in differ.items():
-        if isinstance(key, Symbol):
-            if str(key) != '$delete':
-                return False
-        else:
-            if isinstance(value, dict) and value:
-                if not diff_just_delete(value):
-                    return False
-            else:
-                return False
-    return True

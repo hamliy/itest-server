@@ -48,15 +48,15 @@ class HttpRequest(object):
             'params': {},
             'data': {},
             'files': {},
-            'request_type': 0
+            'requestType': 0
         }
         # 接口请求耗时
         self.cost_time = 0
         # 接口返回值地那样
         self.response = {
-            'cost_time': 0,
+            'costTime': 0,
             'status': 1,  # 0 失败 1 成功
-            'error_info': '',
+            'errorInfo': '',
             'data': {}
         }
         self.headers = {}
@@ -80,7 +80,7 @@ class HttpRequest(object):
         self.url = self.request['url']
         self.files = self.request['files']
         self.method = self.request['method']
-        self.request_type = self.request['request_type']
+        self.request_type = self.request['requestType']
 
     def request_run(self):
         method = self.method.upper()
@@ -96,9 +96,9 @@ class HttpRequest(object):
 
     def set_response(self, data={}, status=1, error=''):
         self.response['status'] = status
-        self.response['error_info'] = error
+        self.response['errorInfo'] = error
         self.response['data'] = data
-        self.response['cost_time'] = self.cost_time
+        self.response['costTime'] = self.cost_time
 
     def set_url(self, url):
         """
@@ -184,7 +184,7 @@ class HttpRequest(object):
             return
         # 请求异常
         if resp is None:
-            self.set_response(data=resp, status=5001, error="response was None !")
+            self.set_response(data=resp, status=0, error="response was None !")
             return
         # if resp is None or resp.status_code != 200:
         #     status = 0

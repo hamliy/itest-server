@@ -12,6 +12,7 @@ from mongoengine.fields import (
     DateTimeField, EmbeddedDocumentField, FloatField, IntField, DictField,
     ListField, ReferenceField, StringField, ObjectIdField, BooleanField
 )
+from requests import Response
 from .m_interface_use_case import InterfaceUseCase
 from .m_user import User
 
@@ -23,6 +24,7 @@ class ResponseData(EmbeddedDocument):
     status = IntField()         # 状态码 5001符合异常， 正常错误码
     data = DictField()          # 返回数据
     costTime = FloatField()     # 请求耗时
+    errorInfo = StringField()   # 失败详情
 
 
 class CheckResult(EmbeddedDocument):
@@ -31,7 +33,7 @@ class CheckResult(EmbeddedDocument):
     """
     passed = BooleanField()         # 是否通过
     error = StringField()           # 失败信息
-    errorDetail = DictField()       # 失败详情
+    errorDetail = ListField()       # 失败详情
 
 
 class InterfaceUseCaseExecution(Document):

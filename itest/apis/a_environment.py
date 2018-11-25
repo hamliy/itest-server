@@ -32,7 +32,7 @@ def get():
 
 @blueprint.route('/create', methods=['POST'])
 @init_params(params=['projectId', 'port', 'protocol', 'ip', 'name', 'desc'],
-             empty_check_params=['projectId', 'ip', 'protocol', 'path', 'name'])
+             empty_check_params=['projectId', 'ip', 'protocol', 'port', 'name'])
 def create():
     info = request.get_json()
     data = EnvironmentService.create(info)

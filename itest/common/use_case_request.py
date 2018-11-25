@@ -9,7 +9,7 @@ import datetime
 import json
 from itest.common.http_request import HttpRequest
 from itest.utils.request import uri_join
-from itest.service.image.s_image import ImageService
+from itest.common.check_result import CheckResult
 
 class UseCaseRequest(HttpRequest):
     def __init__(self, use_case):
@@ -17,9 +17,11 @@ class UseCaseRequest(HttpRequest):
         request = self.init_use_case_request()
         super(UseCaseRequest, self).__init__(request)
         self.case_name = use_case['name']
-        self.expected = use_case['option']['expect']
-        self.check_rule = use_case['option']['checkRule']
-        self.status = 1
+        self.expect = use_case['option']['expect']
+        self.expect_result  = {
+            'passed': True,
+            'errorDetail': [] # 失败详情
+        }
         self.is_run = False
         self.result = {}
 
@@ -38,62 +40,42 @@ class UseCaseRequest(HttpRequest):
             'params': option['params'],
             'data': option['data'],
             'files': option['files'],
-            'request_type': option['request_type']
+            'requestType': option['requestType']
         }
 
     def run(self):
         run_time = datetime.datetime.utcnow
         self.request_run()
         self.is_run = True
-        self.result['run_time'] = run_time
-        self.result['case_name'] = self.case_name
+        self.result['runTime'] = run_time
+        self.result['caseName'] = self.case_name
         self.result['response'] = self.response
         self.result['request'] = self.request
 
-        # self.check_expected()
+        self.check_expect()
 
-        self.result['status'] = self.status
-        self.result['expected'] = self.expected
+        self.result['expectResult'] = self.expect_result
 
-    def check_expected(self):
-
-        if 'data' in self.expected and self.expected['data']:
-            response = self.response
-            info = json.loads(response['data'])
-            expected = self.expected['data']
-
-            noerror = True
-            if 'errorCode' in expected:
-                if 'errorCode' in info:
-                    if str(info['errorCode']) != str(expected['errorCode']):
-                        noerror = False
-                        self.expected['not_match'].append({
-                            'name': 'errorCode',
-                            'response': info['errorCode'],
-                            'expected': expected['errorCode'],
-                            'reason': 'Not Match'
-                        })
-                        self.status = 0
-                else:
-                    noerror = False
-                    self.expected['not_match'].append({
-                        'name': 'errorCode',
-                        'response': '',
-                        'expected': expected['errorCode'],
-                        'reason': 'response not Found errorCode'
-                    })
-                    self.status = 0
-
-            if noerror:
-                if 'data' in response :
-                    detail = json.loads(response['data'])
-                    if detail is not None and 'data' in detail and detail['data'] is not None:
-                        if 'data' in expected:
-                            self.compare(detail['data'], expected['data'])
-                    else:
-                        self.status = 0
-                else:
-                    self.status = 0
+    def check_expect(self):
+        if self.response['status']:
+            check_list = []
+            for expect in self.expect:
+                data = expect['data']
+                check_rule = expect['checkRule']
+                cr = CheckResult(self.response.get('data'), data, check_rule)
+                cr.check()
+                check_list.append(cr.get_result())
+            for check in check_list:
+                if not check['success']:
+                    self.expect_result['passed'] = False
+                    self.expect_result['errorDetail'].append(check)
+        else:
+            self.expect_result['passed'] = False
+            self.expect_result['errorDetail'].append({
+                'success': False,
+                'error': self.response['error_info'],
+                'data': {}
+            })
 
     def compare(self, src_data, expected):
         not_match = []

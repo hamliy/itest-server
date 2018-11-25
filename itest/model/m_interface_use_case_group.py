@@ -18,7 +18,7 @@ from .m_project import Project
 
 class InterfaceUseCaseGroup(Document):
     """
-    接口分组
+    接口用例分组
     """
     meta = {'collection': 'interface_use_case_group'}
 

@@ -18,6 +18,17 @@ from .m_interface import Interface
 from .m_environment import Environment
 from .m_interface_use_case_group import InterfaceUseCaseGroup
 
+class InterfaceUseCaseExpect(EmbeddedDocument):
+    checkRule = DictField()     #{
+                                # check_field:'', #  检查字段： 1 默认 响应文本（resp） ， 2 响应代码(resp.status_code)， 3 响应信息(resp.text)，
+                                #                     4 相应头(resp.headers)
+                                # rule:'',  # assert rule 判断规则 ：
+                                #     1 包括（include） 返回结果包含 指定的内容， 支持正则表达式  默认
+                                #     2 匹配（equals） 指符合结果与指定的内容 完全一致
+                                #     3 后续在叫
+                                # }
+    data = DictField()          # 响应数据
+
 
 class InterfaceUseCaseOption(EmbeddedDocument):
     """
@@ -30,11 +41,10 @@ class InterfaceUseCaseOption(EmbeddedDocument):
     params = DictField()                # 请求参数
     data = DictField(default=None)                  # 请求数据
     files = DictField(default=None)                 # 请求文件 {name: image_id} 换成图片i
-    request_type = IntField(default=0)  # post请求类型 => 0: params or forms, 1: json , 2: files
+    requestType = IntField(default=0)  # post请求类型 => 0: params or forms, 1: json , 2: files
     # file_type = IntField(default=0)     # 文件类型  0: 文件 1： 文件转 Base64 2： 直接Base64
 
-    expect = DictField()                # 用例预期结果
-    checkRule = DictField()             # 预期结果校验规则
+    expect = ListField(EmbeddedDocumentField(InterfaceUseCaseExpect))  # 用例预期结果 InterfaceUseCaseExpect
     association = DictField()           # 参数关联  {useCaseId:id, data: data} setup tearDown
     delay = IntField(default=0)         # 模拟网络延迟
 

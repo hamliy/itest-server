@@ -28,9 +28,8 @@ class InterfaceUseCaseService(object):
     @staticmethod
     def execute_use_case(use_case_id):
         use_case = InterfaceUseCaseService.get_by_id(use_case_id)
-
         # 上传文件 本地转换
-        if use_case['option']['request_type'] == 2:
+        if use_case['option']['requestType'] == 2:
             true_files = {}
             # 缓存图片id
             for key, value in use_case['option']['files'].items():
@@ -51,18 +50,9 @@ class InterfaceUseCaseService(object):
 
         ucr = UseCaseRequest(use_case)
         ucr.run()
-        print(ucr.get_result())
-        response = {
-            'status': 200,
-            'data': {},
-            'costTime': 100
-        }
-        check_result = {
-            'passed': True,
-            'error': "",
-            'errorDetail': {}
-        }
-        return response, check_result
+        result = ucr.get_result()
+        print(result['response'], result['expectResult'])
+        return result['response'], result['expectResult']
 
 
 

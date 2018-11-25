@@ -41,6 +41,7 @@ class InterfaceUseCaseExecutionService(object):
     @staticmethod
     def create_execution_by_id(use_case_id):
         use_case = InterfaceUseCaseService.get_by_id(use_case_id)
+        print(use_case)
         use_case['relationId'] = None
         use_case['executeType'] = 0
         return InterfaceUseCaseExecutionService.create_execution(use_case)
