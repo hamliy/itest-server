@@ -8,9 +8,10 @@
 
 from flask import Blueprint, request
 from itest.service.user.s_user import UserService
+from itest.service.user.s_token import TokenService
 from itest.utils.utils import init_return, md5
 from itest.utils.decorators import init_params
-from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_refresh_token_required, get_jwt_identity)
+from flask_jwt_extended import (create_access_token, get_raw_jwt, create_refresh_token, jwt_refresh_token_required, get_jwt_identity)
 
 
 blueprint = Blueprint('users', __name__)
@@ -51,7 +52,30 @@ def login():
     user.pop('password')
     user['access_token'] = create_access_token(identity=user['id'])
     user['refresh_token'] = create_refresh_token(user['id'])
+    user['access_token_exp'] = TokenService.get_token_exp(user['access_token'])
+    user['refresh_token_exp'] = TokenService.get_token_exp(user['refresh_token'])
+
+    TokenService.add_token_to_database(user['access_token'], 'identity')
+    TokenService.add_token_to_database(user['refresh_token'], 'identity')
+
     return init_return(user)
+
+
+@blueprint.route('/logout', methods=['POST'])
+def logout():
+    jti = get_raw_jwt()['jti']
+    current_user = get_jwt_identity()
+    TokenService.revoke_token(jti, current_user)
+    return init_return({'logout': 'success'})
+
+
+@blueprint.route('/logout/refreshToken', methods=['POST'])
+@jwt_refresh_token_required
+def refresh_logout():
+    jti = get_raw_jwt()['jti']
+    current_user = get_jwt_identity()
+    TokenService.revoke_token(jti, current_user)
+    return init_return({'logout-refreshToken': 'success'})
 
 
 @blueprint.route('/refreshToken', methods=['POST'])
@@ -59,10 +83,11 @@ def login():
 def refresh_token():
     current_user = get_jwt_identity()
     new_token = create_access_token(identity=current_user, fresh=False)
+    TokenService.add_token_to_database(new_token, 'identity')
     return init_return({'access_token': new_token})
 
 
-@blueprint.route('/update', methods=['POST'])
+@blueprint.route('/update/info', methods=['POST'])
 @init_params(params=['id', 'email', 'username'], empty_check=True)
 def update():
     info = request.get_json()

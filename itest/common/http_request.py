@@ -100,6 +100,7 @@ class HttpRequest(object):
         self.response['data'] = data
         self.response['costTime'] = self.cost_time
 
+
     def set_url(self, url):
         """
         set url
@@ -241,6 +242,8 @@ class HttpRequest(object):
         defined post method
         :return:
         """
+        print(self.headers)
+        print(self.params)
         print(self.data)
         print(self.url)
         return requests.post(self.url, headers=self.headers, params=self.params, json=self.data, timeout=float(timeout))

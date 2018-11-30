@@ -6,8 +6,9 @@
 @dec   : 结果检查类
 """
 
-import re
+import re, json
 from itest.utils.compares import get_eqs_json, get_contain_json, get_eqs_str, get_contain_str
+
 
 class CheckResult(object):
     """
@@ -52,7 +53,11 @@ class CheckResult(object):
         return self.result
 
     def compare(self):
+        print(self.data, type(self.data))
         if self.type == 'json':
+            if isinstance(self.data, str):
+                self.data = json.loads(self.data)
+            print(type(self.data))
             if self.check_rule['rule'] == "include":
                 return get_contain_json(self.data, self.expect_data)
             elif self.check_rule['rule'] == "equals":
@@ -71,7 +76,6 @@ class CheckResult(object):
         elif check_field == 'resp.status_code':
             self.data = self.source_data.status_code
             self.type = 'str'
-            result = self.compare(self.source_data['status_code'], 'str')
         elif check_field == 'resp.text':
             self.data = self.source_data.text
             self.type = 'json'

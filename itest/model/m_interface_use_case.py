@@ -18,9 +18,10 @@ from .m_interface import Interface
 from .m_environment import Environment
 from .m_interface_use_case_group import InterfaceUseCaseGroup
 
+
 class InterfaceUseCaseExpect(EmbeddedDocument):
     checkRule = DictField()     #{
-                                # check_field:'', #  检查字段： 1 默认 响应文本（resp） ， 2 响应代码(resp.status_code)， 3 响应信息(resp.text)，
+                                # checkField:'', #  检查字段： 1 默认 响应文本（resp） ， 2 响应代码(resp.status_code)， 3 响应信息(resp.text)，
                                 #                     4 相应头(resp.headers)
                                 # rule:'',  # assert rule 判断规则 ：
                                 #     1 包括（include） 返回结果包含 指定的内容， 支持正则表达式  默认

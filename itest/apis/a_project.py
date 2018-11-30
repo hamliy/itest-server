@@ -16,11 +16,11 @@ blueprint = Blueprint('projects', __name__)
 
 
 @blueprint.route('/search', methods=['POST'])
-@init_params(params=['query'])
+@init_params(params=['query', 'page', 'pageSize'])
 def search():
     info = request.get_json()
-    data = ProjectService.find(info['query'])
-    return init_return(data)
+    info = ProjectService.find(info['query'], info['page'], info['pageSize'])
+    return init_return(info)
 
 
 @blueprint.route('/get', methods=['GET', 'POST'])
@@ -30,7 +30,7 @@ def get():
 
 
 @blueprint.route('/create', methods=['POST'])
-@init_params(params=['name', 'projectType', 'desc'], empty_check_params=['name', 'projectType'])
+@init_params(params=['name', 'projectType', 'version', 'desc'], empty_check_params=['name', 'projectType'])
 def create():
     info = request.get_json()
     is_exist = ProjectService.get_by_name(info['name'])
@@ -42,7 +42,7 @@ def create():
 
 
 @blueprint.route('/update', methods=['POST'])
-@init_params(params=['id', 'name', 'projectType', 'desc'], empty_check_params=['id', 'name', 'projectType'])
+@init_params(params=['id', 'name', 'projectType', 'version', 'desc'], empty_check_params=['id', 'name', 'projectType'])
 def update():
     info = request.get_json()
     rs, status = ProjectService.update(info)

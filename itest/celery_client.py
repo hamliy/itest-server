@@ -13,7 +13,7 @@ from mongoengine import connect
 
 def init_mongo():
     try:
-        connect('itest', host='mongodb://localhost:27017/itest-dev', connect=False)
+        connect('itest', host='mongodb://172.20.166.50:27017/itest-dev', connect=False)
     except Exception:
         raise Exception('连接数据库失败')
 

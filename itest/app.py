@@ -46,15 +46,15 @@ def create_app(config_object=DevConfig):
 
 
 def register_blueprints(app):
-    app.register_blueprint(environment.apis.blueprint, url_prefix='/api/env')
-    app.register_blueprint(invoice.apis.blueprint, url_prefix='/api/invoice')
-    app.register_blueprint(user.apis.blueprint, url_prefix='/api/user')
-    app.register_blueprint(base.project_apis.blueprint, url_prefix='/api/project')
-    app.register_blueprint(base.environment_apis.blueprint, url_prefix='/api/environment')
-    app.register_blueprint(base.task_apis.blueprint, url_prefix='/api/task')
-    app.register_blueprint(base.interface_apis.blueprint, url_prefix='/api/interface')
-    app.register_blueprint(base.use_case_apis.blueprint, url_prefix='/api/usecase')
-    app.register_blueprint(test_data.test_data_apis.blueprint, url_prefix='/api/data')
+    # app.register_blueprint(environment.apis.blueprint, url_prefix='/api/env')
+    # app.register_blueprint(invoice.apis.blueprint, url_prefix='/api/invoice')
+    # app.register_blueprint(user.apis.blueprint, url_prefix='/api/user')
+    # app.register_blueprint(base.project_apis.blueprint, url_prefix='/api/project')
+    # app.register_blueprint(base.environment_apis.blueprint, url_prefix='/api/environment')
+    # app.register_blueprint(base.task_apis.blueprint, url_prefix='/api/task')
+    # app.register_blueprint(base.interface_apis.blueprint, url_prefix='/api/interface')
+    # app.register_blueprint(base.use_case_apis.blueprint, url_prefix='/api/usecase')
+    # app.register_blueprint(test_data.test_data_apis.blueprint, url_prefix='/api/data')
     return None
 
 

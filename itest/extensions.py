@@ -8,9 +8,14 @@
 from mongoengine import connect
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-
+from itest.service.user.s_token import TokenService
 cors = CORS()
 jwt = JWTManager()
+
+
+@jwt.token_in_blacklist_loader
+def check_if_token_revoked(decoded_token):
+    return TokenService.is_token_revoked(decoded_token)
 
 def init_mongo(app, config_prefix='MONGO'):
     def key(suffix):

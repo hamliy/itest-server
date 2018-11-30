@@ -6,10 +6,10 @@
 @dec   : 用例请求封装
 """
 import datetime
-import json
 from itest.common.http_request import HttpRequest
 from itest.utils.request import uri_join
 from itest.common.check_result import CheckResult
+
 
 class UseCaseRequest(HttpRequest):
     def __init__(self, use_case):
@@ -18,9 +18,9 @@ class UseCaseRequest(HttpRequest):
         super(UseCaseRequest, self).__init__(request)
         self.case_name = use_case['name']
         self.expect = use_case['option']['expect']
-        self.expect_result  = {
+        self.expect_result = {
             'passed': True,
-            'errorDetail': [] # 失败详情
+            'errorDetail': []  # 失败详情
         }
         self.is_run = False
         self.result = {}
@@ -73,31 +73,9 @@ class UseCaseRequest(HttpRequest):
             self.expect_result['passed'] = False
             self.expect_result['errorDetail'].append({
                 'success': False,
-                'error': self.response['error_info'],
+                'error': self.response['errorInfo'],
                 'data': {}
             })
-
-    def compare(self, src_data, expected):
-        not_match = []
-        for key, value in expected.items():
-            if key in src_data:
-                if value != src_data[key]:
-                    not_match.append({
-                        'name': key,
-                        'response': src_data[key],
-                        'expected': value,
-                        'reason': 'Not equal'
-                    })
-            else:
-                not_match.append({
-                    'name': key,
-                    'response': '',
-                    'expected': value,
-                    'reason': 'Not Found'
-                })
-        if len(not_match) > 0:
-            self.status = 0
-        self.expected['not_match'] = not_match
 
     def get_result(self):
         return self.result

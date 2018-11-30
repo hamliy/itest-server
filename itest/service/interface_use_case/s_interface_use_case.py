@@ -19,7 +19,7 @@ from bson.errors import InvalidId
 from mongoengine.queryset.visitor import Q
 from datetime import datetime
 from itest.utils.request import get_user_id
-
+from requests import Response
 
 class InterfaceUseCaseService(object):
     def __init__(self):
@@ -51,6 +51,13 @@ class InterfaceUseCaseService(object):
         ucr = UseCaseRequest(use_case)
         ucr.run()
         result = ucr.get_result()
+        if isinstance(result['response']['data'], Response):
+            response = {
+                'status_code': result['response']['data'].status_code,
+                'text': result['response']['data'].text,
+                'headers': result['response']['data'].headers
+            }
+            result['response']['data'] = response
         print(result['response'], result['expectResult'])
         return result['response'], result['expectResult']
 

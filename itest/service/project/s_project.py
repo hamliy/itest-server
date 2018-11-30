@@ -25,6 +25,7 @@ class ProjectService(object):
         return convert_mongo_to_json(Project(name=project['name'],
                                              projectType=project['projectType'],
                                              creatorId=ObjectId(creator_id),
+                                             version=project['version'],
                                              desc=project['desc']).save())
 
     @staticmethod
@@ -37,16 +38,27 @@ class ProjectService(object):
 
     @staticmethod
     def get_projects():
-        return convert_queryset_to_json(Project.objects(isDeleted=False).order_by("-createTime"))
+        total = Project.objects().count()
+        data = convert_queryset_to_json(Project.objects(isDeleted=False).order_by("-createTime"))
+        return {
+            "total": total,
+            "data": data
+        }
 
     @staticmethod
-    def find(q):
+    def find(q, page=1, page_size=10):
         """
         模糊查询
         :return:
         """
-        return convert_queryset_to_json(Project.objects(
-            (Q(name__icontains=q) | Q(desc__icontains=q)) & Q(isDeleted=False)).order_by("-createTime"))
+        total = Project.objects().count()
+        data = convert_queryset_to_json(Project.objects(
+            (Q(name__icontains=q) | Q(desc__icontains=q)) & Q(isDeleted=False)).order_by("-createTime")
+                                        [page_size * (page - 1):page_size * page])
+        return {
+            "total": total,
+            "data": data
+        }
 
     @staticmethod
     def update(project):
@@ -57,6 +69,7 @@ class ProjectService(object):
                 return None, 'not_find'
             rs = data.modify(name=project['name'],
                              projectType=project['projectType'],
+                             version=project['version'],
                              desc=project['desc'],
                              modifiedTime=datetime.utcnow,
                              new=True)
