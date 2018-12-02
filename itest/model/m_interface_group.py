@@ -14,6 +14,10 @@ from mongoengine.fields import (
 from .m_user import User
 from .m_project import Project
 
+class InterfaceBase(EmbeddedDocument):
+
+    interfaceId = ObjectIdField()
+    name = StringField()
 
 class InterfaceGroup(Document):
     """
@@ -24,7 +28,7 @@ class InterfaceGroup(Document):
     projectId = ReferenceField(Project)             # 所属项目id
     creatorId = ReferenceField(User)                  # 创建人id
     name = StringField(required=True)               # 组名
-    member = ListField(ObjectIdField(), default=[])             # 接口成员
+    member = ListField(EmbeddedDocumentField(InterfaceBase), default=[])             # 接口成员 { name, interfaceId}
     createTime = DateTimeField(default=datetime.utcnow)                    # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)                  # 更新时间
     isDeleted = BooleanField(default=False)                      # 是否删除

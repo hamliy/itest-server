@@ -19,8 +19,8 @@ blueprint = Blueprint('projects', __name__)
 @init_params(params=['query', 'page', 'pageSize'])
 def search():
     info = request.get_json()
-    info = ProjectService.find(info['query'], info['page'], info['pageSize'])
-    return init_return(info)
+    data = ProjectService.find(info['query'], info['page'], info['pageSize'])
+    return init_return(data)
 
 
 @blueprint.route('/get', methods=['GET', 'POST'])

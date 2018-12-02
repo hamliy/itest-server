@@ -11,6 +11,7 @@
 from itest.model.m_interface import Interface
 from itest.utils.utils import convert_mongo_to_json, convert_queryset_to_json
 from mongoengine.errors import NotUniqueError
+from itest.service.interface.s_interface_group import InterfaceGroupService
 from bson import ObjectId
 from bson.errors import InvalidId
 from mongoengine.queryset.visitor import Q
@@ -45,6 +46,34 @@ class InterfaceService(object):
     @staticmethod
     def get_by_group_id(group_id):
         return convert_mongo_to_json(Interface.objects(id=ObjectId(group_id), isDeleted=False).first())
+    @staticmethod
+    def get_order_by_group(project_id):
+        interfaces = convert_queryset_to_json(Interface.objects(projectId=ObjectId(project_id), isDeleted=False))
+        tree = []
+        # 循环所有接口 按组分组 生成树结构
+        for interface in interfaces:
+            has_group = False
+            # 判断是否已存在组
+            for group in tree:
+                if interface['groupId'] == group['id']:
+                    group['member'].push({
+                        'name': interface['name'],
+                        'id': interface['id']
+                    })
+                    has_group = True
+            # 如果不存在 则新增
+            if not has_group:
+                # 获取组名
+                group_name = InterfaceGroupService.get_by_id(interface['groupId'])
+                tree.append({
+                    'id': interface['groupId'],
+                    'name': group_name,
+                    'member': [{
+                        'name': interface['name'],
+                        'id': interface['id']
+                    }]
+                })
+        return tree
 
     @staticmethod
     def get_interfaces(project_id):

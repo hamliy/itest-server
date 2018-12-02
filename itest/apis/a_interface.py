@@ -31,6 +31,11 @@ def get():
         return init_return({}, sucess=False, error="项目id不存在", errorCode=3003)
     return init_return(rs)
 
+@blueprint.route('/group-tree', methods=['GET', 'POST'])
+def getOrderByGroup():
+    tree = InterfaceService.get_order_by_group(request.args.get('projectId'))
+    return init_return(tree)
+
 
 @blueprint.route('/create', methods=['POST'])
 @init_params(params=['projectId', 'groupId', 'option', 'method', 'path', 'name', 'desc'],
@@ -60,7 +65,9 @@ def update():
         return init_return({}, sucess=False, error="查无此接口，请确认", errorCode=3005)
     if not rs:
         return init_return({}, sucess=False, error="修改失败", errorCode=3004)
-
+    # 如果修改了接口名，更新接口组存储接口名信息
+    if current_interface['name'] != info['name']:
+        InterfaceGroupService.update_interface_name(info['groupId'],info['id'], info['name'])
     rs['history'] = InterfaceHistoryService.push(current_interface)
     return init_return(rs)
 

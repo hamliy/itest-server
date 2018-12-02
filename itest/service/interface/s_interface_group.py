@@ -66,14 +66,23 @@ class InterfaceGroupService(object):
                                         .order_by("-createTime"))
 
     @staticmethod
-    def add_member(group_id, interface_id):
+    def add_member(group_id, interface_id, interface_name):
+        member = {
+            'name': interface_name,
+            'interfaceId': ObjectId(interface_id)
+        }
         InterfaceGroup.objects(id=ObjectId(group_id), isDeleted=False)\
-                .update_one(push__member=ObjectId(interface_id))
+                .update_one(push__member=member)
+
+    @staticmethod
+    def update_interface_name(group_id, interface_id, name):
+        InterfaceGroup.objects(id=ObjectId(group_id), member__interfaceId=ObjectId(interface_id),isDeleted=False)\
+                .update_one(set__member__S__name=name)
 
     @staticmethod
     def delete_member(group_id, interface_id):
-        InterfaceGroup.objects(id=ObjectId(group_id), isDeleted=False)\
-                .update_one(pull__member=ObjectId(interface_id))
+        InterfaceGroup.objects(id=ObjectId(group_id),isDeleted=False)\
+                .update_one(pull__member__interfaceId=ObjectId(interface_id))
 
     @staticmethod
     def update(interface_group):

@@ -11,7 +11,8 @@ from itest.service.user.s_user import UserService
 from itest.service.user.s_token import TokenService
 from itest.utils.utils import init_return, md5
 from itest.utils.decorators import init_params
-from flask_jwt_extended import (create_access_token, get_raw_jwt, create_refresh_token, jwt_refresh_token_required, get_jwt_identity)
+from flask_jwt_extended import (create_access_token, jwt_required,
+                                get_raw_jwt, create_refresh_token, jwt_refresh_token_required, get_jwt_identity)
 
 
 blueprint = Blueprint('users', __name__)
@@ -62,6 +63,7 @@ def login():
 
 
 @blueprint.route('/logout', methods=['POST'])
+@jwt_required
 def logout():
     jti = get_raw_jwt()['jti']
     current_user = get_jwt_identity()

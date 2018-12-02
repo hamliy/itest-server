@@ -70,16 +70,24 @@ class EnvironmentService(object):
         return convert_queryset_to_json(rs), status
 
     @staticmethod
-    def find(q, project_id):
+    def find(q, project_id, page, page_size):
         """
         模糊查询
         :return:
         """
-        return convert_queryset_to_json(Environment.objects(
-            (Q(name__icontains=q) | Q(desc__icontains=q) | Q(desc__ip=q))
+        if not page:
+            page = 1
+        if not page_size:
+            page_size = 10
+        total = Environment.objects(projectId=ObjectId(project_id)).count()
+        data = convert_queryset_to_json(Environment.objects(
+            (Q(name__icontains=q) | Q(desc__icontains=q) | Q(ip__icontains=q))
             & Q(isDeleted=False) & Q(projectId=ObjectId(project_id)))
-                                        .order_by("-createTime"))
-
+                                        .order_by("-createTime")[page_size * (page - 1):page_size * page])
+        return {
+            "total": total,
+            "data": data
+        }
     @staticmethod
     def update(env):
         status = 'ok'

@@ -15,10 +15,10 @@ blueprint = Blueprint('envs', __name__)
 
 
 @blueprint.route('/search', methods=['POST'])
-@init_params(params=['query', 'project_id'], empty_check_params=['project_id'])
+@init_params(params=['query', 'page', 'pageSize','projectId'], empty_check_params=['projectId'])
 def search():
     info = request.get_json()
-    data = EnvironmentService.find(info['query'], info['project_id'])
+    data = EnvironmentService.find(info['query'], info['projectId'], info['page'], info['pageSize'])
     return init_return(data)
 
 
@@ -40,13 +40,13 @@ def create():
 
 
 @blueprint.route('/update', methods=['POST'])
-@init_params(params=['id', 'port', 'protocol', 'path', 'name', 'desc'],
-             empty_check_params=['id','port', 'protocol', 'path', 'name', 'image_type'])
+@init_params(params=['id', 'port', 'protocol', 'ip', 'name', 'desc'],
+             empty_check_params=['id', 'ip', 'protocol', 'port', 'name'])
 def update():
     info = request.get_json()
     rs, status = EnvironmentService.update(info)
     if status == 'not_object_id':
-        return init_return({}, sucess=False, error="项目id不存在", errorCode=3003)
+        return init_return({}, sucess=False, error="环境id不存在", errorCode=3003)
     if status == 'not_find':
         return init_return({}, sucess=False, error="查无此环境，请确认", errorCode=3005)
     if not rs:
@@ -60,7 +60,7 @@ def delete():
     info = request.get_json()
     rs, status = EnvironmentService.delete(info['id'])
     if status == 'not_object_id':
-        return init_return({}, sucess=False, error="项目id不存在", errorCode=3003)
+        return init_return({}, sucess=False, error="环境id不存在", errorCode=3003)
     if status == 'not_find':
         return init_return({}, sucess=False, error="查无此环境，请确认", errorCode=3005)
     if not rs:
