@@ -26,6 +26,8 @@ class InterfaceService(object):
     @staticmethod
     def create(interface):
         creator_id = get_user_id()
+        if interface['option'] == {}:
+            interface['option'] = InterfaceService.get_interface_default_option()
         return convert_mongo_to_json(Interface(name=interface['name'],
                                                method=interface['method'],
                                                path=interface['path'],
@@ -34,6 +36,32 @@ class InterfaceService(object):
                                                projectId=ObjectId(interface['projectId']),
                                                groupId=ObjectId(interface['groupId']),
                                                desc=interface['desc']).save())
+
+    @staticmethod
+    def get_interface_default_option():
+        """
+        获取莫接口配置
+        :return:
+        """
+        return {
+            "headers": [{
+                'name': 'Content-Type',
+                'value': 'application/json',
+                'desc': '默认json请求'
+            }],
+            "params": {
+                "body": [],
+                "path": [],
+                "query": [],
+                "type": 0
+            },
+            "example": {
+                "body": {},
+                "path": {},
+                "query": {}
+            },
+            "response": []
+        }
 
     @staticmethod
     def get_by_name(name):
@@ -45,35 +73,21 @@ class InterfaceService(object):
 
     @staticmethod
     def get_by_group_id(group_id):
-        return convert_mongo_to_json(Interface.objects(id=ObjectId(group_id), isDeleted=False).first())
+        return convert_queryset_to_json(Interface.objects(groupId=ObjectId(group_id), isDeleted=False))
+
     @staticmethod
-    def get_order_by_group(project_id):
-        interfaces = convert_queryset_to_json(Interface.objects(projectId=ObjectId(project_id), isDeleted=False))
-        tree = []
-        # 循环所有接口 按组分组 生成树结构
-        for interface in interfaces:
-            has_group = False
-            # 判断是否已存在组
-            for group in tree:
-                if interface['groupId'] == group['id']:
-                    group['member'].push({
-                        'name': interface['name'],
-                        'id': interface['id']
-                    })
-                    has_group = True
-            # 如果不存在 则新增
-            if not has_group:
-                # 获取组名
-                group_name = InterfaceGroupService.get_by_id(interface['groupId'])
-                tree.append({
-                    'id': interface['groupId'],
-                    'name': group_name,
-                    'member': [{
-                        'name': interface['name'],
-                        'id': interface['id']
-                    }]
-                })
-        return tree
+    def get_group_interface(project_id):
+        InterfaceGroupService.get_groups(project_id)
+        groups, status = InterfaceGroupService.get_groups(project_id)
+        # tree = []
+        # # 循环所有接口 按组分组 生成树结构
+        # for group in groups:
+        #     tree.append({
+        #         'name': group['name'],
+        #         'id': group['id'],
+        #         'member': group['member']
+        #     })
+        return groups
 
     @staticmethod
     def get_interfaces(project_id):

@@ -85,8 +85,9 @@ def refresh_logout():
 def refresh_token():
     current_user = get_jwt_identity()
     new_token = create_access_token(identity=current_user, fresh=False)
+    access_token_exp = TokenService.get_token_exp(new_token)
     TokenService.add_token_to_database(new_token, 'identity')
-    return init_return({'access_token': new_token})
+    return init_return({'access_token': new_token, 'access_token_exp': access_token_exp})
 
 
 @blueprint.route('/update/info', methods=['POST'])

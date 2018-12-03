@@ -26,15 +26,33 @@ def search():
 
 @blueprint.route('/get', methods=['GET', 'POST'])
 def get():
-    rs, status = InterfaceService.get_interfaces(request.args.get('projectId'))
-    if status == 'not_object_id':
-        return init_return({}, sucess=False, error="项目id不存在", errorCode=3003)
+    rs = InterfaceService.get_by_id(request.args.get('interfaceId'))
+    # if status == 'not_object_id':
+    #     return init_return({}, sucess=False, error="项目id不存在", errorCode=3003)
     return init_return(rs)
 
+
 @blueprint.route('/group-tree', methods=['GET', 'POST'])
-def getOrderByGroup():
-    tree = InterfaceService.get_order_by_group(request.args.get('projectId'))
+@init_params(params=['projectId'], empty_check=True)
+def get_group_interface():
+    """
+    获取接口分组+接口树
+    :return:
+    """
+    info = request.get_json()
+    tree = InterfaceService.get_group_interface(info['projectId'])
     return init_return(tree)
+
+
+@blueprint.route('/group', methods=['GET', 'POST'])
+def get_interface_by_group():
+    """
+    获取接口分组接口列表
+    :return:
+    """
+
+    data = InterfaceService.get_by_group_id(request.args.get('groupId'))
+    return init_return(data)
 
 
 @blueprint.route('/create', methods=['POST'])
@@ -49,7 +67,7 @@ def create():
         return init_return({}, sucess=False, error="查无此接口，请确认", errorCode=3005)
 
     data = InterfaceService.create(info)
-    InterfaceGroupService.add_member(info['groupId'], data['id'])
+    InterfaceGroupService.add_member(info['groupId'], data)
     return init_return(data)
 
 
@@ -67,7 +85,7 @@ def update():
         return init_return({}, sucess=False, error="修改失败", errorCode=3004)
     # 如果修改了接口名，更新接口组存储接口名信息
     if current_interface['name'] != info['name']:
-        InterfaceGroupService.update_interface_name(info['groupId'],info['id'], info['name'])
+        InterfaceGroupService.update_interface_name(info['groupId'], info['id'], info['name'])
     rs['history'] = InterfaceHistoryService.push(current_interface)
     return init_return(rs)
 

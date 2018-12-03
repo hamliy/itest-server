@@ -16,7 +16,7 @@ from .m_project import Project
 
 class InterfaceBase(EmbeddedDocument):
 
-    interfaceId = ObjectIdField()
+    id = ObjectIdField()
     name = StringField()
 
 class InterfaceGroup(Document):
