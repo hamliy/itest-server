@@ -11,7 +11,7 @@ from datetime import datetime
 from mongoengine import connect
 from itest.utils.utils import mongo_to_dict
 
-connect('itest', host='mongodb://172.20.166.50:27017/itest2')
+connect('itest', host='mongodb://localhost:27017/itest2')
 
 def get_operator():
     username = 'admin'

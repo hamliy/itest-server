@@ -44,11 +44,16 @@ class InterfaceService(object):
         :return:
         """
         return {
-            "headers": [{
-                'name': 'Content-Type',
-                'value': 'application/json',
-                'desc': '默认json请求'
-            }],
+            "headers":{
+                "params": [{
+                    'key': 'Content-Type',
+                    'example': 'application/json',
+                    'required': True,
+                    'type': 'string',
+                    'comment': '默认json请求'
+                }],
+                "example": {}
+            },
             "params": {
                 "body": [],
                 "path": [],
@@ -60,7 +65,19 @@ class InterfaceService(object):
                 "path": {},
                 "query": {}
             },
-            "response": []
+            "response": [
+                {
+                    "status": 200,
+                    "statusText": '请求成功',
+                    "params": [{
+                        'comment': None,
+                        'required': True,
+                        'type': "string",
+                        'key': None
+                    }],
+                    "example": {}
+                }
+            ]
         }
 
     @staticmethod

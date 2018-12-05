@@ -41,9 +41,8 @@ class HeaderParam(EmbeddedDocument):
     """
     请求头内容
     """
-    name = StringField()      # 名称
-    value = StringField()   # 值
-    desc = StringField()    # 描述
+    example = DictField()
+    params = ListField()
 
 
 class ResponseParams(EmbeddedDocument):
@@ -60,10 +59,10 @@ class Option(EmbeddedDocument):
     """
     接口参数
     """
-    headers = ListField(EmbeddedDocumentField(HeaderParam))
+    headers = EmbeddedDocumentField(HeaderParam)
     params = EmbeddedDocumentField(BodyParam)
     example = EmbeddedDocumentField(BodyExample)
-    response = ListField(EmbeddedDocumentField( ))
+    response = ListField(EmbeddedDocumentField(ResponseParams))
     responseIndex = IntField(default=0)      # 指定返回结果 或随机
     delay = IntField(default=0)             # 模拟网络延迟
 

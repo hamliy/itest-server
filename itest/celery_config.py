@@ -5,12 +5,8 @@
 @time  : 11/19/18 1:38 PM
 @dec   : 异步任务配置
 """
-# 使用RabbitMQ作为消息代理
-# BROKER_URL = 'amqp://itest:kingdee@localhost:5672/itestvhost'
-# BROKER_URL = 'amqp://itest:kingdee@localhost:5672/itestvhost'
 # 把结果存在Redis
-# CELERY_RESULT_BACKEND = 'rpc://itest:kingdee@localhost:5672/itestvhost'
-CELERY_RESULT_BACKEND = 'mongodb://172.20.166.50:27017/celery'
+CELERY_RESULT_BACKEND = 'mongodb://localhost:27017/celery'
 # 任务序列化和反序列化使用JSON方案
 CELERY_TASK_SERIALIZER = 'json'
 # 读取任务结果使用JSON

@@ -15,8 +15,8 @@ OCR_API = 'rest/2.0/ocr/v1/general'
 OAUTH_API = '/oauth/2.0/token'
 OAUTH_TOKEN = '24.2de4f121e459554a658ec0b174a73f91.2592000.1543373303.282335-14595206'
 
-KINDEE_URL = 'http://api.kingdee.com/'
-KINGDEE_GATEWAY = 'https://gateway.kingdeeresearch.com'
+TEST_URL = 'http://api.test.com/'
+TEST_GATEWAY = 'https://gateway.testresearch.com'
 KD_ORC_API = '/brpocr/general'
 KD_OAUTH_API = '/certification/oauth2/token'
 KD_OAUTH_TOKEN = 'JytFJdiXdVIiFLkr1qF9QtAF4Rnrs8Nb'
@@ -80,18 +80,18 @@ class BaiduOcr(object):
         return self.words_result
 
 
-class KingdeeOrc(object):
+class TestOrc(object):
     """
-    金蝶 ocr 识别
+     ocr 识别
     """
     words_result = []
 
     def __init__(self):
-        self.url = KINDEE_URL
+        self.url = TEST_URL
 
     @staticmethod
     def get_access_token():
-        at_url = uri_join(KINGDEE_GATEWAY, KD_OAUTH_API)
+        at_url = uri_join(TEST_GATEWAY, KD_OAUTH_API)
         data = {
             'grant_type': 'client_credentials',
             'client_id': 'lrmKr2a4L742Z5pu0au0amkGBSJU02Hg',
@@ -110,7 +110,7 @@ class KingdeeOrc(object):
             'access_token': KD_OAUTH_TOKEN,
             'client_id': '201415',
             'client_secret': '8005bcb39ae666289a0e4d8d77e7f920',
-            'passwd': 'kingdee_research_generalocr'
+            'passwd': 'test_research_generalocr'
         }
         # headers = {
         #     'Content-Type': 'application/x-www-form-urlencoded'
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     image_path = '/home/han/project/itest/server2/itest/temps/ocr_test/hetong.jpg'
     # bo.recognize_basic(image_path)
     bo.recognize_location(image_path)
-    ko = KingdeeOrc()
+    ko = TestOrc()
     # print(ko.get_access_token())
     ko.recognize_location(image_path)
 

@@ -19,11 +19,12 @@ class Config(object):
 
     JWT_SECRET_KEY = 'super-secret'
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=2)
-
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
     # 请求的json返回字符串显示中文
     JSON_AS_ASCII = False
     # 开启访问拦截
-    BEFORE_REQUEST = False
+    BEFORE_REQUEST = True
     # 开启过期时间验证
     VERIFY_EXP = True
 
@@ -33,9 +34,7 @@ class ProdConfig(Config):
     ENV = 'prod'
     DEBUG = False
     DEBUG_TB_ENABLED = False
-    MONGO_URI = 'mongodb://172.20.166.50:27017/butterfly'
-    MONGO_USERNAME = 'kingdee'
-    MONGO_PASSWORD = 'kingdee'
+    MONGO_URI = 'mongodb://localhost:27017/butterfly'
 
 
 class DevConfig(Config):
@@ -46,12 +45,8 @@ class DevConfig(Config):
     DEBUG_TB_ENABLED = True
     #MONGO_HOST = 'localhost'
     #MONGO_PORT = 27017
-    MONGO_URI = 'mongodb://172.20.166.50:27017/itest-dev'
-    # MONGO_USERNAME = 'kingdee'
-    # MONGO_PASSWORD = 'kingdee'
+    MONGO_URI = 'mongodb://localhost:27017/itest-dev'
     # MONGO_DBNAME = 'butterfly'
-    # MONGO_USERNAME = 'kingdee'
-    # MONGO_PASSWORD = 'kingdee'
 
 
 class TestConfig(Config):
@@ -61,7 +56,5 @@ class TestConfig(Config):
     DEBUG = True
     BCRYPT_LOG_ROUNDS = 4
     MONGO_URI = 'mongodb://127.0.0.1:27017/butterfly'
-    MONGO_USERNAME = 'kingdee'
-    MONGO_PASSWORD = 'kingdee'
 
 

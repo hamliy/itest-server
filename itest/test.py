@@ -14,8 +14,8 @@ if __name__ == '__main__':
     # g.save()
     # print(g.get())
     headers ={'Content-Type': 'application/json'}
-    res =requests.post(url="https://finchain.kchaintest.kingdeeresearch.com/api/user/login", headers=headers,params={},
-                  json={'username': '17077187768', 'password': 'kingdee'}, timeout=float(60))
+    res =requests.post(url="https://finchain.kchaintest.testresearch.com/api/user/login", headers=headers,params={},
+                  json={'username': '17077187768', 'password': 'test'}, timeout=float(60))
     print(res.text)
 
 
