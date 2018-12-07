@@ -17,7 +17,7 @@ class UseCaseRequest(HttpRequest):
         request = self.init_use_case_request()
         super(UseCaseRequest, self).__init__(request)
         self.case_name = use_case['name']
-        self.expect = use_case['option']['expect']
+        self.expect = use_case['options']['expect']
         self.expect_result = {
             'passed': True,
             'errorDetail': []  # 失败详情
@@ -30,17 +30,17 @@ class UseCaseRequest(HttpRequest):
         初始化 用例请求参数
         :return:
         """
-        option = self.use_case['option']
-        url = uri_join(option['url'], option['path'])
+        options = self.use_case['options']
+        url = uri_join(options['url'], options['path'])
 
         return {
             'url': url,
-            'headers': option['headers'],
-            'method': option['method'],
-            'params': option['params'],
-            'data': option['data'],
-            'files': option['files'],
-            'requestType': option['requestType']
+            'headers': options['headers'],
+            'method': options['method'],
+            'params': options['params'],
+            'data': options['data'],
+            'files': options['files'],
+            'requestType': options['requestType']
         }
 
     def run(self):

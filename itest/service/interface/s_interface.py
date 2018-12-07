@@ -26,12 +26,12 @@ class InterfaceService(object):
     @staticmethod
     def create(interface):
         creator_id = get_user_id()
-        if interface['option'] == {}:
-            interface['option'] = InterfaceService.get_interface_default_option()
+        if interface['options'] == {}:
+            interface['options'] = InterfaceService.get_interface_default_option()
         return convert_mongo_to_json(Interface(name=interface['name'],
                                                method=interface['method'],
                                                path=interface['path'],
-                                               option=interface['option'],
+                                               options=interface['options'],
                                                creatorId=ObjectId(creator_id),
                                                projectId=ObjectId(interface['projectId']),
                                                groupId=ObjectId(interface['groupId']),
@@ -57,10 +57,9 @@ class InterfaceService(object):
             "params": {
                 "body": [],
                 "path": [],
-                "query": [],
-                "type": 0
+                "query": []
             },
-            "example": {
+            "examples": {
                 "body": {},
                 "path": {},
                 "query": {}
@@ -134,8 +133,10 @@ class InterfaceService(object):
             if not data.first():
                 return None, 'not_find'
             rs = data.modify(name=interface['name'],
-                             option=interface['option'],
+                             options=interface['options'],
                              desc=interface['desc'],
+                             path=interface['path'],
+                             method=interface['method'],
                              modifiedTime=datetime.utcnow,
                              new=True)
         except InvalidId:

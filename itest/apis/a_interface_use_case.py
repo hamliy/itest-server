@@ -35,9 +35,9 @@ def get():
 
 @blueprint.route('/create', methods=['POST'])
 @init_params(params=['projectId', 'interfaceId', 'groupId', 'environmentId',
-                     'level', 'useCaseNo', 'detail', 'option', 'name', 'desc'],
-             empty_check_params=['projectId', 'interfaceId', 'groupId', 'name', 'option''projectId', 'groupId',
-                                 'environmentId', 'level', 'useCaseNo', 'detail', 'option', 'name'])
+                     'level', 'useCaseNo', 'detail', 'options', 'name', 'desc'],
+             empty_check_params=['projectId', 'interfaceId', 'groupId', 'name', 'options''projectId', 'groupId',
+                                 'environmentId', 'level', 'useCaseNo', 'detail', 'name'])
 def create():
     info = request.get_json()
     group, status = InterfaceUseCaseGroupService.get_by_id(info['groupId'])
@@ -56,9 +56,9 @@ def create():
 
 
 @blueprint.route('/update', methods=['POST'])
-@init_params(params=['id', 'interfaceId', 'environmentId', 'level', 'useCaseNo', 'detail', 'option', 'name', 'desc'],
-             empty_check_params=['id',  'name', 'option', 'interfaceId', 'groupId',
-                                 'environmentId', 'level', 'useCaseNo', 'detail', 'option', 'name'])
+@init_params(params=['id', 'interfaceId', 'environmentId', 'level', 'useCaseNo', 'detail', 'options', 'name', 'desc'],
+             empty_check_params=['id',  'name', 'interfaceId', 'groupId',
+                                 'environmentId', 'level', 'useCaseNo', 'detail', 'options', 'name'])
 def update():
     info = request.get_json()
     current_use_case = InterfaceUseCaseService.get_by_id(info['id'])

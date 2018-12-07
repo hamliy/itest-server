@@ -55,13 +55,13 @@ class ResponseParams(EmbeddedDocument):
     statusText = StringField()   # 状态名
 
 
-class Option(EmbeddedDocument):
+class Options(EmbeddedDocument):
     """
     接口参数
     """
     headers = EmbeddedDocumentField(HeaderParam)
     params = EmbeddedDocumentField(BodyParam)
-    example = EmbeddedDocumentField(BodyExample)
+    examples = EmbeddedDocumentField(BodyExample)
     response = ListField(EmbeddedDocumentField(ResponseParams))
     responseIndex = IntField(default=0)      # 指定返回结果 或随机
     delay = IntField(default=0)             # 模拟网络延迟
@@ -79,7 +79,7 @@ class Interface(Document):
     name = StringField(required=True)  # 接口名
     method = StringField(required=True, default="GET")  # 方法
     path = StringField(required=True)   # 接口路径
-    option = EmbeddedDocumentField(Option)
+    options = EmbeddedDocumentField(Options)
 
     createTime = DateTimeField(default=datetime.utcnow)  # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)  # 更新时间

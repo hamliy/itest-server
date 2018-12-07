@@ -145,7 +145,7 @@ class InterfaceUseCaseExecutionService(object):
                              level=use_case['level'],
                              useCaseNo=use_case['useCaseNo'],
                              detail=use_case['detail'],
-                             option=use_case['option'],
+                             options=use_case['options'],
                              modifiedTime=datetime.utcnow,
                              new=True)
         except InvalidId:

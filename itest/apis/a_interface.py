@@ -56,8 +56,8 @@ def get_interface_by_group():
 
 
 @blueprint.route('/create', methods=['POST'])
-@init_params(params=['projectId', 'groupId', 'option', 'method', 'path', 'name', 'desc'],
-             empty_check_params=['projectId', 'groupId', 'method', 'path', 'name', 'option'])
+@init_params(params=['projectId', 'groupId', 'options', 'method', 'path', 'name', 'desc'],
+             empty_check_params=['projectId', 'groupId', 'method', 'path', 'name', 'options'])
 def create():
     info = request.get_json()
     group, status = InterfaceGroupService.get_by_id(info['groupId'])
@@ -72,7 +72,7 @@ def create():
 
 
 @blueprint.route('/update', methods=['POST'])
-@init_params(params=['id', 'name', 'desc', 'option'], empty_check_params=['id', 'name', 'option'])
+@init_params(params=['id', 'name', 'desc', 'options'], empty_check_params=['id', 'name', 'options'])
 def update():
     info = request.get_json()
     current_interface = InterfaceService.get_by_id(info['id'])

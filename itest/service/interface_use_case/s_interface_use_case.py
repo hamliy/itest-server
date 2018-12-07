@@ -29,10 +29,10 @@ class InterfaceUseCaseService(object):
     def execute_use_case(use_case_id):
         use_case = InterfaceUseCaseService.get_by_id(use_case_id)
         # 上传文件 本地转换
-        if use_case['option']['requestType'] == 2:
+        if use_case['options']['requestType'] == 2:
             true_files = {}
             # 缓存图片id
-            for key, value in use_case['option']['files'].items():
+            for key, value in use_case['options']['files'].items():
                 image = ImageService.get_by_id(value)
                 if not image:
                     return {
@@ -46,7 +46,7 @@ class InterfaceUseCaseService(object):
                         }
                 else:
                     true_files[key] = (image['name'], open(image['path'], 'rb'), 'multipart/form-data')
-            use_case['option']['files'] = true_files
+            use_case['options']['files'] = true_files
 
         ucr = UseCaseRequest(use_case)
         ucr.run()
@@ -76,7 +76,7 @@ class InterfaceUseCaseService(object):
                                   level=use_case['level'],
                                   useCaseNo=use_case['useCaseNo'],
                                   detail=use_case['detail'],
-                                  option=use_case['option'],
+                                  options=use_case['options'],
                                   projectId=ObjectId(use_case['projectId']),
                                   desc=use_case['desc']).save()
         except InvalidId:
@@ -134,7 +134,7 @@ class InterfaceUseCaseService(object):
                              level=use_case['level'],
                              useCaseNo=use_case['useCaseNo'],
                              detail=use_case['detail'],
-                             option=use_case['option'],
+                             options=use_case['options'],
                              modifiedTime=datetime.utcnow,
                              new=True)
         except InvalidId:

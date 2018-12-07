@@ -31,7 +31,7 @@ class InterfaceUseCaseExpect(EmbeddedDocument):
     data = DictField()          # 响应数据
 
 
-class InterfaceUseCaseOption(EmbeddedDocument):
+class InterfaceUseCaseOptions(EmbeddedDocument):
     """
     用例参数
     """
@@ -66,7 +66,7 @@ class InterfaceUseCase(Document):
     name = StringField(required=True)                   # 用例名
     detail = StringField(required=True, defalt="")                              # 用例详情
 
-    option = EmbeddedDocumentField(InterfaceUseCaseOption)      # 用例参数
+    options = EmbeddedDocumentField(InterfaceUseCaseOptions)      # 用例参数
 
     createTime = DateTimeField(default=datetime.utcnow)                    # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)                  # 更新时间
