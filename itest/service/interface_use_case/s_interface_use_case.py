@@ -96,11 +96,15 @@ class InterfaceUseCaseService(object):
         return convert_mongo_to_json(InterfaceUseCase.objects(id=ObjectId(use_case_id), isDeleted=False).first())
 
     @staticmethod
+    def get_by_group_id(group_id):
+        return convert_queryset_to_json(InterfaceUseCase.objects(groupId=ObjectId(group_id), isDeleted=False).first())
+
+    @staticmethod
     def get_by_id_list(id_list):
         return convert_queryset_to_json(InterfaceUseCase.objects(id__in=id_list, isDeleted=False))
 
     @staticmethod
-    def get_use_cases(project_id):
+    def get_all(project_id):
         status = 'ok'
         try:
             rs = InterfaceUseCase.objects(projectId=ObjectId(project_id), isDeleted=False).order_by("-createTime")

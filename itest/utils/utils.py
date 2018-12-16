@@ -89,6 +89,8 @@ def convert_mongo_to_json(o):
 # mongo 查询结果集转json
 def convert_queryset_to_json(queryset):
     data = []
+    if not queryset:
+        return data
     for item in queryset:
         data.append(convert_mongo_to_json(item))
     return data

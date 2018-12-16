@@ -15,6 +15,10 @@ from mongoengine.fields import (
 from .m_user import User
 from .m_project import Project
 
+class InterfaceUseCaseBase(EmbeddedDocument):
+
+    id = ObjectIdField()
+    name = StringField()
 
 class InterfaceUseCaseGroup(Document):
     """
@@ -25,7 +29,7 @@ class InterfaceUseCaseGroup(Document):
     projectId = ReferenceField(Project)             # 所属项目id
     creatorId = ReferenceField(User)                  # 创建人id
     name = StringField(required=True)               # 组名
-    member = ListField(ObjectIdField(), default=[])             # 用例成员
+    member = ListField(EmbeddedDocumentField(InterfaceUseCaseBase), default=[])             # 用例成员
     groupType = IntField(default=0)                 # 分组类型默认  0 ，接口用例组，成员 无关联执行
                                                     # 1 业务用例组，用例上下文，按顺序执行
     createTime = DateTimeField(default=datetime.utcnow)                    # 创建时间

@@ -93,7 +93,6 @@ class InterfaceService(object):
 
     @staticmethod
     def get_group_interface(project_id):
-        InterfaceGroupService.get_groups(project_id)
         groups, status = InterfaceGroupService.get_groups(project_id)
         # tree = []
         # # 循环所有接口 按组分组 生成树结构

@@ -25,11 +25,23 @@ def search():
     return init_return(data)
 
 
-@blueprint.route('/get', methods=['GET', 'POST'])
-def get():
-    rs, status = InterfaceUseCaseService.get_use_cases(request.args.get('projectId'))
+@blueprint.route('/getAll', methods=['GET', 'POST'])
+@init_params(params=['projectId'], empty_check_params=['projectId'])
+def getAll():
+    info = request.get_json()
+    rs, status = InterfaceUseCaseService.get_all(info['projectId'])
     if status == 'not_object_id':
         return init_return({}, sucess=False, error="项目id不存在", errorCode=3003)
+    return init_return(rs)
+
+@blueprint.route('/getById', methods=['GET', 'POST'])
+def getById():
+    rs = InterfaceUseCaseService.get_by_id(request.args.get('useCaseId'))
+    return init_return(rs)
+
+@blueprint.route('/getByGroupId', methods=['GET', 'POST'])
+def getByGroupId():
+    rs = InterfaceUseCaseService.get_by_group_id(request.args.get('useCaseGroupId'))
     return init_return(rs)
 
 
