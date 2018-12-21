@@ -72,6 +72,7 @@ class InterfaceService(object):
                         'comment': None,
                         'required': True,
                         'type': "string",
+                        'example': None,
                         'key': None
                     }],
                     "example": {}

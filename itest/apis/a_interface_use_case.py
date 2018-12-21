@@ -18,10 +18,10 @@ blueprint = Blueprint('interface-use-case', __name__)
 
 
 @blueprint.route('/search', methods=['POST'])
-@init_params(params=['query', 'projectId'], empty_check_params=['projectId'])
+@init_params(params=['query', 'page', 'pageSize', 'projectId'])
 def search():
     info = request.get_json()
-    data = InterfaceUseCaseService.find(info['query'], info['projectId'])
+    data = InterfaceUseCaseService.find(info['query'], info['projectId'], info['page'], info['pageSize'])
     return init_return(data)
 
 
@@ -46,10 +46,10 @@ def getByGroupId():
 
 
 @blueprint.route('/create', methods=['POST'])
-@init_params(params=['projectId', 'interfaceId', 'groupId', 'environmentId',
-                     'level', 'useCaseNo', 'detail', 'options', 'name', 'desc'],
-             empty_check_params=['projectId', 'interfaceId', 'groupId', 'name', 'options''projectId', 'groupId',
-                                 'environmentId', 'level', 'useCaseNo', 'detail', 'name'])
+@init_params(params=['projectId', 'interfaceId', 'groupId',
+                     'level', 'options', 'name', 'desc'],
+             empty_check_params=['projectId', 'interfaceId', 'groupId', 'name', 'options', 'groupId',
+                                 'level', 'name'])
 def create():
     info = request.get_json()
     group, status = InterfaceUseCaseGroupService.get_by_id(info['groupId'])
@@ -63,14 +63,14 @@ def create():
         return init_return({}, sucess=False, error="请求的object_id错误", errorCode=3003)
     if status2 == 'not_unique':
         return init_return({}, sucess=False, error="用例编号重复，请修改", errorCode=3007)
-    InterfaceUseCaseGroupService.add_member(info['groupId'], data['id'])
+    InterfaceUseCaseGroupService.add_member(info['groupId'], data)
     return init_return(data)
 
 
 @blueprint.route('/update', methods=['POST'])
-@init_params(params=['id', 'interfaceId', 'environmentId', 'level', 'useCaseNo', 'detail', 'options', 'name', 'desc'],
+@init_params(params=['id', 'interfaceId', 'level', 'useCaseNo', 'detail', 'options', 'name', 'desc'],
              empty_check_params=['id',  'name', 'interfaceId', 'groupId',
-                                 'environmentId', 'level', 'useCaseNo', 'detail', 'options', 'name'])
+                                 'level', 'useCaseNo', 'detail', 'options', 'name'])
 def update():
     info = request.get_json()
     current_use_case = InterfaceUseCaseService.get_by_id(info['id'])

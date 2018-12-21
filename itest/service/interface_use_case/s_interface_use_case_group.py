@@ -67,9 +67,13 @@ class InterfaceUseCaseGroupService(object):
                                         .order_by("-createTime"))
 
     @staticmethod
-    def add_member(group_id, use_case_id):
+    def add_member(group_id, use_case):
+        member = {
+            'name': use_case['name'],
+            'id': ObjectId(use_case['id'])
+        }
         InterfaceUseCaseGroup.objects(id=ObjectId(group_id), isDeleted=False)\
-                .update_one(push__member=ObjectId(use_case_id))
+                .update_one(push__member=member)
 
     @staticmethod
     def delete_member(group_id, use_case_id):

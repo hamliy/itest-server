@@ -24,7 +24,6 @@ class BodyParam(EmbeddedDocument):
     body = ListField()      # 提交 json 或form数据  请求类型为GET 则无该参数 data
     path = ListField()      # 提交 restful风格url参数 https://www/:param1/:param2 url
     query = ListField()     # url参数 https://www？param1=hi params
-    type = IntField(default=0)  # 类型 0 body 1 path 2 query
 
 
 class BodyExample(EmbeddedDocument):
@@ -61,6 +60,7 @@ class Options(EmbeddedDocument):
     """
     headers = EmbeddedDocumentField(HeaderParam)
     params = EmbeddedDocumentField(BodyParam)
+    type = StringField(default='query')  # 类型 body path query
     examples = EmbeddedDocumentField(BodyExample)
     response = ListField(EmbeddedDocumentField(ResponseParams))
     responseIndex = IntField(default=0)      # 指定返回结果 或随机

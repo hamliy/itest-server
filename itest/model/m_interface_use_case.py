@@ -35,18 +35,13 @@ class InterfaceUseCaseOptions(EmbeddedDocument):
     """
     用例参数
     """
-    url = StringField()                 # 请求url
     path = StringField()                # 接口路径
     method = StringField()              # 方法
-    headers = DictField()               # 请求头
-    params = DictField()                # 请求参数
+    headers = ListField()               # 请求头
     data = DictField(default=None)                  # 请求数据
-    files = DictField(default=None)                 # 请求文件 {name: image_id} 换成图片i
-    requestType = IntField(default=0)  # post请求类型 => 0: params or forms, 1: json , 2: files
-    # file_type = IntField(default=0)     # 文件类型  0: 文件 1： 文件转 Base64 2： 直接Base64
-
+    type = StringField(default='query')     # 请求类型 query body path
     expect = ListField(EmbeddedDocumentField(InterfaceUseCaseExpect))  # 用例预期结果 InterfaceUseCaseExpect
-    association = DictField()           # 参数关联  {useCaseId:id, data: data} setup tearDown
+    association = DictField(default={})           # 参数关联  {useCaseId:id, data: data} setup tearDown
     delay = IntField(default=0)         # 模拟网络延迟
 
 
@@ -59,12 +54,9 @@ class InterfaceUseCase(Document):
     projectId = ReferenceField(Project, required=True)             # 所属项目id
     creatorId = ReferenceField(User)                  # 创建人id
     interfaceId = ReferenceField(Interface)
-    environmentId = ReferenceField(Environment)
     groupId = ReferenceField(InterfaceUseCaseGroup)     # 用例分组
-    useCaseNo = StringField(required=True, unique=True)                           # 用例编号
     level = IntField(required=True, default=0)  # 用例级别 0 未设置  1 2 3 4
     name = StringField(required=True)                   # 用例名
-    detail = StringField(required=True, defalt="")                              # 用例详情
 
     options = EmbeddedDocumentField(InterfaceUseCaseOptions)      # 用例参数
 

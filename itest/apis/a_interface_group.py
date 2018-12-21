@@ -23,8 +23,10 @@ def search():
 
 
 @blueprint.route('/get', methods=['GET', 'POST'])
+@init_params(params=['projectId'], empty_check=True)
 def get():
-    rs, status = InterfaceGroupService.get_groups(request.args.get('projectId'))
+    info = request.get_json()
+    rs, status = InterfaceGroupService.get_groups(info['projectId'])
     if status == 'not_object_id':
         return init_return({}, sucess=False, error="项目id不存在", errorCode=3003)
     return init_return(rs)
