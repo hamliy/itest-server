@@ -68,9 +68,9 @@ def create():
 
 
 @blueprint.route('/update', methods=['POST'])
-@init_params(params=['id', 'interfaceId', 'level', 'useCaseNo', 'detail', 'options', 'name', 'desc'],
+@init_params(params=['id', 'interfaceId', 'level', 'options', 'name', 'desc'],
              empty_check_params=['id',  'name', 'interfaceId', 'groupId',
-                                 'level', 'useCaseNo', 'detail', 'options', 'name'])
+                                 'level', 'options', 'name'])
 def update():
     info = request.get_json()
     current_use_case = InterfaceUseCaseService.get_by_id(info['id'])

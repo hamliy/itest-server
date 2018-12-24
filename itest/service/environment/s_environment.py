@@ -60,7 +60,6 @@ class EnvironmentService(object):
 
     @staticmethod
     def get_envs(project_id):
-        print(get_user_id())
         status = 'ok'
         try:
             rs = Environment.objects(projectId=ObjectId(project_id), isDeleted=False).order_by("-createTime")

@@ -31,9 +31,8 @@ class InterfaceUseCaseExecutionService(object):
                                                                useCaseId=ObjectId(use_case['id']),
                                                                relationId=ObjectId(use_case['relationId']),
                                                                executeType=use_case['executeType'],
-                                                               useCaseNo=use_case['useCaseNo'],
                                                                useCaseName=use_case['name'],
-                                                               useCaseDetail=use_case['detail'],
+                                                               useCaseDesc=use_case['desc'],
                                                                response={},
                                                                result={},
                                                                startTime=start_time).save())

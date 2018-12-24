@@ -32,6 +32,6 @@ class Environment(Document):
     checkTime = DateTimeField(default=datetime.utcnow)    # 状态检查时间
     createTime = DateTimeField(default=datetime.utcnow)                    # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)                  # 更新时间
-    # isDefault = BooleanField(default=False)             # 是否是i默认环境
+    isDefault = BooleanField(default=False)             # 是否是i默认环境
     isDeleted = BooleanField(default=False)                      # 是否删除
     desc = StringField(default="")                            # 描述

@@ -33,4 +33,4 @@ class InterfaceUseCaseHistory(Document):
     useCaseId = ReferenceField(InterfaceUseCase, unique=True)        # 关联用例
     records = ListField(EmbeddedDocumentField(History))
     createTime = DateTimeField(default=datetime.utcnow)  # 创建时间
-    updateTime = DateTimeField(default=datetime.utcnow)  # 更新时间
+    modifiedTime = DateTimeField(default=datetime.utcnow)  # 更新时间

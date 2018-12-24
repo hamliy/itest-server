@@ -44,11 +44,10 @@ class InterfaceUseCaseExecution(Document):
     creatorId = ReferenceField(User)  # 执行人
     useCaseId = ReferenceField(InterfaceUseCase)  # 用例Id
     relationId = ObjectIdField(default=None)  # 关联Id  根据执行类型设置 0 无， 1，2 测试计划执行结果 id
-    executeType = IntField(default=0)    # 用例执行类型  0 单用例执行调试 1 按组执行 创建临时执行测试计划 2 按测试计划执行
+    executeType = IntField(default=0)    # 用例执行类型   0 单用例执行调试 1 按组执行 创建临时执行测试计划 2 按测试计划执行
     status = IntField(default=0)    # 用例执行状态 0 执行中 1 执行完成
-    useCaseNo = StringField()   # 用例编号
     useCaseName = StringField(required=True)  # 用例名
-    useCaseDetail = StringField()   # 用例
+    useCaseDesc = StringField()   # 用例
 
     response = EmbeddedDocumentField(ResponseData)  # 请求信息
     result = EmbeddedDocumentField(CheckResult)    # 信息结果

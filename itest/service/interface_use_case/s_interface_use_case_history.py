@@ -35,14 +35,12 @@ class InterfaceUseCaseHistoryService(object):
         status = 'ok'
         try:
             operator_id = get_user_id()
-            print(operator_id)
             name = UserService.get_by_id(operator_id)['name']
             record = {
                 'data': use_case ,
                 'operatorId': operator_id,
                 'operatorName': name
             }
-            print(use_case)
             history = InterfaceUseCaseHistory.objects(useCaseId=ObjectId(use_case['id']))
             if not history.first():
                 rs = InterfaceUseCaseHistory(records=[record],

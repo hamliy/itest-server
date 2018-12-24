@@ -78,7 +78,7 @@ class InterfaceUseCaseGroupService(object):
     @staticmethod
     def delete_member(group_id, use_case_id):
         InterfaceUseCaseGroup.objects(id=ObjectId(group_id), isDeleted=False)\
-                .update_one(pull__member=ObjectId(use_case_id))
+                .update_one(pull__member__id=ObjectId(use_case_id))
 
     @staticmethod
     def update(interface_use_case_group):

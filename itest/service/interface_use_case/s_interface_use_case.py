@@ -82,9 +82,9 @@ class InterfaceUseCaseService(object):
         except InvalidId:
             rs = None
             status = 'not_object_id'
-        except NotUniqueError:
-            rs = None
-            status = 'not_unique'
+        # except NotUniqueError:
+        #     rs = None
+        #     status = 'not_unique'
         return convert_mongo_to_json(rs), status
 
     @staticmethod
@@ -101,7 +101,7 @@ class InterfaceUseCaseService(object):
             "headers": interface['options']['headers'],
             "data": {
                 "params": interface['options']['params'],
-                "example": interface['options']['example']
+                "examples": interface['options']['examples']
             },
             "type": interface['options']['type']
         }

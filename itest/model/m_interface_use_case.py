@@ -37,7 +37,7 @@ class InterfaceUseCaseOptions(EmbeddedDocument):
     """
     path = StringField()                # 接口路径
     method = StringField()              # 方法
-    headers = ListField()               # 请求头
+    headers = DictField()               # 请求头
     data = DictField(default=None)                  # 请求数据
     type = StringField(default='query')     # 请求类型 query body path
     expect = ListField(EmbeddedDocumentField(InterfaceUseCaseExpect))  # 用例预期结果 InterfaceUseCaseExpect
