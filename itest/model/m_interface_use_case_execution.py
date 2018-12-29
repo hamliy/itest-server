@@ -50,7 +50,6 @@ class InterfaceUseCaseExecution(Document):
     useCaseDesc = StringField()   # 用例
 
     response = EmbeddedDocumentField(ResponseData)  # 请求信息
-    result = EmbeddedDocumentField(CheckResult)    # 信息结果
 
     startTime = DateTimeField(default=None)  # 开始时间
     endTime = DateTimeField(default=None)  # 结束时间

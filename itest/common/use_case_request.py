@@ -6,14 +6,26 @@
 @dec   : 用例请求封装
 """
 import datetime
-from itest.common.http_request import HttpRequest
-from itest.utils.request import uri_join
+from itest.common.api_request import ApiRequest
+from itest.utils.request import uri_join, get_use_case_url
 from itest.common.check_result import CheckResult
 
 
-class UseCaseRequest(HttpRequest):
-    def __init__(self, use_case):
+def getKeyValue(objs):
+    """
+    获取key value
+    :return:
+    """
+    obj = {}
+    for item in objs:
+        obj[item['key']] = item['example']
+    return obj
+
+
+class UseCaseRequest(ApiRequest):
+    def __init__(self, use_case, env):
         self.use_case = use_case
+        self.env = env
         request = self.init_use_case_request()
         super(UseCaseRequest, self).__init__(request)
         self.case_name = use_case['name']
@@ -31,17 +43,32 @@ class UseCaseRequest(HttpRequest):
         :return:
         """
         options = self.use_case['options']
-        url = uri_join(options['url'], options['path'])
-
-        return {
+        url = get_use_case_url(self.env['protocol'], self.env['ip'],
+                               self.env['port'], options['path'])
+        request_params = {
             'url': url,
-            'headers': options['headers'],
+            'headers': getKeyValue(options['headers']['params']),
             'method': options['method'],
-            'params': options['params'],
-            'data': options['data'],
-            'files': options['files'],
-            'requestType': options['requestType']
+            'params': {},
+            'data': {},
+            'json': {},
+            'files': None,
+            'requestType': 'get'
         }
+        data = options['data']['params']
+        # 按参数请求
+        if options['type'] == 'query':
+            request_params['params'] = getKeyValue(data['query'])
+        # 根据headers content-type 判断
+        elif options['type'] == 'json':
+            request_params['json'] = getKeyValue(data['json'])
+        elif options['type'] == 'form':
+            request_params['data'] = getKeyValue(data['form'])
+        elif options['type'] == 'path':
+            item = getKeyValue(data['path'])
+            for key, value in item.getItems():
+                request_params['url'] += '/'+value
+        return request_params
 
     def run(self):
         run_time = datetime.datetime.utcnow

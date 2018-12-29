@@ -102,10 +102,15 @@ def delete():
 
 
 @blueprint.route('/execute', methods=['POST'])
-@init_params(params=['id'], empty_check=True)
+@init_params(params=['useCase', 'env'], empty_check=True)
 def run_by_id():
+    """
+    执行用例
+    根据用例和环境进行测试执行
+    :return:
+    """
     info = request.get_json()
-    rs = InterfaceUseCaseExecuteService.execute_by_id(info['id'])
+    rs = InterfaceUseCaseExecuteService.execute_by_use_case(info['useCase'],  info['env'])
     return init_return(rs)
 
 

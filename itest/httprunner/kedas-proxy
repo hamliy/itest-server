@@ -1,0 +1,56 @@
+[
+    {
+        "config": {
+            "name": "kedas test",
+            "variables": [
+              {"token": "${get_token()}"}
+            ],
+            "request": {
+                "base_url": "http://123.207.7.95:31942",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }
+        }
+    },
+    {
+        "test": {
+            "name": "用特征值查询信息",
+            "request": {
+                "url": "/kedas/record",
+                "headers": {},
+                "method": "GET",
+                "params": {
+                  "accessToken": "$token",
+                  "bduId": "HWTjmPpEDaS7Re5n9ibmaYFzpvaMhgKhjyFiKo9pHViv",
+                  "recordId": "SqOHlhECy%2fuFA%2b9MydFPoALRi2O%2b6w0tVqrXqk833DNr%2fvmOTOY4DJJmF9tK9Xec"
+                }
+            },
+            "extract": [
+            ],
+            "validate": [
+                {"eq": ["status_code", 200]},
+                {"eq": ["headers.Content-Type", "application/json"]}
+            ]
+        }
+    },
+    {
+        "test": {
+            "name": "/api/users/1000",
+            "request": {
+                "url": "/api/users/1000",
+                "headers": {
+                    "token": "$token"
+                },
+                "method": "POST",
+                "json": {"name": "user1", "password": "123456"}
+            },
+            "validate": [
+                {"eq": ["status_code", 201]},
+                {"eq": ["headers.Content-Type", "application/json"]},
+                {"eq": ["content.success", true]},
+                {"eq": ["content.msg", "user created successfully."]}
+            ]
+        }
+    }
+]

@@ -46,6 +46,21 @@ class InterfaceUseCaseExecutionService(object):
         return InterfaceUseCaseExecutionService.create_execution(use_case)
 
     @staticmethod
+    def create_execution(use_case, env):
+        start_time = datetime.utcnow
+        creator_id = get_user_id()
+        return convert_mongo_to_json(InterfaceUseCaseExecution(
+                creatorId=ObjectId(creator_id),
+                useCaseId=ObjectId(use_case['id']),
+                relationId=ObjectId(use_case['relationId']),
+                executeType=use_case['executeType'],
+                useCaseName=use_case['name'],
+                useCaseDesc=use_case['desc'],
+                response={},
+                result={},
+                startTime=start_time).save())
+
+    @staticmethod
     def create_execution_by_group(group_id):
         start_time = datetime.utcnow
         creator_id = get_user_id()

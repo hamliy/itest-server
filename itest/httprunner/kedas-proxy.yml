@@ -1,0 +1,34 @@
+- config:
+    name: kedas proxy description
+    variables:
+        - accessToken: ${get_token()}
+        - proxy: "HWTjmPpEDaS7Re5n9ibmaYFzpvaMhgKhjyFiKo9pHViv"
+        - channelId: "test"
+    request:
+        base_url: http://123.207.7.95:31697
+        headers:
+            Content-Type: application/json
+
+- test:
+    name: "身份注册代理"
+    variables:
+        - uid: "test"
+        - tid: "test"
+        - wxid: "test"
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/registerByProxy
+        method: POST
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+            tid: $tid
+            wxid: $wxid
+            name: $name
+            tname: $tname
+    validate:
+        - eq: [status_code, 503]
+        - eq: [content.errcode, 400]

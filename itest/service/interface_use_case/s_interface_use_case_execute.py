@@ -17,6 +17,19 @@ class InterfaceUseCaseExecuteService(object):
         pass
 
     @staticmethod
+    def execute_by_id(use_case, env):
+        """
+        执行用例： 1 创建用例执行结果 2 调用异步任务 执行用例 3 返回任务开始状态
+        :param use_case_id:
+        :return:
+        """
+        execution = InterfaceUseCaseExecutionService.create_execution_by_id(use_case_id)
+        # 按组执行单个用例任务
+        print(use_case_id, execution['id'])
+        execute_use_case_task.delay(use_case_id, execution['id'])
+        return execution
+
+    @staticmethod
     def execute_by_id(use_case_id):
         """
         执行用例： 1 创建用例执行结果 2 调用异步任务 执行用例 3 返回任务开始状态
