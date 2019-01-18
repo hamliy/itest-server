@@ -9,13 +9,14 @@ import lxml.html
 import execjs
 import requests, re, json, os
 import datetime
-from time import sleep
 import threading
 import queue
 from itest.tools.train_info.db_operation import update_train_info, get_set, get_station_code_order_by_name
 from itest.tools.train_info.util import getMonthFirstDayAndLastDay, TestThreadByQ
 
 etree = lxml.html.etree
+
+
 def get_train_number():
     """
     从 jt2345网站获取所有火车车次信息
@@ -31,6 +32,7 @@ def get_train_number():
     for i in html_data:
         train_numbers.append(i.text)
     return train_numbers
+
 
 def save_train_station_from_12306(path):
     """
@@ -52,6 +54,7 @@ def save_train_station_from_12306(path):
             if chunk:
                 code.write(chunk)
 
+
 def save_train_list_from_12306(path):
     """
     从12306获取所有车次信息（按月更新车次数据），并保存为js
@@ -67,6 +70,7 @@ def save_train_list_from_12306(path):
         for chunk in resp.iter_content(chunk_size=1024):
             if chunk:
                 code.write(chunk)
+
 
 def get_train_station_list_from_12306(train):
     """
@@ -94,9 +98,10 @@ def get_train_station_list_from_12306(train):
     }
     try:
         resp = requests.get(url, params=params)
-    except ConnectionError :
+    except ConnectionError:
         resp = {'text': 'TimeoutError'}
     return resp.text
+
 
 def request_train_station_by_thread(all_train_list, threadNum):
     total = len(all_train_list)
@@ -137,6 +142,92 @@ def request_train_station_by_thread(all_train_list, threadNum):
             results.extend(t.get_result())
         print(len(results))
     return results
+
+
+def get_seat_type_by_query_z(train):
+    """
+    从查询站到站的车次查询 座位号
+    :return:
+    """
+    url = 'https://kyfw.12306.cn/otn/leftTicket/queryZ'
+    params = {
+        'leftTicketDTO.train_date': train['trainDate'],
+        'leftTicketDTO.from_station': train['startCode'],
+        'leftTicketDTO.to_station': train['endCode'],
+        'purpose_codes': 'ADULT'
+    }
+    try:
+        resp = requests.get(url, params=params)
+        print(resp.status_code, resp.text)
+        result = json.loads(resp.text)
+        if result['status']:
+            infos = json.loads(resp.text)['data']['result']
+            # info = "RxKOJhkdq3meu5VL5x816HPcQl2wprfZS3XkUJeEQ5II3vL1QYAiFI5EJ8IqJj6pKe6a%2Ff%2FtHp1H%0Ar2ViMmXdi1OWU6%2BHnyi0F8xkvCm2Kf24%2FN1J%2FcXFWsMMHBWA6PFINzlV0b%2BZVU8oGUZbm1VrU%2B7y%0AnQMNUPdBS6GuQdthYbWRCnDxyVY%2BXgYtkkDwbn0C3xVEoWoCGe2ku%2BmQyz%2BPOqeJfBy%2FxsDHIWJD%0AADmREzfzyiYWvilvHruCIFADIyNpTvmro%2BVZ%2FUe70j2mIKWIeUNfGKg%2FI66BLP%2BMkU8J5uvSgIye%0AIqBMcA%3D%3D|预订|330000K59810|K599|BTC|GZQ|BXP|GZQ|05:14|11:06|29:52|Y|31RMgZmiY%2FUh40pakE45kIplgFGat2H4doHPTv3VgBF7wVbYVRd8OvcOnw4%3D|20190122|3|C1|11|34|0|0||||无|||有||无|有|||||10401030|1413|1|0|null"
+            if len(infos) == 0:
+                train['errorCode'] = 403
+                train['error'] = 'train list not found'
+                train['seatType'] = ''
+            for info in infos:
+                seat_type = info.split('|')[-4]
+                train_no = info.split('|')[2]
+                train_number = info.split('|')[3]
+                if train_no == train['trainNo']:
+                    train['seatType'] = seat_type
+                    break
+            if 'seatType' not in train:
+                train['errorCode'] = 404
+                train['error'] = 'train_no not found'
+                train['seatType'] = ''
+        else:
+            train['errorCode'] = 401
+            train['seatType'] = ''
+            train['error'] = result['seat_type query error']
+
+    except ConnectionError:
+        train['errorCode'] = 402
+        train['seatType'] = ''
+        train['error'] = result['seat_type query connection error']
+    return train
+
+
+def request_train_seat_type_by_thread(all_train_list, threadNum):
+    total = len(all_train_list)
+    queue_lock = threading.Lock()
+    queues = queue.Queue(total)
+    threads = []
+    results = []
+    # 启动线程
+    for i in range(threadNum):
+        name = '线程%s' % i
+        tq = TestThreadByQ(get_seat_type_by_query_z, queues, queue_lock, total, name=name)
+        tq.start()
+        threads.append(tq)
+    # 填充队列
+    print('queue init')
+    queue_lock.acquire()
+    for train in all_train_list:
+        queues.put(train)
+    queue_lock.release()
+    print('queue end')
+    # 等待队列清空
+    while not queues.empty():
+        pass
+
+    # 通知线程退出
+    for t in threads:
+        t.set_exit_flag(1)
+
+    # 等待线程完成
+    for t in threads:
+        t.join()
+        if results == []:
+            results = t.get_result()
+        else:
+            results.extend(t.get_result())
+        print(len(results))
+    return results
+
+
 def get_all_train_station_list_from_12306(year, month):
     """
     获取所有车次的站点信息(查询7天内)
@@ -149,6 +240,7 @@ def get_all_train_station_list_from_12306(year, month):
     fist_day, last_day = getMonthFirstDayAndLastDay(year, month)
     all_train = set.find({'createTime':{ "$gte" : fist_day, "$lt" : last_day }})
     all_train_list = []
+    all_train_station_list = []
     for train in all_train:
         # C3开头的火车 主要是金山卫到上海南的城际火车，12306 找不到该车次及车站，先过滤掉
         # 香港 九龙 12306查找不到 ，先过滤
@@ -158,38 +250,55 @@ def get_all_train_station_list_from_12306(year, month):
         if not train['trainNumber'].startswith('C3') and train['endStation'] not in black_list \
                 and train['startStation'] not in black_list:
             all_train_list.append(train)
-    all_train_station_list = []
-    results = request_train_station_by_thread(all_train_list[0:200], 5)
+        else:
+            all_train_station_list.append({
+                'header': train['header'],
+                'trainNumber': train['trainNumber'],
+                'trainNo': train['trainNo'],
+                'trainDate': train['trainDate'],
+                'startStation': train['startStation'],
+                'endStation': train['endStation'],
+                'startCode': '',
+                'endCode': '',
+                'stations': [],
+                'errorCode': 303,
+                'error': 'Station code not found'
+            })
+    results = request_train_station_by_thread(all_train_list, 10)
     for result in results:
         info = result['response']
         train = result['params']
         if info == 'TimeoutError':
             print('get error for %s' % train)
             all_train_station_list.append({
-                'hearder': train['header'],
+                'header': train['header'],
                 'trainNumber': train['trainNumber'],
                 'trainNo': train['trainNo'],
+                'trainDate': train['trainDate'],
                 'startStation': train['startStation'],
                 'endStation': train['endStation'],
                 'startCode': train['fromCode'],
                 'endCode': train['toCode'],
                 'stations': [],
-                'loaded': False
+                'errorCode': 301,
+                'error': 'TimeoutError'
             })
         else:
             station_list = json.loads(info)['data']['data']
             if len(station_list) == 0:
                 print('get error for %s' % train)
                 all_train_station_list.append({
-                    'hearder': train['header'],
+                    'header': train['header'],
                     'trainNumber': train['trainNumber'],
                     'trainNo': train['trainNo'],
+                    'trainDate': train['trainDate'],
                     'startStation': train['startStation'],
                     'endStation': train['endStation'],
                     'startCode': train['fromCode'],
                     'endCode': train['toCode'],
                     'stations': [],
-                    'loaded': False
+                    'errorCode': 302,
+                    'error': 'Not found'
                 })
             else:
                 stations = []
@@ -202,17 +311,55 @@ def get_all_train_station_list_from_12306(year, month):
                         'stationNo': station['station_no']
                     })
                 all_train_station_list.append({
-                    'hearder': train['header'],
+                    'header': train['header'],
                     'trainNumber': train['trainNumber'],
                     'trainNo': train['trainNo'],
+                    'trainDate': train['trainDate'],
                     'startStation': train['startStation'],
                     'endStation': train['endStation'],
                     'startCode': train['fromCode'],
                     'endCode': train['toCode'],
                     'stations': stations,
-                    'loaded': True
+                    'errorCode': 0,
+                    'error': ''
                 })
     return all_train_station_list
+
+
+def update_all_train_seat_type():
+    """
+    获取所有车次的座席信息信息(查询7天内)
+    根据对应的年月的车次信息查询并并更新数据
+    :param year:
+    :param month:
+    :return:
+    """
+    year = datetime.datetime.utcnow().year  # 当前月份
+    month = datetime.datetime.utcnow().month  # 当前月份
+    dbset = get_set('train_station_list')
+    fist_day, last_day = getMonthFirstDayAndLastDay(year, month)
+    train_0 = dbset.find_one({'createTime':{ "$gte" : fist_day, "$lt" : last_day}, 'errorCode':0})
+    # 如果这个月已经有数据了 且存在座位字段 不更新
+    if train_0 and 'seatType' in train_0:
+        print('All seat_type ready update this month %s ' % datetime.datetime.utcnow().strftime('%Y-%m'))
+    else:
+        all_train_stations = dbset.find({'createTime': {"$gte": fist_day, "$lt": last_day}, 'errorCode': 0})
+        all_train_list = []
+        for train in all_train_stations:
+            all_train_list.append(train)
+        results = request_train_seat_type_by_thread(all_train_list, 5)
+        for result in results:
+            c = {'createTime': {"$gte": fist_day, "$lt": last_day},
+                 'trainNo': result['response']['trainNo'],
+                 'trainNumber': result['response']['trainNumber']}
+            t = dbset.find_one(c)
+            t['seatType'] = result['response']['seatType']
+            t['errorCode'] = result['response']['errorCode']
+            t['error'] = result['response']['error']
+            print('update train_no %s, seat_type %s' % (result['response']['trainNo'], result['response']['seatType']))
+            dbset.update(c, t)
+
+
 
 def analyze_train_number_js(js_path):
     """
@@ -241,6 +388,7 @@ def analyze_train_number_js(js_path):
                         'train_date': date
                     })
     return train_all_data
+
 
 def analyze_train_station_js(js_path):
     """
@@ -276,6 +424,7 @@ def analyze_train_station_js(js_path):
             'stationNo': station_no,
         })
     return all_train_station
+
 
 def update_train_number_data():
     """
@@ -321,6 +470,7 @@ def update_train_number_data():
         set = get_set('train_list')
         set.insert_many(all)
 
+
 def update_train_station_data():
     """
     更新车站数据(每月更新一次)
@@ -351,6 +501,7 @@ def update_train_station_data():
         set = get_set('train_station')
         set.insert_many(all)
 
+
 def update_train_station_list_data():
     """
     更新车次站点数据(每月更新一次)
@@ -362,7 +513,7 @@ def update_train_station_list_data():
     fist_day, last_day = getMonthFirstDayAndLastDay(year, month)
     all_train_stations = set.find({'createTime':{ "$gte" : fist_day, "$lt" : last_day }})
     # 如果这个月已经有数据了 不更新
-    if all_train_stations.count() < 0:
+    if all_train_stations.count() > 0:
         print('All ready update this month %s ' % datetime.datetime.utcnow().strftime('%Y-%m'))
     else:
         all_train_station_list = get_all_train_station_list_from_12306(year, month)
@@ -376,101 +527,115 @@ def update_train_station_list_data():
         print('start update db for train_station_list')
         set.insert_many(all)
 
-def get_train_station_by_number(train_number):
-    url = "http://www.jt2345.com/huoche/checi/%s.htm" % train_number
-    resp = requests.get(url)
-    # 默认编码
-    coding = 'utf-8'
-    if resp.encoding == 'ISO-8859-1':
-        # 'ISO-8859-1'对应Latin1 编码
-        coding = 'latin1'
-    try:
-        change_text = resp.text.encode(coding).decode("gbk")
-    except UnicodeDecodeError:
-        print(resp.text.encode(coding))
-        change_text = resp.text
-    html = etree.HTML(change_text)
-    # print(change_text)
-    # print(etree.tostring(html, encoding='gb2312'))
-    base_info_table = html.xpath('/html/body/center/table')[0]
-    station_info_table = html.xpath('/html/body/center/table')[1]
-    base_info_tr = base_info_table.xpath('./tr')
-    station_info_tr = station_info_table.xpath('./tr')
-    base_info = {'车次': train_number}
-    station_info = []
-    data = {
-        'checi': '',
-        'start':'',
-        'start_time':'',
-        'end': '',
-        'end_time': '',
-        'price': '',
-        'cost_time': '',
-        'zuoxi':{'type':'price', '':''}
-    }
-    for i in base_info_tr:
-        data = i.xpath('./td/text()')
-        if len(data) == 2:
-            base_info[data[0].encode(coding).decode('gbk')] = data[1].encode(coding).decode('gbk')
-    # for i in station_info_tr[0]:
-    #     print(i.text)
-    for i in station_info_tr:
-        if len(i.xpath('./td/a/text()')) > 0:
-            station_name = i.xpath('./td/a/text()')[0]
-
-            print(station_name)
-            station_number = i.xpath('./td[1]/text()')[0].encode(coding).decode('gbk')
-            station_info.append({
-                'station_number': station_number,
-                'station_name': station_name.encode(coding).decode('gbk')
-            })
-    print(base_info,station_info)
-    return base_info, station_info
-
-def init_tain_info():
+def update_train_price_data():
     """
-    初始化所有车次+车站信息
+    更新火车票价格信息
     :return:
     """
-    all_train_numbers = get_train_number()
-    print(len(all_train_numbers), all_train_numbers[0])
-    all_count = len(all_train_numbers)
-    count = 1
-    for train_number in all_train_numbers[261:]:
-        print('init: %s（%s/%s）' %(train_number, count, all_count))
-        base_info, station_info = get_train_station_by_number(train_number)
-        # update_train_info({
-        #     'baseInfo': base_info,
-        #     'trainNumber': train_number,
-        #     'stationInfo': station_info,
-        #     'createTime': datetime.utcnow(),
-        #     'desc': 'init'
-        # })
-        count +=1
 
-def replasceCharEntity(htmlstr):
-    CHAR_ENTITYES= {
-        'nbsp': ' ', '160': ' ',
-        'lt': '<', '60': '<',
-        'gt': '>', '62': '>',
-        'amp': '&', '38': '&',
-        'quot': '"', '34': '"'
-    }
-    re_charEntity = re.compile(r'&#?(?P<name>\w+);')
-    sz = re_charEntity.search(htmlstr)
-    while sz:
-        key = sz.group('name') # 去除&#：
-        try:
-            htmlstr = re_charEntity.sub(CHAR_ENTITYES[key], htmlstr, 1)
-            sz = re_charEntity.search(htmlstr)
-        except KeyError:
-            # 以空串代替
-            htmlstr = re_charEntity.sub('', htmlstr)
-            sz = re_charEntity.search(htmlstr)
-    return htmlstr
+#
+# def get_train_station_by_number(train_number):
+#     url = "http://www.jt2345.com/huoche/checi/%s.htm" % train_number
+#     resp = requests.get(url)
+#     # 默认编码
+#     coding = 'utf-8'
+#     if resp.encoding == 'ISO-8859-1':
+#         # 'ISO-8859-1'对应Latin1 编码
+#         coding = 'latin1'
+#     try:
+#         change_text = resp.text.encode(coding).decode("gbk")
+#     except UnicodeDecodeError:
+#         print(resp.text.encode(coding))
+#         change_text = resp.text
+#     html = etree.HTML(change_text)
+#     # print(change_text)
+#     # print(etree.tostring(html, encoding='gb2312'))
+#     base_info_table = html.xpath('/html/body/center/table')[0]
+#     station_info_table = html.xpath('/html/body/center/table')[1]
+#     base_info_tr = base_info_table.xpath('./tr')
+#     station_info_tr = station_info_table.xpath('./tr')
+#     base_info = {'车次': train_number}
+#     station_info = []
+#     data = {
+#         'checi': '',
+#         'start':'',
+#         'start_time':'',
+#         'end': '',
+#         'end_time': '',
+#         'price': '',
+#         'cost_time': '',
+#         'zuoxi':{'type':'price', '':''}
+#     }
+#     for i in base_info_tr:
+#         data = i.xpath('./td/text()')
+#         if len(data) == 2:
+#             base_info[data[0].encode(coding).decode('gbk')] = data[1].encode(coding).decode('gbk')
+#     # for i in station_info_tr[0]:
+#     #     print(i.text)
+#     for i in station_info_tr:
+#         if len(i.xpath('./td/a/text()')) > 0:
+#             station_name = i.xpath('./td/a/text()')[0]
+#
+#             print(station_name)
+#             station_number = i.xpath('./td[1]/text()')[0].encode(coding).decode('gbk')
+#             station_info.append({
+#                 'station_number': station_number,
+#                 'station_name': station_name.encode(coding).decode('gbk')
+#             })
+#     print(base_info,station_info)
+#     return base_info, station_info
+#
+#
+# def init_tain_info():
+#     """
+#     初始化所有车次+车站信息
+#     :return:
+#     """
+#     all_train_numbers = get_train_number()
+#     print(len(all_train_numbers), all_train_numbers[0])
+#     all_count = len(all_train_numbers)
+#     count = 1
+#     for train_number in all_train_numbers[261:]:
+#         print('init: %s（%s/%s）' %(train_number, count, all_count))
+#         base_info, station_info = get_train_station_by_number(train_number)
+#         # update_train_info({
+#         #     'baseInfo': base_info,
+#         #     'trainNumber': train_number,
+#         #     'stationInfo': station_info,
+#         #     'createTime': datetime.utcnow(),
+#         #     'desc': 'init'
+#         # })
+#         count +=1
+#
+# def replasceCharEntity(htmlstr):
+#     CHAR_ENTITYES= {
+#         'nbsp': ' ', '160': ' ',
+#         'lt': '<', '60': '<',
+#         'gt': '>', '62': '>',
+#         'amp': '&', '38': '&',
+#         'quot': '"', '34': '"'
+#     }
+#     re_charEntity = re.compile(r'&#?(?P<name>\w+);')
+#     sz = re_charEntity.search(htmlstr)
+#     while sz:
+#         key = sz.group('name') # 去除&#：
+#         try:
+#             htmlstr = re_charEntity.sub(CHAR_ENTITYES[key], htmlstr, 1)
+#             sz = re_charEntity.search(htmlstr)
+#         except KeyError:
+#             # 以空串代替
+#             htmlstr = re_charEntity.sub('', htmlstr)
+#             sz = re_charEntity.search(htmlstr)
+#     return htmlstr
+
 
 if __name__ == '__main__':
     # init_train_number_data()
     update_train_number_data()
-    update_train_station_data()
-    update_train_station_list_data()
+    # update_train_station_data()
+    # update_train_station_list_data()
+    # data = "RxKOJhkdq3meu5VL5x816HPcQl2wprfZS3XkUJeEQ5II3vL1QYAiFI5EJ8IqJj6pKe6a%2Ff%2FtHp1H%0Ar2ViMmXdi1OWU6%2BHnyi0F8xkvCm2Kf24%2FN1J%2FcXFWsMMHBWA6PFINzlV0b%2BZVU8oGUZbm1VrU%2B7y%0AnQMNUPdBS6GuQdthYbWRCnDxyVY%2BXgYtkkDwbn0C3xVEoWoCGe2ku%2BmQyz%2BPOqeJfBy%2FxsDHIWJD%0AADmREzfzyiYWvilvHruCIFADIyNpTvmro%2BVZ%2FUe70j2mIKWIeUNfGKg%2FI66BLP%2BMkU8J5uvSgIye%0AIqBMcA%3D%3D|预订|330000K59810|K599|BTC|GZQ|BXP|GZQ|05:14|11:06|29:52|Y|31RMgZmiY%2FUh40pakE45kIplgFGat2H4doHPTv3VgBF7wVbYVRd8OvcOnw4%3D|20190122|3|C1|11|34|0|0||||无|||有||无|有|||||10401030|1413|1|0|null"
+    # info = data.split('|')
+    # print(info[-4])
+    # print(info[2])
+    update_all_train_seat_type()

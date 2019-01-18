@@ -5,3 +5,6 @@
 @time  : 8/28/18 4:39 PM
 @dec   : 
 """
+import platform
+
+separator = '\\' if platform.system() == 'Windows' else '/'

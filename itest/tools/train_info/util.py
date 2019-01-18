@@ -71,7 +71,6 @@ class TestThreadByQ(threading.Thread):
                     'response': resp,
                     'params': data
                 })
-                print(len(self.result))
                 print('%s: 完成处理任务 (%s/%s)' % (self.name, count, self.total))
             else:
                 self.queueLock.release()

@@ -6,8 +6,6 @@
 @dec   : 接口用例管理服务
 """
 
-
-
 from itest.model.m_interface_use_case import InterfaceUseCase, InterfaceUseCaseOptions
 from itest.model.m_interface_use_case_execution import InterfaceUseCaseExecution
 from itest.service.image.s_image import ImageService
@@ -21,6 +19,7 @@ from mongoengine.queryset.visitor import Q
 from datetime import datetime
 from itest.utils.request import get_user_id
 from requests import Response
+
 
 class InterfaceUseCaseService(object):
     def __init__(self):
@@ -62,7 +61,13 @@ class InterfaceUseCaseService(object):
         print(result['response'], result['expectResult'])
         return result['response'], result['expectResult']
 
-
+    @staticmethod
+    def add_use_case(**kwargs):
+        """
+        用例信息落地
+        :param kwargs:
+        :return:
+        """
 
     @staticmethod
     def create(use_case):

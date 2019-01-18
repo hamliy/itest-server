@@ -14,10 +14,12 @@ from mongoengine.fields import (
 from .m_user import User
 from .m_project import Project
 
+
 class InterfaceBase(EmbeddedDocument):
 
     id = ObjectIdField()
     name = StringField()
+
 
 class InterfaceGroup(Document):
     """

@@ -13,9 +13,11 @@ if __name__ == '__main__':
     # g = group(add.s(i, i ) for i in range(10))()
     # g.save()
     # print(g.get())
+    data = {'proxy': 'HWTjmPpEDaS7Re5n9ibmaYFzpvaMhgKhjyFiKo9pHViv', 'accessToken': '15458996845fc99549decf5d8e858cd5',
+            'channelId': 'test', 'uid': 'test', 'tid': 'test', 'wxid': 'test', 'name': 'test', 'tname': 'test'}
+    print(data, type(data))
     headers ={'Content-Type': 'application/json'}
-    res =requests.post(url="https://finchain.kchaintest.testresearch.com/api/user/login", headers=headers,params={},
-                  json={'username': '17077187768', 'password': 'test'}, timeout=float(60))
+    res =requests.post(url="http://123.207.7.95:31697/kbdus/registerByProxy", headers=headers, json=data, timeout=float(60))
     print(res.text)
 
 

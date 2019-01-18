@@ -10,7 +10,7 @@ from pymongo import MongoClient
 from datetime import datetime
 from itest.tools.train_info.util import getMonthFirstDayAndLastDay
 
-MONGO_URL = 'mongodb://localhost:27017/'
+MONGO_URL = 'mongodb://172.20.166.50:27017/'
 DB_NAME = 'train'
 
 def get_set(dbset):

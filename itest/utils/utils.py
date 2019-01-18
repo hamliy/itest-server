@@ -5,7 +5,7 @@
 @time  : 8/28/18 9:23 PM
 @dec   : 
 """
-import json, os
+import json, os, time, io, yaml
 import datetime
 from bson import ObjectId
 import hashlib
@@ -116,4 +116,52 @@ def md5(str):
     return m.hexdigest()
 
 
+# 时间戳格式转换
+def timestamp_to_datetime(summary, type=True):
+    if not type:
+        time_stamp = int(summary["time"]["start_at"])
+        summary['time']['start_datetime'] = datetime.datetime. \
+            fromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
 
+    for detail in summary['details']:
+        try:
+            time_stamp = int(detail['time']['start_at'])
+            detail['time']['start_at'] = datetime.datetime.fromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
+        except Exception:
+            pass
+
+        for record in detail['records']:
+            try:
+                time_stamp = int(record['meta_data']['request']['start_timestamp'])
+                record['meta_data']['request']['start_timestamp'] = \
+                    datetime.datetime.fromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
+            except Exception:
+                pass
+    return summary
+
+def get_time_stamp():
+    ct = time.time()
+    local_time = time.localtime(ct)
+    data_head = time.strftime("%Y-%m-%d %H-%M-%S", local_time)
+    data_secs = (ct - int(ct)) * 1000
+    time_stamp = "%s-%03d" % (data_head, data_secs)
+    return time_stamp
+
+
+def dump_yaml_file(yaml_file, data):
+    """ load yaml file and check file content format
+    """
+    with io.open(yaml_file, 'w', encoding='utf-8') as stream:
+        yaml.dump(data, stream, indent=4, default_flow_style=False, encoding='utf-8')
+
+
+def _dump_json_file(json_file, data):
+    """ load json file and check file content format
+    """
+    with io.open(json_file, 'w', encoding='utf-8') as stream:
+        json.dump(data, stream, indent=4, separators=(',', ': '), ensure_ascii=False)
+
+
+def dump_python_file(python_file, data):
+    with io.open(python_file, 'w', encoding='utf-8') as stream:
+        stream.write(data)
