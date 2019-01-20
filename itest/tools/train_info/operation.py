@@ -158,35 +158,40 @@ def get_seat_type_by_query_z(train):
     }
     try:
         resp = requests.get(url, params=params)
-        print(resp.status_code, resp.text)
-        result = json.loads(resp.text)
-        if result['status']:
-            infos = json.loads(resp.text)['data']['result']
-            # info = "RxKOJhkdq3meu5VL5x816HPcQl2wprfZS3XkUJeEQ5II3vL1QYAiFI5EJ8IqJj6pKe6a%2Ff%2FtHp1H%0Ar2ViMmXdi1OWU6%2BHnyi0F8xkvCm2Kf24%2FN1J%2FcXFWsMMHBWA6PFINzlV0b%2BZVU8oGUZbm1VrU%2B7y%0AnQMNUPdBS6GuQdthYbWRCnDxyVY%2BXgYtkkDwbn0C3xVEoWoCGe2ku%2BmQyz%2BPOqeJfBy%2FxsDHIWJD%0AADmREzfzyiYWvilvHruCIFADIyNpTvmro%2BVZ%2FUe70j2mIKWIeUNfGKg%2FI66BLP%2BMkU8J5uvSgIye%0AIqBMcA%3D%3D|预订|330000K59810|K599|BTC|GZQ|BXP|GZQ|05:14|11:06|29:52|Y|31RMgZmiY%2FUh40pakE45kIplgFGat2H4doHPTv3VgBF7wVbYVRd8OvcOnw4%3D|20190122|3|C1|11|34|0|0||||无|||有||无|有|||||10401030|1413|1|0|null"
-            if len(infos) == 0:
-                train['errorCode'] = 403
-                train['error'] = 'train list not found'
-                train['seatType'] = ''
-            for info in infos:
-                seat_type = info.split('|')[-4]
-                train_no = info.split('|')[2]
-                train_number = info.split('|')[3]
-                if train_no == train['trainNo']:
-                    train['seatType'] = seat_type
-                    break
-            if 'seatType' not in train:
-                train['errorCode'] = 404
-                train['error'] = 'train_no not found'
-                train['seatType'] = ''
-        else:
-            train['errorCode'] = 401
+        if '<html' in resp.text:
+            print('seat type load failed')
+            train['errorCode'] = 404
+            train['error'] = 'seat type load failed'
             train['seatType'] = ''
-            train['error'] = result['seat_type query error']
+        else:
+            result = json.loads(resp.text)
+            if result['status']:
+                infos = json.loads(resp.text)['data']['result']
+                # info = "RxKOJhkdq3meu5VL5x816HPcQl2wprfZS3XkUJeEQ5II3vL1QYAiFI5EJ8IqJj6pKe6a%2Ff%2FtHp1H%0Ar2ViMmXdi1OWU6%2BHnyi0F8xkvCm2Kf24%2FN1J%2FcXFWsMMHBWA6PFINzlV0b%2BZVU8oGUZbm1VrU%2B7y%0AnQMNUPdBS6GuQdthYbWRCnDxyVY%2BXgYtkkDwbn0C3xVEoWoCGe2ku%2BmQyz%2BPOqeJfBy%2FxsDHIWJD%0AADmREzfzyiYWvilvHruCIFADIyNpTvmro%2BVZ%2FUe70j2mIKWIeUNfGKg%2FI66BLP%2BMkU8J5uvSgIye%0AIqBMcA%3D%3D|预订|330000K59810|K599|BTC|GZQ|BXP|GZQ|05:14|11:06|29:52|Y|31RMgZmiY%2FUh40pakE45kIplgFGat2H4doHPTv3VgBF7wVbYVRd8OvcOnw4%3D|20190122|3|C1|11|34|0|0||||无|||有||无|有|||||10401030|1413|1|0|null"
+                if len(infos) == 0:
+                    train['errorCode'] = 403
+                    train['error'] = 'train list not found'
+                    train['seatType'] = ''
+                for info in infos:
+                    seat_type = info.split('|')[-4]
+                    train_no = info.split('|')[2]
+                    train_number = info.split('|')[3]
+                    if train_no == train['trainNo']:
+                        train['seatType'] = seat_type
+                        break
+                if 'seatType' not in train:
+                    train['errorCode'] = 404
+                    train['error'] = 'train_no not found'
+                    train['seatType'] = ''
+            else:
+                train['errorCode'] = 401
+                train['seatType'] = ''
+                train['error'] = 'seat_type query error'
 
     except ConnectionError:
         train['errorCode'] = 402
         train['seatType'] = ''
-        train['error'] = result['seat_type query connection error']
+        train['error'] = 'seat_type query connection error'
     return train
 
 
@@ -264,6 +269,7 @@ def get_all_train_station_list_from_12306(year, month):
                 'errorCode': 303,
                 'error': 'Station code not found'
             })
+    print(len(all_train_list),all_train_list[0])
     results = request_train_station_by_thread(all_train_list, 10)
     for result in results:
         info = result['response']
@@ -280,10 +286,26 @@ def get_all_train_station_list_from_12306(year, month):
                 'startCode': train['fromCode'],
                 'endCode': train['toCode'],
                 'stations': [],
+                'errorCode': 304,
+                'error': 'Load station list failed'
+            })
+        elif '<html' in info:
+            print('get error for %s, response %s' % (train, info))
+            all_train_station_list.append({
+                'header': train['header'],
+                'trainNumber': train['trainNumber'],
+                'trainNo': train['trainNo'],
+                'trainDate': train['trainDate'],
+                'startStation': train['startStation'],
+                'endStation': train['endStation'],
+                'startCode': train['fromCode'],
+                'endCode': train['toCode'],
+                'stations': [],
                 'errorCode': 301,
                 'error': 'TimeoutError'
             })
         else:
+            print(info)
             station_list = json.loads(info)['data']['data']
             if len(station_list) == 0:
                 print('get error for %s' % train)
@@ -513,7 +535,7 @@ def update_train_station_list_data():
     fist_day, last_day = getMonthFirstDayAndLastDay(year, month)
     all_train_stations = set.find({'createTime':{ "$gte" : fist_day, "$lt" : last_day }})
     # 如果这个月已经有数据了 不更新
-    if all_train_stations.count() > 0:
+    if all_train_stations.count() < 0:
         print('All ready update this month %s ' % datetime.datetime.utcnow().strftime('%Y-%m'))
     else:
         all_train_station_list = get_all_train_station_list_from_12306(year, month)
@@ -631,7 +653,7 @@ def update_train_price_data():
 
 if __name__ == '__main__':
     # init_train_number_data()
-    update_train_number_data()
+    # update_train_number_data()
     # update_train_station_data()
     # update_train_station_list_data()
     # data = "RxKOJhkdq3meu5VL5x816HPcQl2wprfZS3XkUJeEQ5II3vL1QYAiFI5EJ8IqJj6pKe6a%2Ff%2FtHp1H%0Ar2ViMmXdi1OWU6%2BHnyi0F8xkvCm2Kf24%2FN1J%2FcXFWsMMHBWA6PFINzlV0b%2BZVU8oGUZbm1VrU%2B7y%0AnQMNUPdBS6GuQdthYbWRCnDxyVY%2BXgYtkkDwbn0C3xVEoWoCGe2ku%2BmQyz%2BPOqeJfBy%2FxsDHIWJD%0AADmREzfzyiYWvilvHruCIFADIyNpTvmro%2BVZ%2FUe70j2mIKWIeUNfGKg%2FI66BLP%2BMkU8J5uvSgIye%0AIqBMcA%3D%3D|预订|330000K59810|K599|BTC|GZQ|BXP|GZQ|05:14|11:06|29:52|Y|31RMgZmiY%2FUh40pakE45kIplgFGat2H4doHPTv3VgBF7wVbYVRd8OvcOnw4%3D|20190122|3|C1|11|34|0|0||||无|||有||无|有|||||10401030|1413|1|0|null"
