@@ -6,7 +6,7 @@
 @dec   : 异步执行任务函数
 """
 from itest.celery_client import celery_client
-from itest.service.celery_tasks.s_celery_tasks import CeleryTasksService
+# from itest.service.celery_tasks.s_celery_tasks import CeleryTasksService
 
 
 @celery_client.task
@@ -16,6 +16,7 @@ def add(x, y):
 
 @celery_client.task
 def execute_use_case_task(use_case_id, execution_id):
-    return CeleryTasksService.execute_use_case_task(use_case_id, execution_id)
+    return ''
+    # return CeleryTasksService.execute_use_case_task(use_case_id, execution_id)
 
 

@@ -12,6 +12,7 @@ from itest import environment, invoice, user, base, test_data
 from itest.apis import a_user, a_project, a_image, a_image_group, a_mark_field, a_environment,\
     a_interface, a_interface_history, a_interface_group, a_interface_use_case_group,\
     a_interface_use_case_history, a_interface_use_case
+from itest.tools.running_accout import data_creator_api
 #
 
 
@@ -46,6 +47,8 @@ def create_app(config_object=DevConfig):
 
 
 def register_blueprints(app):
+
+    app.register_blueprint(data_creator_api.blueprint, url_prefix='/api/runningAccount')
     # app.register_blueprint(environment.apis.blueprint, url_prefix='/api/env')
     # app.register_blueprint(invoice.apis.blueprint, url_prefix='/api/invoice')
     # app.register_blueprint(user.apis.blueprint, url_prefix='/api/user')
