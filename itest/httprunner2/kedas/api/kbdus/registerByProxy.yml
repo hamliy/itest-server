@@ -1,0 +1,15 @@
+- api:
+    name: "数字身份信息代理注册接口"
+    def: registerByProxy($proxy, $accessToken, $channelId, $uid, $tid, $wxid, $name, $tname)
+    request:
+        url: /kbdus/registerByProxy
+        method: POST
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+            tid: $tid
+            wxid: $wxid
+            name: $name
+            tname: $tname

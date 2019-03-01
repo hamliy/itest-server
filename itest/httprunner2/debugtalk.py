@@ -7,7 +7,7 @@
 """
 
 import requests, json
-
+import uuid
 
 def get_token():
     url = 'https://api.kingdee.com/auth/user/access_token'
@@ -23,3 +23,10 @@ def get_token():
         return json.loads(response.text)['data']['access_token']
     else:
         return ''
+
+# 获取sd
+def get_unique_id():
+    return str(uuid.uuid4()).replace('-', '')
+
+if __name__ == '__main__':
+    print(str(get_unique_id()).replace('-',''))

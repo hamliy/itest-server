@@ -26,6 +26,7 @@ class TestReports(Document):
     startTime = DateTimeField()     # 运行时间
     status = BooleanField()     # 任务状态
     stat = DictField()       # 结果 状态 stat
+    summary = DictField()    # 结果具体信息
 
     reports = DictField()    # 执行结果
 

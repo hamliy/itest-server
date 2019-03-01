@@ -1,11 +1,12 @@
 # encoding: utf-8
 """
 @author: han.li
-@file  : s_project.py
-@time  : 11/6/18 3:14 PM
-@dec   : 项目服务
+@file  : module.py
+@time  : 2/28/19 3:59 PM
+@dec   : 模块服务
 """
-from itest.model.m_project import Project
+
+from itest.model.m_module import Module
 from itest.utils.utils import convert_mongo_to_json, convert_queryset_to_json
 from mongoengine.errors import NotUniqueError
 from bson import ObjectId
@@ -15,32 +16,31 @@ from datetime import datetime
 from itest.utils.request import get_user_id
 
 
-class ProjectService(object):
+class ModuleService(object):
     def __init__(self):
         pass
 
     @staticmethod
-    def create(project):
+    def create(module):
         creator_id = get_user_id()
-        return convert_mongo_to_json(Project(name=project['name'],
-                                             devUser=project['devUser'],
-                                             testUser=project['testUser'],
-                                             creatorId=ObjectId(creator_id),
-                                             version=project['version'],
-                                             desc=project['desc']).save())
+        return convert_mongo_to_json(Module(name=module['name'],
+                                            testUser=module['testUser'],
+                                            belongProjectId=ObjectId(module['projectId']),
+                                            creatorId=ObjectId(creator_id),
+                                            desc=module['desc']).save())
 
     @staticmethod
     def get_by_name(name):
-        return convert_mongo_to_json(Project.objects(name=name).first())
+        return convert_mongo_to_json(Module.objects(name=name).first())
 
     @staticmethod
     def get_by_id(project_id):
-        return convert_mongo_to_json(Project.objects(id=ObjectId(project_id)).first())
+        return convert_mongo_to_json(Module.objects(id=ObjectId(project_id)).first())
 
     @staticmethod
-    def get_projects():
-        total = Project.objects().count()
-        data = convert_queryset_to_json(Project.objects(isDeleted=False).order_by("-createTime"))
+    def get_modules():
+        total = Module.objects().count()
+        data = convert_queryset_to_json(Module.objects(isDeleted=False).order_by("-createTime"))
         return {
             "total": total,
             "data": data
@@ -52,8 +52,8 @@ class ProjectService(object):
         模糊查询
         :return:
         """
-        total = Project.objects().count()
-        data = convert_queryset_to_json(Project.objects(
+        total = Module.objects().count()
+        data = convert_queryset_to_json(Module.objects(
             (Q(name__icontains=q) | Q(desc__icontains=q)) & Q(isDeleted=False)).order_by("-createTime")
                                         [page_size * (page - 1):page_size * page])
         return {
@@ -62,17 +62,15 @@ class ProjectService(object):
         }
 
     @staticmethod
-    def update(project):
+    def update(module):
         status = 'ok'
         try:
-            data = Project.objects(id=ObjectId(project['id']), isDeleted=False)
+            data = Module.objects(id=ObjectId(module['id']), isDeleted=False)
             if not data.first():
                 return None, 'not_find'
-            rs = data.modify(name=project['name'],
-                             devUser=project['devUser'],
-                             testUser=project['testUser'],
-                             version=project['version'],
-                             desc=project['desc'],
+            rs = data.modify(name=module['name'],
+                             testUser=module['testUser'],
+                             desc=module['desc'],
                              modifiedTime=datetime.utcnow,
                              new=True)
         except NotUniqueError:
@@ -85,10 +83,10 @@ class ProjectService(object):
 
     # 删除 标记isDeleted
     @staticmethod
-    def delete(project_id):
+    def delete(module_id):
         status = 'ok'
         try:
-            data = Project.objects(id=ObjectId(project_id), isDeleted=False)
+            data = Module.objects(id=ObjectId(module_id), isDeleted=False)
             if not data.first():
                 return None, 'not_find'
             delete_name = data.first()['name'] + '_已删除_' + project_id
@@ -103,4 +101,3 @@ class ProjectService(object):
             rs = None
             status = 'not_object_id'
         return convert_mongo_to_json(rs), status
-

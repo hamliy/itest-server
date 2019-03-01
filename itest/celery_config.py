@@ -6,7 +6,7 @@
 @dec   : 异步任务配置
 """
 # 把结果存在Redis
-CELERY_RESULT_BACKEND = 'mongodb://localhost:27017/celery'
+CELERY_RESULT_BACKEND = 'mongodb://172.20.166.50:27017/celery'
 # 任务序列化和反序列化使用JSON方案
 CELERY_TASK_SERIALIZER = 'json'
 # 读取任务结果使用JSON

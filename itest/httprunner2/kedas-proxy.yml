@@ -1,0 +1,91 @@
+- config:
+    name: kedas proxy description
+    variables:
+        - accessToken: ${get_token()}
+        - proxy: "HWTjmPpEDaS7Re5n9ibmaYFzpvaMhgKhjyFiKo9pHViv"
+        - channelId: "test"
+    request:
+        base_url: http://123.207.7.95:31697
+        headers:
+            Content-Type: application/json
+
+- test:
+    name: "1-身份注册代理-使用UID+TID注册成功"
+    variables:
+        - uid: ${get_unique_id()}
+        - tid: ${get_unique_id()}
+        - wxid: "test"
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/registerByProxy
+        method: POST
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+            tid: $tid
+            name: $name
+            tname: $tname
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.uid, $uid]
+        - eq: [content.data.tid, $tid]
+        - eq: [content.data.name, $name]
+        - eq: [content.data.tname, $tname]
+        - eq: [content.data.status, true]
+- test:
+    name: "2-身份注册代理-使用wxid注册成功"
+    variables:
+        - wxid: ${get_unique_id()}
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/registerByProxy
+        method: POST
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            wxid: $wxid
+            name: $name
+            tname: $tname
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.uid, null]
+        - eq: [content.data.tid, null]
+        - eq: [content.data.name, $name]
+        - eq: [content.data.tname, $tname]
+        - eq: [content.data.status, true]
+
+- test:
+    name: "3-身份注册代理-使用wxid+uid+tid注册成功"
+    variables:
+        - uid: ${get_unique_id()}
+        - tid: ${get_unique_id()}
+        - wxid: ${get_unique_id()}
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/registerByProxy
+        method: POST
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+            tid: $tid
+            wxid: $wxid
+            name: $name
+            tname: $tname
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.uid, $uid]
+        - eq: [content.data.tid, $tid]
+        - eq: [content.data.name, $name]
+        - eq: [content.data.tname, $tname]
+        - eq: [content.data.status, true]

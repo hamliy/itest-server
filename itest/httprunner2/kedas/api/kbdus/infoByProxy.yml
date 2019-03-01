@@ -1,0 +1,14 @@
+- api:
+    name: "数字身份信息代理查询接口"
+    def: infoByProxy($proxy, $accessToken, $channelId, $uid, $tid, $offset, $limit )
+    request:
+        url: /kbdus/registerByProxy
+        method: GET
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+            tid: $tid
+            offset: $offset
+            limit: $limit

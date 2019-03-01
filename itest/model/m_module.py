@@ -21,7 +21,7 @@ class Module(Document):
     """
     meta = {'collection': 'db_module'}
 
-    name = StringField(required=True, unique=True)      # 项目名
+    name = StringField(required=True, unique=True)      # 模块名
     belongProjectId = ReferenceField(Project)           # 所属项目
     creatorId = ReferenceField(User)                    # 创建人
     testUser = StringField(default='')                  # 测试人员名

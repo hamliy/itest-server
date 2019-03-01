@@ -95,10 +95,22 @@ def convert_queryset_to_json(queryset):
         data.append(convert_mongo_to_json(item))
     return data
 
+
 # 获取项目路径
-def get_project_path ():
+def get_project_path():
     utils_dir = os.path.dirname(os.path.abspath(__file__))
     return os.path.abspath(os.path.join(utils_dir, ".."))
+
+
+# 获取用例执行目录
+def get_test_dir():
+    return os.path.join(get_project_path(), 'test_case_dir')
+
+
+# 获取用例执行路径
+def get_test_dir_path(type):
+    path = os.path.join(get_test_dir(), type)
+    return os.path.join(path, get_time_stamp())
 
 
 # 获取项目静态图像路径
@@ -116,7 +128,7 @@ def md5(str):
     return m.hexdigest()
 
 
-# 时间戳格式转换
+# httprunner 运行结果时间戳格式转换
 def timestamp_to_datetime(summary, type=True):
     if not type:
         time_stamp = int(summary["time"]["start_at"])
@@ -139,6 +151,7 @@ def timestamp_to_datetime(summary, type=True):
                 pass
     return summary
 
+# 获取当前时间戳
 def get_time_stamp():
     ct = time.time()
     local_time = time.localtime(ct)
@@ -165,3 +178,4 @@ def _dump_json_file(json_file, data):
 def dump_python_file(python_file, data):
     with io.open(python_file, 'w', encoding='utf-8') as stream:
         stream.write(data)
+

@@ -8,7 +8,7 @@
 from datetime import datetime
 from mongoengine import Document
 from mongoengine.fields import (
-    DateTimeField, StringField, BooleanField
+    DateTimeField, StringField, BooleanField, IntField
 )
 from itest.utils.decorators import model_handler
 from mongoengine import signals
@@ -32,6 +32,7 @@ class User(Document):
     name = StringField(required=True)                   # 用户名
     email = StringField(required=True, unique=True)     # 邮箱
     password = StringField(required=True)               # 密码
+
     createTime = DateTimeField(default=datetime.utcnow)                        # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)                      # 更新时间
     isDeleted = BooleanField(default=False)                          # 是否删除

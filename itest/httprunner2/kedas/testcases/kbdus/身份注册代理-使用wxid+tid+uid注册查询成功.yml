@@ -1,0 +1,120 @@
+- config:
+    name: 身份信息代理测试2
+    variables:
+        - accessToken: ${get_token()}
+        - proxy: "HWTjmPpEDaS7Re5n9ibmaYFzpvaMhgKhjyFiKo9pHViv"
+        - channelId: $channelId
+        - wxid: ${get_unique_id()}
+        - tid: ${get_unique_id()}
+        - uid: ${get_unique_id()}
+    request:
+        base_url: $url
+        headers:
+            Content-Type: application/json
+
+- test:
+    name: "3-身份注册代理-使用wxid注册成功"
+    variables:
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/registerByProxy
+        method: POST
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+            tid: $tid
+            wxid: $wxid
+            name: $name
+            tname: $tname
+    extract:
+        - bduId: content.data.bduId
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.uid, $uid]
+        - eq: [content.data.tid, $tid]
+        - eq: [content.data.name, $name]
+        - eq: [content.data.tname, $tname]
+        - eq: [content.data.status, true]
+
+- test:
+    name: "4-身份查询代理-使用wxid查询成功"
+    variables:
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/infoByProxy
+        method: GET
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            wxid: $wxid
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.0.bduId, $bduId]
+        - eq: [content.data.0.status, true]
+
+- test:
+    name: "4-身份查询代理-使用tid查询成功"
+    variables:
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/infoByProxy
+        method: GET
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            tid: $tid
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.0.bduId, $bduId]
+        - eq: [content.data.0.status, true]
+
+- test:
+    name: "4-身份查询代理-使用uid查询成功"
+    variables:
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/infoByProxy
+        method: GET
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.0.bduId, $bduId]
+        - eq: [content.data.0.status, true]
+
+
+- test:
+    name: "4-身份查询代理-使用wxid+uid+tid查询成功"
+    variables:
+        - name: "test"
+        - tname: "test"
+    request:
+        url: /kbdus/infoByProxy
+        method: GET
+        params:
+            proxy: $proxy
+            accessToken: $accessToken
+            channelId: $channelId
+            uid: $uid
+            tid: $tid
+            wxid: $wxid
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.errcode, 0]
+        - eq: [content.data.0.bduId, $bduId]
+        - eq: [content.data.0.status, true]

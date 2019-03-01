@@ -2,46 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f8035f8-7c26-4b05-9777-3dfd2ba6bc9f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/itest/apis/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_environment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_image.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_image_group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_interface.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_interface_group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_interface_history.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_mark_field.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_project.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/apis/a_user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/model/m_image_group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/service/environment/ping.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/service/image/s_image_group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/service/interface/s_interface_group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/service/interface/s_interface_history.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/service/mark/s_mark_field.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/service/project/s_project.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/itest/utils/errors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/apis/a_module.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/apis/a_use_case.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/httprunner2/kedas-proxy.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/httprunner2/kedas/api/kbdus/infoByProxy.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/httprunner2/kedas/api/kbdus/registerByProxy.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/httprunner2/kedas/testcases/kbdus/身份注册代理-使用UID+TID注册成功.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/httprunner2/kedas/testcases/kbdus/身份注册代理-使用wxid+tid+uid注册查询成功.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/httprunner2/kedas/testcases/kbdus/身份注册代理-使用wxid注册查询成功.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/httprunner2/kedas/testcases/kbdus/身份注册代理-使用wxid注册查询成功01.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/service/module/s_module.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/service/test_case/s_test_case.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/temps/train_info/operation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/tools/running_accout/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/tools/running_accout/data_creator_api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/tools/running_accout/data_creator_db.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/tools/running_accout/util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/tools/train_info/get_from_114.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itest/tools/train_info/proxy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoapp.py" beforeDir="false" afterPath="$PROJECT_DIR$/autoapp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/base/project_apis.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/base/project_apis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/apis/a_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/apis/a_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/celery_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/celery_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/celery_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/celery_tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itest/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/model/m_environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/model/m_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_interface_group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/model/m_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/model/m_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/model/m_interface_history.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_interface_history.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/model/m_mark.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_mark_field.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/httprunner/debugtalk.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/httprunner2/debugtalk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/httprunner/kedas-proxy" beforeDir="false" afterPath="$PROJECT_DIR$/itest/httprunner2/kedas-proxy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/httprunner/kedas-proxy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/httprunner/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/itest/httprunner2/test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/model/m_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_module.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itest/model/m_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/model/m_test_case.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_test_case.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/model/m_test_reports.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_test_reports.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itest/model/m_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/model/m_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/service/environment/s_environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/service/environment/s_environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/service/image/s_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/service/image/s_image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/service/interface/s_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/service/interface/s_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/service/mark/s_mark.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/service/user/s_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/service/user/s_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/utils/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/utils/decorators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itest/utils/request.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/utils/request.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/service/project/s_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/service/project/s_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/service/task/s_task.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/service/task/s_task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/service/test_reports/s_test_reports.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/service/test_reports/s_test_reports.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/tools/train_info/db_operation.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/tools/train_info/db_operation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/tools/train_info/operation.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/tools/train_info/operation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/tools/train_info/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/tools/train_info/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itest/utils/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/utils/runner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/itest/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/itest/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requestment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requestment.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,131 +52,117 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/server2$operation__1_.coverage" NAME="operation (1) Coverage Results" MODIFIED="1548161635852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/tools/train_info" />
+    <SUITE FILE_PATH="coverage/server2$operation.coverage" NAME="operation Coverage Results" MODIFIED="1550556221547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/tools/train_info" />
+    <SUITE FILE_PATH="coverage/server2$debugtalk.coverage" NAME="debugtalk Coverage Results" MODIFIED="1546409354619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/httprunner" />
+    <SUITE FILE_PATH="coverage/server2$get_from_114.coverage" NAME="get_from_114 Coverage Results" MODIFIED="1550559811651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/tools/train_info" />
     <SUITE FILE_PATH="coverage/server2$interface_apis.coverage" NAME="interface_apis Coverage Results" MODIFIED="1536237379572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/base" />
     <SUITE FILE_PATH="coverage/server2$baiduorc.coverage" NAME="baiduorc Coverage Results" MODIFIED="1540989705690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/temps/ocr_test" />
-    <SUITE FILE_PATH="coverage/server2$m_images.coverage" NAME="m_images Coverage Results" MODIFIED="1541396293501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/model" />
+    <SUITE FILE_PATH="coverage/server2$test.coverage" NAME="test Coverage Results" MODIFIED="1546051722590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest" />
+    <SUITE FILE_PATH="coverage/server2$proxy.coverage" NAME="proxy Coverage Results" MODIFIED="1551236343379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/tools/train_info" />
+    <SUITE FILE_PATH="coverage/server2$util.coverage" NAME="util Coverage Results" MODIFIED="1548901578244" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/tools/running_accout" />
     <SUITE FILE_PATH="coverage/server2$database.coverage" NAME="database Coverage Results" MODIFIED="1541490516564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/server2$ocr.coverage" NAME="ocr Coverage Results" MODIFIED="1541066005785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/orctest" />
-    <SUITE FILE_PATH="coverage/server2$autoapp.coverage" NAME="autoapp Coverage Results" MODIFIED="1542274876807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/server2$db_operation.coverage" NAME="db_operation Coverage Results" MODIFIED="1550559113942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/tools/train_info" />
     <SUITE FILE_PATH="coverage/server2$test_kchain.coverage" NAME="test_kchain Coverage Results" MODIFIED="1540175478456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/other" />
+    <SUITE FILE_PATH="coverage/server2$data_creator_db.coverage" NAME="data_creator_db Coverage Results" MODIFIED="1548856288125" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/tools/running_accout" />
+    <SUITE FILE_PATH="coverage/server2$m_images.coverage" NAME="m_images Coverage Results" MODIFIED="1541396293501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/itest/model" />
+    <SUITE FILE_PATH="coverage/server2$autoapp.coverage" NAME="autoapp Coverage Results" MODIFIED="1548904096176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="server2" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="a_image.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/itest/apis/a_image.py">
+      <file leaf-file-name="m_test_case.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/model/m_test_case.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-93">
-              <caret line="82" column="40" selection-start-line="82" selection-start-column="40" selection-end-line="82" selection-end-column="40" />
+            <state relative-caret-position="306">
+              <caret line="35" column="11" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="11" />
               <folding>
-                <element signature="e#104#140#0" expanded="true" />
+                <element signature="e#105#134#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="a_environment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/itest/apis/a_environment.py">
+      <file leaf-file-name="runner.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/utils/runner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+            <state relative-caret-position="1403">
+              <caret line="167" column="4" selection-start-line="167" selection-start-column="4" selection-end-line="167" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/utils/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="201">
+              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
               <folding>
-                <element signature="e#110#146#0" expanded="true" />
+                <element signature="e#95#126#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/itest/app.py">
+      <file leaf-file-name="s_test_case.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/service/test_case/s_test_case.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1389">
-              <caret line="63" column="76" selection-start-line="63" selection-start-column="76" selection-end-line="63" selection-end-column="76" />
+            <state relative-caret-position="145">
+              <caret line="98" selection-start-line="98" selection-end-line="98" />
               <folding>
-                <element signature="e#107#149#0" expanded="true" />
+                <element signature="e#102#146#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="s_interface_use_case.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/service/interface_use_case/s_interface_use_case.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#838#7245#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="a_use_case.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/apis/a_use_case.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2116">
+              <caret line="92" column="19" selection-start-line="92" selection-start-column="19" selection-end-line="92" selection-end-column="19" />
+              <folding>
+                <element signature="e#106#142#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="celery_config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/celery_config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-138" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/itest/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
-              <folding>
-                <element signature="e#103#112#0" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-777" />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project_apis.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/itest/base/project_apis.py">
+      <file leaf-file-name="celery_tasks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/itest/celery_tasks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="74" selection-start-line="74" selection-end-line="74" />
+            <state relative-caret-position="345">
+              <caret line="29" column="53" lean-forward="true" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
               <folding>
-                <element signature="e#239#275#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/itest/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="59" column="6" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
-              <folding>
-                <element signature="e#97#126#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="autoapp.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/autoapp.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="29" column="29" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="m_image_group.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/itest/model/m_image_group.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
-              <folding>
-                <element signature="e#109#138#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="a_image_group.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/itest/apis/a_image_group.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-              <folding>
-                <element signature="e#111#147#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="m_image.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/itest/model/m_image.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-              <folding>
-                <element signature="e#101#130#0" expanded="true" />
+                <element signature="e#111#156#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -192,36 +179,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>theme/a</find>
-      <find>theme</find>
-      <find>first</find>
-      <find>o</find>
-      <find>now</find>
-      <find>contain</find>
-      <find>time</find>
-      <find>datetime</find>
-      <find>utcfromtimestamp</find>
+      <find>D20</find>
+      <find>K128</find>
+      <find>x</find>
+      <find>reset</find>
+      <find>proxy_url</find>
+      <find>proxy</find>
+      <find>5793/6633</find>
+      <find>print(</find>
+      <find>f</find>
+      <find>TEst</find>
+      <find>update_train_station_list_data</find>
+      <find>auth</find>
+      <find>timedelta</find>
+      <find>insert_one</find>
+      <find>update_train_ticket</find>
+      <find>ticket</find>
+      <find>get proxy_url</find>
+      <find>update_one</find>
+      <find>insert_user</find>
+      <find>filter=</find>
+      <find>query failed</find>
+      <find>)</find>
       <find>date</find>
-      <find>DateEncoder</find>
-      <find>update</find>
-      <find>flask_jwt_extended</find>
-      <find>refresh</find>
-      <find>msg</find>
-      <find>needs_fresh_token_loader</find>
-      <find>allowed</find>
-      <find>verify_token_type</find>
-      <find>refresh tokens</find>
-      <find>:</find>
-      <find>?</find>
-      <find>NotUniqueError</find>
-      <find>WrongTokenError</find>
-      <find>all</find>
-      <find>image_type</find>
-      <find>upsert</find>
-      <find>push</find>
-      <find>each</find>
-      <find>sort</find>
-      <find>updateupdate</find>
+      <find>update_train_number_data</find>
+      <find>find</find>
+      <find>insert_dispatch</find>
+      <find>get_all_train_station_list_from_12306</find>
+      <find>id</find>
+      <find>htt</find>
+      <find>run_test_</find>
     </findStrings>
     <replaceStrings>
       <replace>url_prefix='/api</replace>
@@ -237,57 +224,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/itest/model/m_data.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_user_case.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_task.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_use_case.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_execution.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_use_case_execution.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_use_case_history.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_task_execution.py" />
-        <option value="$PROJECT_DIR$/database.py" />
-        <option value="$PROJECT_DIR$/itest/models.py" />
-        <option value="$PROJECT_DIR$/autoapp.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_user.py" />
-        <option value="$PROJECT_DIR$/itest/base/project_apis.py" />
-        <option value="$PROJECT_DIR$/itest/utils/errors.py" />
-        <option value="$PROJECT_DIR$/itest/apis/s_image.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_image_group.py" />
-        <option value="$PROJECT_DIR$/itest/utils/utils.py" />
-        <option value="$PROJECT_DIR$/itest/service/image/s_image_group.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_project.py" />
-        <option value="$PROJECT_DIR$/itest/service/project/s_project.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_project.py" />
-        <option value="$PROJECT_DIR$/itest/service/image/s_image.py" />
-        <option value="$PROJECT_DIR$/itest/utils/decorators.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_image.py" />
-        <option value="$PROJECT_DIR$/itest/service/mark/s_mark.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_mark.py" />
-        <option value="$PROJECT_DIR$/itest/service/mark_field/s_mark_field.py" />
-        <option value="$PROJECT_DIR$/itest/service/mark/s_mark_field.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_mark_field.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_image.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_mark_field.py" />
-        <option value="$PROJECT_DIR$/itest/service/environment/ping.sh" />
-        <option value="$PROJECT_DIR$/itest/model/m_environment.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_interface_group.py" />
-        <option value="$PROJECT_DIR$/itest/apis/__init__.py" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/testcases/kbdus/registerByProxyTeste.yml.py" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/debugtalk.py" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/.env" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/api/kbdus/registerByProxy.yml" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/testcases/kbdus/registerByProxyTest.yml" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/testcases/kbdus/registerByProxyTest02.yml" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/testcases/kbdus/身份注册代理-使用wxid+tid+uid注册查询成功.yml" />
+        <option value="$PROJECT_DIR$/itest/httprunner/kedas/testcases/kbdus/身份注册代理-使用UID+TID注册成功.yml" />
         <option value="$PROJECT_DIR$/itest/model/m_interface_group.py" />
-        <option value="$PROJECT_DIR$/itest/service/interface/s_interface_group.py" />
-        <option value="$PROJECT_DIR$/itest/service/interface/s_interface.py" />
-        <option value="$PROJECT_DIR$/itest/service/user/s_user.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_user.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_interface.py" />
-        <option value="$PROJECT_DIR$/itest/service/environment/s_environment.py" />
-        <option value="$PROJECT_DIR$/itest/utils/request.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_environment.py" />
-        <option value="$PROJECT_DIR$/itest/model/m_interface_history.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_interface.py" />
-        <option value="$PROJECT_DIR$/itest/service/interface/s_interface_history.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_interface_history.py" />
-        <option value="$PROJECT_DIR$/itest/apis/a_image_group.py" />
+        <option value="$PROJECT_DIR$/itest/service/interface_use_case/s_interface_use_case.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_interface_use_case_group.py" />
+        <option value="$PROJECT_DIR$/itest/temps/train_info/operation.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_testcase_info.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_debug_talk.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_test_suite.py" />
+        <option value="$PROJECT_DIR$/itest/utils/__init__.py" />
+        <option value="$PROJECT_DIR$/itest/service/celery_tasks/s_celery_tasks.py" />
+        <option value="$PROJECT_DIR$/itest/tools/train_info/proxy.py" />
+        <option value="$PROJECT_DIR$/itest/tools/train_info/util.py" />
         <option value="$PROJECT_DIR$/itest/app.py" />
+        <option value="$PROJECT_DIR$/itest/tools/running_accout/__init__.py" />
+        <option value="$PROJECT_DIR$/itest/__init__.py" />
         <option value="$PROJECT_DIR$/itest/config.py" />
+        <option value="$PROJECT_DIR$/itest/tools/running_accout/util.py" />
+        <option value="$PROJECT_DIR$/itest/tools/running_accout/data_creator_api.py" />
+        <option value="$PROJECT_DIR$/itest/tools/running_accout/data_creator_db.py" />
+        <option value="$PROJECT_DIR$/itest/tools/train_info/operation.py" />
+        <option value="$PROJECT_DIR$/itest/tools/train_info/db_operation.py" />
+        <option value="$PROJECT_DIR$/itest/tools/train_info/get_from_114.py" />
+        <option value="$PROJECT_DIR$/itest/apis/a_interface_use_case.py" />
+        <option value="$PROJECT_DIR$/itest/service/test_reports/s_test_reports.py" />
+        <option value="$PROJECT_DIR$/itest/service/task/s_task.py" />
+        <option value="$PROJECT_DIR$/itest/celery_tasks.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_module.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_test_reports.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_base_model.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_user.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_project.py" />
+        <option value="$PROJECT_DIR$/itest/apis/a_project.py" />
+        <option value="$PROJECT_DIR$/itest/service/project/s_project.py" />
+        <option value="$PROJECT_DIR$/itest/service/s_module/s_module.py" />
+        <option value="$PROJECT_DIR$/itest/apis/a_module.py" />
+        <option value="$PROJECT_DIR$/itest/service/usecase/a_use_case.py" />
+        <option value="$PROJECT_DIR$/itest/service/use_case/a_use_case.py" />
+        <option value="$PROJECT_DIR$/itest/service/use_case/a_test_case.py" />
+        <option value="$PROJECT_DIR$/itest/service/test_case/a_test_case.py" />
+        <option value="$PROJECT_DIR$/itest/model/m_test_case.py" />
+        <option value="$PROJECT_DIR$/itest/service/test_case/s_test_case.py" />
+        <option value="$PROJECT_DIR$/itest/utils/runner.py" />
+        <option value="$PROJECT_DIR$/itest/utils/utils.py" />
+        <option value="$PROJECT_DIR$/itest/apis/a_use_case.py" />
       </list>
     </option>
   </component>
@@ -324,89 +311,6 @@
               <item name="server2" type="b2602c69:ProjectViewProjectNode" />
               <item name="server2" type="462c0819:PsiDirectoryNode" />
               <item name="itest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="orctest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="image" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="interface" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="mark" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="temps" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="temps" type="462c0819:PsiDirectoryNode" />
-              <item name="ocr_test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="test_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server2" type="462c0819:PsiDirectoryNode" />
-              <item name="itest" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -497,13 +401,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/invoice_test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HttpRunner/HttpRunner" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/itest/httprunner/kedas/testcases/kbdus" />
+      <recent name="$PROJECT_DIR$/itest/common" />
       <recent name="$PROJECT_DIR$/itest/apis" />
       <recent name="$PROJECT_DIR$/itest/service/project" />
       <recent name="$PROJECT_DIR$/itest/temps/ocr_test" />
@@ -521,7 +427,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.autoapp">
+  <component name="RunManager" selected="Python.get_from_114">
     <configuration name="autoapp" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -541,7 +447,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="baiduorc" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="db_operation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -549,18 +455,18 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/itest/temps/ocr_test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/itest/tools/train_info" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/itest/temps/ocr_test/baiduorc.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/itest/tools/train_info/db_operation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="database" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="get_from_114" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -568,18 +474,18 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/itest/tools/train_info" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/itest/tools/train_info/get_from_114.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="m_images" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="operation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -587,18 +493,18 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/itest/model" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/itest/tools/train_info" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/itest/model/m_image.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/itest/tools/train_info/operation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="ocr" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="util" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -606,31 +512,31 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/itest/orctest" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/itest/tools/running_accout" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/itest/orctest/ocr.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/itest/tools/running_accout/util.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
+      <item itemvalue="Python.get_from_114" />
+      <item itemvalue="Python.util" />
       <item itemvalue="Python.autoapp" />
-      <item itemvalue="Python.baiduorc" />
-      <item itemvalue="Python.ocr" />
-      <item itemvalue="Python.m_images" />
-      <item itemvalue="Python.database" />
+      <item itemvalue="Python.operation" />
+      <item itemvalue="Python.db_operation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.get_from_114" />
+        <item itemvalue="Python.db_operation" />
+        <item itemvalue="Python.operation" />
         <item itemvalue="Python.autoapp" />
-        <item itemvalue="Python.database" />
-        <item itemvalue="Python.m_images" />
-        <item itemvalue="Python.ocr" />
-        <item itemvalue="Python.baiduorc" />
+        <item itemvalue="Python.util" />
       </list>
     </recent_temporary>
   </component>
@@ -687,7 +593,63 @@
       <option name="project" value="LOCAL" />
       <updated>1541670968060</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="new model and service">
+      <created>1543569966408</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1543569966408</updated>
+    </task>
+    <task id="LOCAL-00008" summary="new model and service">
+      <created>1543836873281</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1543836873281</updated>
+    </task>
+    <task id="LOCAL-00009" summary="new model and service">
+      <created>1543988575851</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1543988575851</updated>
+    </task>
+    <task id="LOCAL-00010" summary="new model and service">
+      <created>1544175704988</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1544175704988</updated>
+    </task>
+    <task id="LOCAL-00011" summary="dev">
+      <created>1545386884305</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1545386884305</updated>
+    </task>
+    <task id="LOCAL-00012" summary="dev 2">
+      <created>1545644922942</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1545644922942</updated>
+    </task>
+    <task id="LOCAL-00013" summary="dev 2">
+      <created>1546080631970</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1546080631976</updated>
+    </task>
+    <task id="LOCAL-00014" summary="dev 3">
+      <created>1551174011072</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1551174011072</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -702,49 +664,49 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1649" height="903" extended-state="6" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32857144" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50280726" side_tool="true" weight="0.32901555" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4980588" weight="0.35324675" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49719277" visible="true" weight="0.32987013" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.32857144" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50280726" side_tool="true" weight="0.32901555" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4980588" weight="0.4103896" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49719277" visible="true" weight="0.3948052" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32857144" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49916804" weight="0.25454545" />
-      <window_info content_ui="combo" x="734" y="186" width="315" height="581" id="Project" order="0" sideWeight="0.7486631" visible="true" weight="0.20399252" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49916804" weight="0.5285714" />
+      <window_info content_ui="combo" x="734" y="186" width="315" height="581" id="Project" order="0" sideWeight="0.74725276" visible="true" weight="0.2651279" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32987013" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33766234" />
       <window_info anchor="right" id="SciView" order="4" />
-      <window_info id="Structure" order="1" sideWeight="0.2513369" side_tool="true" weight="0.19900188" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49916804" weight="0.39740258" />
+      <window_info id="Structure" order="1" sideWeight="0.25274727" side_tool="true" weight="0.2651279" />
+      <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.49916804" weight="0.5116883" />
       <window_info id="Favorites" order="2" sideWeight="0.24545455" side_tool="true" weight="0.19650654" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49719277" weight="0.32987013" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.24545455" side_tool="true" weight="0.19650654" />
-      <window_info content_ui="combo" x="734" y="186" width="315" height="581" id="Project" order="0" sideWeight="0.7486631" visible="true" weight="0.20399252" />
+      <window_info active="true" content_ui="combo" x="734" y="186" width="315" height="581" id="Project" order="0" sideWeight="0.7486631" visible="true" weight="0.18590143" />
       <window_info id="Structure" order="1" sideWeight="0.2513369" side_tool="true" weight="0.19900188" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32857144" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4980588" visible="true" weight="0.35324675" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4980588" visible="true" weight="0.07662338" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32987013" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49916804" weight="0.25454545" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50280726" side_tool="true" weight="0.32901555" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49719277" weight="0.32857144" />
       <window_info anchor="right" id="SciView" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49916804" weight="0.39740258" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49916804" weight="0.39740258" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32857144" />
     </layout-to-restore>
   </component>
@@ -754,6 +716,32 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.sh" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -762,7 +750,10 @@
     <MESSAGE value="first init" />
     <MESSAGE value="interface dev" />
     <MESSAGE value="new model and service" />
-    <option name="LAST_COMMIT_MESSAGE" value="new model and service" />
+    <MESSAGE value="dev" />
+    <MESSAGE value="dev 2" />
+    <MESSAGE value="dev 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -773,443 +764,358 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="29" />
+      <option name="time" value="65" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/itest/model/m_task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-276" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_task_execution.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-485" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_use_case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-759" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_use_case_execution.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-759" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_use_case_history.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/project/s_project.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="57" column="50" lean-forward="true" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_project.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-393">
-          <caret line="44" column="102" selection-start-line="44" selection-start-column="102" selection-end-line="44" selection-end-column="102" />
-          <folding>
-            <element signature="e#105#141#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/utils/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="142" column="78" lean-forward="true" selection-start-line="142" selection-start-column="78" selection-end-line="142" selection-end-column="78" />
-          <folding>
-            <element signature="e#104#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_project.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding>
-            <element signature="e#102#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/test_data/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="14" selection-start-line="14" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/image/s_image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2369">
-          <caret line="111" column="46" selection-start-line="111" selection-start-column="41" selection-end-line="111" selection-end-column="46" />
-          <folding>
-            <element signature="e#101#138#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_mark_field.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/utils/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-          <folding>
-            <element signature="e#95#110#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/mark/s_mark_field.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
-          <folding>
-            <element signature="e#109#155#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/environment/ping.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_environment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="16" />
-          <folding>
-            <element signature="e#108#137#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/base/interface_apis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="209" column="39" selection-start-line="209" selection-start-column="29" selection-end-line="209" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_mark_field.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="22" />
-          <folding>
-            <element signature="e#110#146#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/pymongo/collection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="2870" column="46" selection-start-line="2870" selection-start-column="38" selection-end-line="2870" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/pymongo/mongo_client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-796">
-          <caret line="1163" column="8" selection-start-line="1163" selection-start-column="8" selection-end-line="1163" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/image/s_image_group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="29" column="80" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="29" selection-end-column="80" />
-          <folding>
-            <element signature="e#110#158#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/user/s_user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-474">
-          <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-37">
-          <caret line="74" column="37" selection-start-line="74" selection-start-column="37" selection-end-line="74" selection-end-column="37" />
-          <folding>
-            <element signature="e#105#134#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="35" column="56" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
-          <folding>
-            <element signature="e#100#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_interface_group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-874">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-          <folding>
-            <element signature="e#115#151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/flask_jwt_extended/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="258" column="53" selection-start-line="258" selection-start-column="35" selection-end-line="258" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/flask_jwt_extended/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/utils/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-106">
-          <caret line="16" column="61" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
-          <folding>
-            <element signature="e#182#214#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/environment/s_environment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="62" column="25" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="25" />
-          <folding>
-            <element signature="e#118#167#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_interface_group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding>
-            <element signature="e#107#136#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
-          <folding>
-            <element signature="e#102#138#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/mongoengine/queryset/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="647" selection-start-line="647" selection-end-line="647" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/interface/s_interface_group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-386">
-          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
-          <folding>
-            <element signature="e#116#172#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/interface/s_interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="92" column="14" selection-start-line="92" selection-start-column="12" selection-end-line="92" selection-end-column="14" />
-          <folding>
-            <element signature="e#109#154#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_interface_history.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="32" column="109" selection-start-line="32" selection-start-column="109" selection-end-line="32" selection-end-column="109" />
-          <folding>
-            <element signature="e#117#146#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/mongoengine/fields.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="877" column="19" selection-start-line="877" selection-start-column="12" selection-end-line="877" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/service/interface/s_interface_history.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="31" column="35" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="77" column="57" lean-forward="true" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
-          <folding>
-            <element signature="e#109#145#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_interface_history.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding>
-            <element signature="e#117#153#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/test_data/test_data_apis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2208" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_environment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
-          <folding>
-            <element signature="e#110#146#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-          <folding>
-            <element signature="e#101#130#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/model/m_image_group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
-          <folding>
-            <element signature="e#109#138#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-93">
-          <caret line="82" column="40" selection-start-line="82" selection-start-column="40" selection-end-line="82" selection-end-column="40" />
-          <folding>
-            <element signature="e#104#140#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/itest/apis/a_image_group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <element signature="e#111#147#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/autoapp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/itest/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1389">
-          <caret line="63" column="76" selection-start-line="63" selection-start-column="76" selection-end-line="63" selection-end-column="76" />
+        <state relative-caret-position="-683">
+          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
           <folding>
             <element signature="e#107#149#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/itest/config.py">
+    <entry file="file://$PROJECT_DIR$/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
-          <folding>
-            <element signature="e#103#112#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="339">
+          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autoapp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-601">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/itest/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/extensions.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/celery_client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="59" column="6" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
+        <state relative-caret-position="126">
+          <caret line="20" column="60" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="60" />
           <folding>
-            <element signature="e#97#126#0" expanded="true" />
+            <element signature="e#114#139#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/itest/base/project_apis.py">
+    <entry file="file://$PROJECT_DIR$/itest/httprunner2/debugtalk.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="-396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requestment.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/httprunner2/reports/1545898587.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/httprunner/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/environment/s_environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1794" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/base/task_apis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1377">
+          <caret line="170" column="17" selection-start-line="170" selection-start-column="17" selection-end-line="170" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/base/environment_apis.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/common/api_request.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/common/http_request.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/common/check_result.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/common/use_case_request.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/utils/img_util.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/utils/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/task/s_task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/interface_use_case/s_interface_use_case_execute.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-124">
+          <caret line="60" column="55" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/httprunner/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="769" column="27" selection-start-line="769" selection-start-column="8" selection-end-line="769" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/httprunner/report.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="274" column="4" selection-start-line="274" selection-start-column="4" selection-end-line="274" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/httprunner/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="162" lean-forward="true" selection-start-line="162" selection-end-line="162" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/test_reports/s_test_reports.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
           <folding>
-            <element signature="e#239#275#0" expanded="true" />
+            <element signature="e#110#160#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_image.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_debug_talk.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_test_suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="23" column="49" lean-forward="true" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_base_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="20" column="85" selection-start-line="20" selection-start-column="85" selection-end-line="20" selection-end-column="85" />
+          <folding>
+            <element signature="e#107#136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_project.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="25" column="11" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_test_reports.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding>
+            <element signature="e#108#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#100#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="19" />
+          <folding>
+            <element signature="e#102#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/module/s_module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
+          <folding>
+            <element signature="e#103#142#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/apis/a_user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/apis/a_module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1401">
+          <caret line="63" column="30" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
+          <folding>
+            <element signature="e#103#139#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/apis/a_project.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="73" />
+          <folding>
+            <element signature="e#105#141#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/base/use_case_apis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/apis/a_interface_use_case_history.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/apis/a_interface_use_case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#116#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/project/s_project.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="105" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="105" />
+          <folding>
+            <element signature="e#103#144#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/interface_use_case/s_interface_use_case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#838#7245#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/utils/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding>
+            <element signature="e#95#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/model/m_test_case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="35" column="11" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="11" />
+          <folding>
+            <element signature="e#105#134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/service/test_case/s_test_case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+          <folding>
+            <element signature="e#102#146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/celery_tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="29" column="53" lean-forward="true" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+          <folding>
+            <element signature="e#111#156#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/utils/runner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1403">
+          <caret line="167" column="4" selection-start-line="167" selection-start-column="4" selection-end-line="167" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/apis/a_use_case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2116">
+          <caret line="92" column="19" selection-start-line="92" selection-start-column="19" selection-end-line="92" selection-end-column="19" />
+          <folding>
+            <element signature="e#106#142#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/celery_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-138" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/itest/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-777" />
       </provider>
     </entry>
   </component>

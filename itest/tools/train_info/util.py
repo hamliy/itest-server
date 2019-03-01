@@ -77,3 +77,47 @@ class TestThreadByQ(threading.Thread):
 
     def set_exit_flag(self, flag):
         self.exit_flag = flag
+
+
+def run_by_thread(source_datas, run_func, threadNum, ret = False, fun2=None):
+    total = len(source_datas)
+    queue_lock = threading.Lock()
+    queues = queue.Queue(total)
+    threads = []
+    results = []
+    # 启动线程
+    for i in range(threadNum):
+        name = '线程%s' % i
+        tq = TestThreadByQ(run_func, queues, queue_lock, total, name=name)
+        tq.start()
+        threads.append(tq)
+    # 填充队列
+    print('queue init')
+    queue_lock.acquire()
+    for train in source_datas:
+        queues.put(train)
+    queue_lock.release()
+    print('queue end')
+    # 等待队列清空
+    while not queues.empty():
+        if fun2 and queues.qsize()%100 == 0:
+            fun2()
+        pass
+
+    print('通知线程退出')
+    # 通知线程退出
+    for t in threads:
+        t.set_exit_flag(1)
+
+    print('等待线程完成')
+    # 等待线程完成
+    for t in threads:
+        t.join()
+        if ret:
+            if results == []:
+                results = t.get_result()
+            else:
+                results.extend(t.get_result())
+    print('线程完成')
+    if ret:
+        return results

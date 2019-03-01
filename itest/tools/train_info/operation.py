@@ -10,9 +10,10 @@ import execjs
 import requests, re, json, os
 import datetime
 import threading
-import queue
-from itest.tools.train_info.db_operation import update_train_info, get_set, get_station_code_order_by_name
-from itest.tools.train_info.util import getMonthFirstDayAndLastDay, TestThreadByQ
+import queue, random
+from itest.tools.train_info.db_operation import get_normal_proxys_url,\
+    get_set, get_station_code_order_by_name,update_train_seat
+from itest.tools.train_info.util import getMonthFirstDayAndLastDay, TestThreadByQ, run_by_thread
 
 etree = lxml.html.etree
 
@@ -66,6 +67,7 @@ def save_train_list_from_12306(path):
     url = 'https://kyfw.12306.cn/otn/resources/js/query/train_list.js'
     # url = 'https://kyfw.12306.cn/otn/resources/js/query/train_list.js?scriptVersion=1.0'
     resp = requests.get(url, stream=True)
+    print(resp.text)
     with open(path, 'wb') as code:
         for chunk in resp.iter_content(chunk_size=1024):
             if chunk:
@@ -144,7 +146,22 @@ def request_train_station_by_thread(all_train_list, threadNum):
     return results
 
 
-def get_seat_type_by_query_z(train):
+def update_seat_type(train):
+    """
+    更新车次座位信息
+    :return:
+    """
+    print('get seat %s' % train['trainNo'])
+    for i in range(3):
+        train_with_seat = update_seat_type_by_query_z(train)
+        if train_with_seat['errorCode'] == 0:
+            break
+
+    print('update date %s' % train['trainNo'])
+    update_train_seat(train_with_seat)
+
+
+def update_seat_type_by_query_z(train):
     """
     从查询站到站的车次查询 座位号
     :return:
@@ -156,8 +173,11 @@ def get_seat_type_by_query_z(train):
         'leftTicketDTO.to_station': train['endCode'],
         'purpose_codes': 'ADULT'
     }
+    proxies = get_normal_proxys_url()
+    proxy_url = random.choice(proxies)
     try:
-        resp = requests.get(url, params=params)
+        resp = requests.get(url, params=params, proxies={'http': proxy_url,
+                                                 'https': proxy_url}, timeout=5)
         if '<html' in resp.text:
             print('seat type load failed')
             train['errorCode'] = 404
@@ -175,7 +195,7 @@ def get_seat_type_by_query_z(train):
                 for info in infos:
                     seat_type = info.split('|')[-4]
                     train_no = info.split('|')[2]
-                    train_number = info.split('|')[3]
+                    # train_number = info.split('|')[3]
                     if train_no == train['trainNo']:
                         train['seatType'] = seat_type
                         break
@@ -188,10 +208,10 @@ def get_seat_type_by_query_z(train):
                 train['seatType'] = ''
                 train['error'] = 'seat_type query error'
 
-    except ConnectionError:
+    except Exception as e:
         train['errorCode'] = 402
         train['seatType'] = ''
-        train['error'] = 'seat_type query connection error'
+        train['error'] = 'seat_type query error: %s' % e
     return train
 
 
@@ -204,7 +224,7 @@ def request_train_seat_type_by_thread(all_train_list, threadNum):
     # 启动线程
     for i in range(threadNum):
         name = '线程%s' % i
-        tq = TestThreadByQ(get_seat_type_by_query_z, queues, queue_lock, total, name=name)
+        tq = TestThreadByQ(update_seat_type_by_query_z, queues, queue_lock, total, name=name)
         tq.start()
         threads.append(tq)
     # 填充队列
@@ -367,19 +387,20 @@ def update_all_train_seat_type():
     else:
         all_train_stations = dbset.find({'createTime': {"$gte": fist_day, "$lt": last_day}, 'errorCode': 0})
         all_train_list = []
-        for train in all_train_stations:
+        for train in all_train_stations[0:10]:
             all_train_list.append(train)
-        results = request_train_seat_type_by_thread(all_train_list, 5)
-        for result in results:
-            c = {'createTime': {"$gte": fist_day, "$lt": last_day},
-                 'trainNo': result['response']['trainNo'],
-                 'trainNumber': result['response']['trainNumber']}
-            t = dbset.find_one(c)
-            t['seatType'] = result['response']['seatType']
-            t['errorCode'] = result['response']['errorCode']
-            t['error'] = result['response']['error']
-            print('update train_no %s, seat_type %s' % (result['response']['trainNo'], result['response']['seatType']))
-            dbset.update(c, t)
+        run_by_thread(all_train_list, update_seat_type, 5 , True)
+        # results = request_train_seat_type_by_thread(all_train_list, 5)
+        # for result in results:
+        #     c = {'createTime': {"$gte": fist_day, "$lt": last_day},
+        #          'trainNo': result['response']['trainNo'],
+        #          'trainNumber': result['response']['trainNumber']}
+        #     t = dbset.find_one(c)
+        #     t['seatType'] = result['response']['seatType']
+        #     t['errorCode'] = result['response']['errorCode']
+        #     t['error'] = result['response']['error']
+        #     print('update train_no %s, seat_type %s' % (result['response']['trainNo'], result['response']['seatType']))
+        #     dbset.update(c, t)
 
 
 
@@ -660,4 +681,5 @@ if __name__ == '__main__':
     # info = data.split('|')
     # print(info[-4])
     # print(info[2])
-    update_all_train_seat_type()
+    # update_all_train_seat_type()
+    update_train_number_data()

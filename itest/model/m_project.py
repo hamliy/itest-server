@@ -22,8 +22,10 @@ class Project(Document):
 
     name = StringField(required=True, unique=True)      # 项目名
     version = StringField(default="V1.0")                             # 项目版本号 V1.0 后续创建版本管理
-    projectType = StringField(default="web")                                # 项目类型   Web， app
     creatorId = ReferenceField(User)                      # 创建人
+    devUser = StringField(default='')
+    testUser = StringField(default='')
+
     createTime = DateTimeField(default=datetime.utcnow)                        # 创建时间
     modifiedTime = DateTimeField(default=datetime.utcnow)                      # 更新时间
     isDeleted = BooleanField(default=False)                          # 是否删除

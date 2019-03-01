@@ -24,7 +24,7 @@ class Config(object):
     # 请求的json返回字符串显示中文
     JSON_AS_ASCII = False
     # 开启访问拦截
-    BEFORE_REQUEST = True
+    BEFORE_REQUEST = False
     # 开启过期时间验证
     VERIFY_EXP = True
 
@@ -45,7 +45,7 @@ class DevConfig(Config):
     DEBUG_TB_ENABLED = True
     #MONGO_HOST = 'localhost'
     #MONGO_PORT = 27017
-    MONGO_URI = 'mongodb://localhost:27017/itest-dev'
+    MONGO_URI = 'mongodb://172.20.166.50:27017/itest-dev'
     # MONGO_DBNAME = 'butterfly'
 
 

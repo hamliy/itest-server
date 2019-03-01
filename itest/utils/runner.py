@@ -33,15 +33,15 @@ def run_by_single(index, base_url, path):
             }
         }
     }
-    testcase_list = []
 
-    testcase_list.append(config)
+    test_case_list = [config]
 
     data = TestCase.objects(id=ObjectId(index), isDeleted=False)
-    if not data.first():
-        return testcase_list
 
     obj = data.first()
+
+    if not obj:
+        return test_case_list
 
     include = eval(obj['include'])
     request = eval(obj['request'])
@@ -52,21 +52,21 @@ def run_by_single(index, base_url, path):
 
     config['config']['name'] = name
 
-    testcase_dir_path = os.path.join(path, project)
+    test_case_dir_path = os.path.join(path, project)
 
-    if not os.path.exists(testcase_dir_path):
-        os.makedirs(testcase_dir_path)
+    if not os.path.exists(test_case_dir_path):
+        os.makedirs(test_case_dir_path)
 
         debugtalk_datas = DebugTalk.objects(belongProjectId=project)
 
         if not debugtalk_datas.first():
-            return testcase_list
+            return test_case_list
 
         debug_talk = debugtalk_datas.first()['debugTalk']
 
-        dump_python_file(os.path.join(testcase_dir_path, 'debugtalk.py'), debug_talk)
+        dump_python_file(os.path.join(test_case_list, 'debugtalk.py'), debug_talk)
 
-    testcase_dir_path = os.path.join(testcase_dir_path, module)
+    testcase_dir_path = os.path.join(test_case_dir_path, module)
 
     if not os.path.exists(testcase_dir_path):
         os.mkdir(testcase_dir_path)
@@ -77,16 +77,16 @@ def run_by_single(index, base_url, path):
             config_request = eval(TestCase.objects(id=ObjectId(config_id)).first()['request'])
             config_request.get('config').get('request').setdefault('base_url', base_url)
             config_request['config']['name'] = name
-            testcase_list[0] = config_request
+            test_case_list[0] = config_request
         else:
             id = test_info[0]
             pre_request = eval(TestCase.objects(id=ObjectId(id)).first()['request'])
-            testcase_list.append(pre_request)
+            test_case_list.append(pre_request)
 
     if request['test']['request']['url'] != '':
-        testcase_list.append(request)
+        test_case_list.append(request)
 
-    dump_yaml_file(os.path.join(testcase_dir_path, name + '.yml'), testcase_list)
+    dump_yaml_file(os.path.join(testcase_dir_path, name + '.yml'), test_case_list)
 
 
 def run_by_suite(index, base_url, path):

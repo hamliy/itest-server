@@ -29,7 +29,7 @@ class TestCase(Document):
     configType = IntField(default=1)    # 'test/config'
     belongProjectId = ReferenceField(Project)  # 所属项目
     creatorId = ReferenceField(User)                  # 创建人id
-    belongModuleId = ReferenceField(Module)             # 所属模块
+    belongModuleId = ReferenceField(Module, reverse_delete_rule='CASCADE')  # 所属模块, 如果模块删除 者相关用例也删除
     include = StringField()                 # 前置config/test
     level = IntField(required=True, default=0, choices=LEVEL)  # 用例级别 0 未设置  1 2 3 4
 
